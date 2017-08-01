@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wheelOfJeopardy.WheelofJeopardyDocumentController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -65,6 +65,42 @@
                   <Font size="48.0" />
                </font>
             </Label>
+            <AnchorPane layoutX="799.0" layoutY="119.0" prefHeight="218.0" prefWidth="500.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="118.0" layoutY="147.0" style="&#10;" text="Player 3" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="386.0" layoutY="28.0" style="&#10;" text="Tokens" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="234.0" layoutY="148.0" prefHeight="25.0" prefWidth="118.0" />
+                  <Label alignment="CENTER" layoutX="262.0" layoutY="28.0" style="&#10;" text="Scores" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="234.0" layoutY="110.0" prefHeight="25.0" prefWidth="118.0" />
+                  <TextField layoutX="384.0" layoutY="148.0" prefHeight="25.0" prefWidth="67.0" />
+                  <TextField layoutX="234.0" layoutY="68.0" prefHeight="25.0" prefWidth="118.0" />
+                  <TextField layoutX="384.0" layoutY="68.0" prefHeight="25.0" prefWidth="67.0" />
+                  <TextField layoutX="385.0" layoutY="110.0" prefHeight="25.0" prefWidth="67.0" />
+                  <Label alignment="CENTER" layoutX="118.0" layoutY="109.0" style="&#10;" text="Player 2" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="118.0" layoutY="70.0" style="&#10;" text="Player 1" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Button layoutX="1143.0" layoutY="467.0" mnemonicParsing="false" text="SpinWheel" />
             <AnchorPane layoutX="223.0" layoutY="72.0" prefHeight="369.0" prefWidth="635.0">
                <children>
                   <TableView layoutX="33.0" layoutY="84.0" prefHeight="159.0" prefWidth="463.0">
@@ -104,7 +140,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane blendMode="SRC_ATOP" layoutX="257.0" layoutY="368.0" prefHeight="296.0" prefWidth="772.0" style="-fx-border-color: black;">
+            <AnchorPane blendMode="SRC_ATOP" layoutX="257.0" layoutY="360.0" prefHeight="296.0" prefWidth="772.0" style="-fx-border-color: black;">
                <children>
                   <Label alignment="CENTER" layoutX="14.0" layoutY="39.0" style="&#10;" text="Player 2" textAlignment="CENTER" wrapText="false">
                      <font>
@@ -168,42 +204,6 @@
                   <Button layoutX="645.0" layoutY="240.0" mnemonicParsing="false" text="Incorrect" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="799.0" layoutY="119.0" prefHeight="218.0" prefWidth="500.0">
-               <children>
-                  <Label alignment="CENTER" layoutX="118.0" layoutY="147.0" style="&#10;" text="Player 3" textAlignment="CENTER" wrapText="false">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="386.0" layoutY="28.0" style="&#10;" text="Tokens" textAlignment="CENTER" wrapText="false">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutX="234.0" layoutY="148.0" prefHeight="25.0" prefWidth="118.0" />
-                  <Label alignment="CENTER" layoutX="262.0" layoutY="28.0" style="&#10;" text="Scores" textAlignment="CENTER" wrapText="false">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField layoutX="234.0" layoutY="110.0" prefHeight="25.0" prefWidth="118.0" />
-                  <TextField layoutX="384.0" layoutY="148.0" prefHeight="25.0" prefWidth="67.0" />
-                  <TextField layoutX="234.0" layoutY="68.0" prefHeight="25.0" prefWidth="118.0" />
-                  <TextField layoutX="384.0" layoutY="68.0" prefHeight="25.0" prefWidth="67.0" />
-                  <TextField layoutX="385.0" layoutY="110.0" prefHeight="25.0" prefWidth="67.0" />
-                  <Label alignment="CENTER" layoutX="118.0" layoutY="109.0" style="&#10;" text="Player 2" textAlignment="CENTER" wrapText="false">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="118.0" layoutY="70.0" style="&#10;" text="Player 1" textAlignment="CENTER" wrapText="false">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <Button layoutX="1143.0" layoutY="467.0" mnemonicParsing="false" text="SpinWheel" />
       </children>
     </AnchorPane>
       <Pane prefHeight="105.0" prefWidth="1280.0">
