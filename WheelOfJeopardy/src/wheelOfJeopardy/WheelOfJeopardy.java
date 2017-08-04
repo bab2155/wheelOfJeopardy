@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import wheelOfJeopardy.WheelofJeopardyDocumentController;
+
 
 /**
  *
@@ -17,9 +19,21 @@ import javafx.stage.Stage;
  */
 public class WheelOfJeopardy extends Application {
     
+    static WheelofJeopardyDocumentController wheelofJeopardyDC; 
+    
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("WheelofJeopardy.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("WheelofJeopardy.fxml"));
+        //Set up instance instead of using static load() method
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("WheelofJeopardy.fxml"));
+        Parent root = loader.load();
+        
+        wheelofJeopardyDC = (WheelofJeopardyDocumentController)loader.getController();
+        wheelofJeopardyDC.setGamePlayVisible(true);
+        String player = "Anakin";
+        wheelofJeopardyDC.populateLoseTurn(player);
+        
         
         Scene scene = new Scene(root);
         

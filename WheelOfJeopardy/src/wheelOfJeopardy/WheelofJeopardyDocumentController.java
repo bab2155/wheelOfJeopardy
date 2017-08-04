@@ -143,11 +143,33 @@ public class WheelofJeopardyDocumentController implements Initializable {
     
     //Anchor visibility
     @FXML
-    private void setGamePlayVisible(Boolean visible){
+    public void setGamePlayVisible(Boolean visible){
         if(visible == true){
+            setSectorsInvisible();
             game_play.setVisible(true);
         } else {
+            setSectorsInvisible();
             game_play.setVisible(false);
+        }
+    }
+    
+    @FXML
+    public void setPlayerStatsVisible(Boolean visible){
+        if(visible == true){
+            player_stats.setVisible(true);
+        } else {
+            setSectorsInvisible();
+            player_stats.setVisible(false);
+        }
+    }
+    
+        @FXML
+    public void setGameStatsVisible(Boolean visible){
+        if(visible == true){
+            game_stats.setVisible(true);
+        } else {
+            setSectorsInvisible();
+            game_stats.setVisible(false);
         }
     }
     
@@ -360,6 +382,43 @@ public class WheelofJeopardyDocumentController implements Initializable {
         opponent_identifier.setText(opponent);
         //Add in categories to menu
         setSectorOpponentChoiceVisible(true);
+    }
+        
+    public void populateGameStats(){
+        //need category names
+        //Add in categories to menu
+        //Populate cell tables
+    }
+    
+    public void updateGameStats(){
+        //update round and game timer?
+    }
+    
+    public void highlightCategoryTable(){
+        //Find category point value to highlight
+    }
+    
+    public void updateCategoryTable(){
+        //Remove category point value cell value
+    }
+    
+    
+    public void populatePlayerStats(){
+        //player names
+    }
+    
+    public void updatePlayerStats(String player, String points, String tokens){
+       //lookup Java string comparisons
+        if(player == player1_label.getText()){
+            player1_score.setText(points);
+            player1_tokens.setText(tokens);
+        } else if (player == player2_label.getText()){
+            player2_score.setText(points);
+            player2_tokens.setText(tokens);
+        } else {
+            player3_score.setText(points);
+            player3_tokens.setText(tokens);    
+        }
     }
         
     @Override
