@@ -2,8 +2,8 @@ package wheelOfJeopardy;
 
 public class BankruptSector  extends WheelSector{
 
-	public BankruptSector(String theName){
-		super(theName);
+	public BankruptSector(){
+		super("Bankrupt");
 	}
 	public void performAction(Controller theController){
 		

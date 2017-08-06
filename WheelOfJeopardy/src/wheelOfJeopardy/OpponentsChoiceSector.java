@@ -3,8 +3,8 @@ package wheelOfJeopardy;
 public class OpponentsChoiceSector extends WheelSector{
 
 	private Player Opponent;
-	public OpponentsChoiceSector(String theName){
-		super(theName);
+	public OpponentsChoiceSector(){
+		super("Opponents Choice");
 	}
 	
 	public void performAction(Controller theController){

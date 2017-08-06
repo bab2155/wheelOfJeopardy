@@ -2,8 +2,8 @@ package wheelOfJeopardy;
 
 public class FreeSpinSector extends WheelSector{
 
-	public FreeSpinSector(String theName){
-		super(theName);
+	public FreeSpinSector(){
+		super("Free Spin");
 	}
 	public void performAction(Controller theController){
 		

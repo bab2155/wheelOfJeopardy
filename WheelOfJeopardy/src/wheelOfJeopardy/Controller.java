@@ -1,5 +1,7 @@
 package wheelOfJeopardy;
 
+import java.util.Arrays;
+
 public class Controller {
 	private QuestionBoard QuestionBoard;
 	private Player[] Players;
@@ -7,10 +9,11 @@ public class Controller {
 	private ScoreBoard ScoreBoard;
 	private TimeKeeper TimeKeeper;
 	private Wheel Wheel;
+	private int RoundNumber;
 	//need to add View as an attribute
 	
 	public void startGame(){
-		
+		this.RoundNumber = 1;
 	}
 	public void stopGame(){
 		
@@ -35,6 +38,12 @@ public class Controller {
 	}
 	public void useTokenForCurrentPlayer(){
 		
+	}
+	public void createQuestionBoardFromDatabase(String theUserDatabaseName){
+		String theActualDatabaseNames[] = DatabaseManager.getDatabaseNames();
+		if (Arrays.asList(theActualDatabaseNames).contains(theUserDatabaseName)){
+			this.QuestionBoard = DatabaseManager.createQuestionBoardForRound(theUserDatabaseName,this.RoundNumber);
+		}
 	}
 
 }
