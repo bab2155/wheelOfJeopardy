@@ -104,27 +104,54 @@
             <Button fx:id="spin_wheel_button" layoutX="1047.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleSpinWheelAction" text="SpinWheel" />
             <AnchorPane fx:id="game_stats" layoutX="120.0" layoutY="72.0" prefHeight="369.0" prefWidth="635.0">
                <children>
-                  <TableView fx:id="category_table" layoutX="36.0" layoutY="84.0" prefHeight="159.0" prefWidth="463.0">
+                  <TableView fx:id="category_table" layoutX="36.0" layoutY="73.0" prefHeight="191.0" prefWidth="603.0">
                     <columns>
-                      <TableColumn fx:id="category1" minWidth="5.3999786376953125" prefWidth="72.60000610351562" text="C2" />
-                        <TableColumn fx:id="category2" prefWidth="77.39999389648438" text="C3" />
-                        <TableColumn fx:id="category3" prefWidth="75.0" text="C4" />
-                        <TableColumn fx:id="category4" prefWidth="75.0" text="C5" />
-                        <TableColumn fx:id="category5" prefWidth="75.0" text="C5" />
-                      <TableColumn fx:id="category6" prefWidth="75.0" text="C6" />
+                      <TableColumn fx:id="category1" minWidth="5.3999786376953125" prefWidth="100.0">
+                          <graphic>
+                            <Label fx:id="category1_label" alignment="CENTER" text="Team Points (Small Maps)" textAlignment="CENTER" wrapText="true" />
+                          </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="category2" prefWidth="100.0">
+                           <graphic>
+                                <Label fx:id="category2_label" alignment="CENTER" prefHeight="60.0" prefWidth="147.0" text="Team2 Points (Small Maps)" textAlignment="CENTER" wrapText="true" />
+                            </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="category3" prefWidth="100.0">
+                            <graphic>
+                                <Label fx:id="category3_label" alignment="CENTER" text="Team Points (Small Maps)" textAlignment="CENTER" wrapText="true" />
+                            </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="category4" prefWidth="100.0">
+                            <graphic>
+                                <Label fx:id="category4_label" alignment="CENTER" text="Team Points (Small Maps)" textAlignment="CENTER" wrapText="true" />
+                            </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="category5" prefWidth="100.0">
+                            <graphic>
+                                <Label fx:id="category5_label" alignment="CENTER" text="Team Points (Small Maps)" textAlignment="CENTER" wrapText="true" />
+                            </graphic>
+                        </TableColumn>
+                      <TableColumn fx:id="category6" prefWidth="100.0">
+                            <graphic>
+                                <Label fx:id="category6_label" alignment="CENTER" text="Team Points (Small Maps)" textAlignment="CENTER" wrapText="true" />
+                            </graphic>
+                       </TableColumn>
                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
-                  <Label fx:id="spin_counter" alignment="CENTER" layoutX="432.0" layoutY="37.0" style="&#10;" text="25" textAlignment="CENTER" wrapText="false">
+                  <Label fx:id="spin_counter" alignment="CENTER" layoutX="428.0" layoutY="32.0" style="&#10;" text="25" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="game_timer" alignment="CENTER" layoutX="146.0" layoutY="41.0" style="&#10;" text="25:23" textAlignment="CENTER" wrapText="false">
+                  <Label fx:id="game_timer" alignment="CENTER" layoutX="145.0" layoutY="35.0" style="&#10;" text="25:23" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="spin_label" alignment="CENTER" layoutX="277.0" layoutY="37.0" style="&#10;" text="Spins Remaining:" textAlignment="CENTER" wrapText="false">
+                  <Label fx:id="spin_label" alignment="CENTER" layoutX="277.0" layoutY="33.0" style="&#10;" text="Spins Remaining:" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -134,7 +161,7 @@
                   <Font size="18.0" />
                 </font>
               </Label>
-                  <Label fx:id="game_time_label" alignment="CENTER" layoutX="34.0" layoutY="41.0" style="&#10;" text="Game Time:" textAlignment="CENTER" wrapText="false">
+                  <Label fx:id="game_time_label" alignment="CENTER" layoutX="36.0" layoutY="35.0" style="&#10;" text="Game Time:" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -146,7 +173,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="game_play" blendMode="SRC_ATOP" layoutX="157.0" layoutY="364.0" prefHeight="300.0" prefWidth="776.0" style="-fx-border-color: black;" visible="false">
+            <AnchorPane fx:id="game_play" blendMode="SRC_ATOP" layoutX="157.0" layoutY="364.0" prefHeight="300.0" prefWidth="776.0" style="-fx-border-color: black;">
                <children>
                   <Label fx:id="player_identifier" alignment="CENTER" prefHeight="57.0" prefWidth="162.0" style="&#10;" text="Player 2" textAlignment="CENTER" wrapText="false">
                      <font>
@@ -279,7 +306,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <ChoiceBox layoutX="342.0" layoutY="194.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="category_box_player" layoutX="342.0" layoutY="194.0" prefWidth="150.0" />
                         <Label fx:id="player_identifier21131" alignment="CENTER" layoutX="338.0" layoutY="136.0" style="&#10;" text="Choose a category" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
@@ -315,7 +342,7 @@
                            </font>
                         </Label>
                         <Button fx:id="player_submit_button211" layoutX="396.0" layoutY="237.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Submit" />
-                        <ChoiceBox layoutX="348.0" layoutY="199.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="category_box_opponent" layoutX="348.0" layoutY="199.0" prefWidth="150.0" />
                         <Label fx:id="player_identifier2113" alignment="CENTER" layoutX="341.0" layoutY="144.0" style="&#10;" text="choose a category " textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
