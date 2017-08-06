@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wheelOfJeopardy.WheelofJeopardyDocumentController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="485.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Label fx:id="title" alignment="CENTER" layoutX="421.0" prefHeight="70.0" prefWidth="455.0" text="Wheel of Jeopardy">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <AnchorPane fx:id="player_stats" layoutX="699.0" layoutY="119.0" prefHeight="218.0" prefWidth="500.0">
+               <children>
+                  <Label fx:id="player3_label" alignment="CENTER" layoutX="118.0" layoutY="147.0" style="&#10;" text="Player 3" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="token_label" alignment="CENTER" layoutX="386.0" layoutY="28.0" style="&#10;" text="Tokens" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="player3_score" editable="false" layoutX="234.0" layoutY="148.0" prefHeight="25.0" prefWidth="118.0" />
+                  <Label fx:id="scores_label" alignment="CENTER" layoutX="262.0" layoutY="28.0" style="&#10;" text="Scores" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="player2_score" editable="false" layoutX="234.0" layoutY="110.0" prefHeight="25.0" prefWidth="118.0" />
+                  <TextField fx:id="player3_tokens" editable="false" layoutX="384.0" layoutY="148.0" prefHeight="25.0" prefWidth="67.0" />
+                  <TextField fx:id="player1_score" editable="false" layoutX="234.0" layoutY="68.0" prefHeight="25.0" prefWidth="118.0" />
+                  <TextField fx:id="player1_tokens" editable="false" layoutX="384.0" layoutY="68.0" prefHeight="25.0" prefWidth="67.0" />
+                  <TextField fx:id="player2_tokens" editable="false" layoutX="385.0" layoutY="110.0" prefHeight="25.0" prefWidth="67.0" />
+                  <Label fx:id="player2_label" alignment="CENTER" layoutX="118.0" layoutY="109.0" style="&#10;" text="Player 2" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="player1_label" alignment="CENTER" layoutX="118.0" layoutY="70.0" style="&#10;" text="Player 1" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <Button fx:id="spin_wheel_button" layoutX="1047.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleSpinWheelAction" text="SpinWheel" />
+            <AnchorPane fx:id="game_stats" layoutX="120.0" layoutY="72.0" prefHeight="369.0" prefWidth="635.0">
+               <children>
+                  <TableView fx:id="category_table" layoutX="36.0" layoutY="73.0" prefHeight="191.0" prefWidth="603.0">
+                    <columns>
+                      <TableColumn fx:id="category1" minWidth="5.3999786376953125" prefWidth="100.0">
+                          <graphic>
+                            <Label fx:id="category1_label" alignment="CENTER" text="Team Points (Small Maps)" textAlignment="CENTER" wrapText="true" />
+                          </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="category2" prefWidth="100.0">
+                           <graphic>
+                                <Label fx:id="category2_label" alignment="CENTER" prefHeight="60.0" prefWidth="147.0" text="Team2 Points (Small Maps)" textAlignment="CENTER" wrapText="true" />
+                            </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="category3" prefWidth="100.0">
+                            <graphic>
+                                <Label fx:id="category3_label" alignment="CENTER" text="Team Points (Small Maps)" textAlignment="CENTER" wrapText="true" />
+                            </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="category4" prefWidth="100.0">
+                            <graphic>
+                                <Label fx:id="category4_label" alignment="CENTER" text="Team Points (Small Maps)" textAlignment="CENTER" wrapText="true" />
+                            </graphic>
+                        </TableColumn>
+                        <TableColumn fx:id="category5" prefWidth="100.0">
+                            <graphic>
+                                <Label fx:id="category5_label" alignment="CENTER" text="Team Points (Small Maps)" textAlignment="CENTER" wrapText="true" />
+                            </graphic>
+                        </TableColumn>
+                      <TableColumn fx:id="category6" prefWidth="100.0">
+                            <graphic>
+                                <Label fx:id="category6_label" alignment="CENTER" text="Team Points (Small Maps)" textAlignment="CENTER" wrapText="true" />
+                            </graphic>
+                       </TableColumn>
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Label fx:id="spin_counter" alignment="CENTER" layoutX="428.0" layoutY="32.0" style="&#10;" text="25" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="game_timer" alignment="CENTER" layoutX="145.0" layoutY="35.0" style="&#10;" text="25:23" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="spin_label" alignment="CENTER" layoutX="277.0" layoutY="33.0" style="&#10;" text="Spins Remaining:" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+              <Label fx:id="round_label" alignment="CENTER" layoutX="36.0" layoutY="-1.0" style="&#10;" text="Round" textAlignment="CENTER" wrapText="false">
+                <font>
+                  <Font size="18.0" />
+                </font>
+              </Label>
+                  <Label fx:id="game_time_label" alignment="CENTER" layoutX="36.0" layoutY="35.0" style="&#10;" text="Game Time:" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="round_value" alignment="CENTER" layoutX="93.0" layoutY="-1.0" style="&#10;" text="2" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="game_play" blendMode="SRC_ATOP" layoutX="157.0" layoutY="364.0" prefHeight="300.0" prefWidth="776.0" style="-fx-border-color: black;">
+               <children>
+                  <Label fx:id="player_identifier" alignment="CENTER" prefHeight="57.0" prefWidth="162.0" style="&#10;" text="Player 2" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="688.0" layoutY="15.0" style="&#10;" text="0:13" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="538.0" layoutY="15.0" style="&#10;" text="Time Remaining:" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane fx:id="sector_bankruptcy" layoutY="21.0" prefHeight="277.0" prefWidth="774.0" visible="false">
+                     <children>
+                        <Label alignment="CENTER" style="&#10;" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="question_value_label1" alignment="CENTER" layoutX="343.0" layoutY="82.0" style="&#10;" text="Bankruptcy" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="player_submit_button1" layoutX="370.0" layoutY="224.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Continue" />
+                        <Label fx:id="question_value_label11" alignment="CENTER" layoutX="245.0" layoutY="139.0" style="&#10;" text="Lose all accumulated points for this round" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="sector_question" prefHeight="296.0" prefWidth="772.0" visible="false">
+                     <children>
+                        <Label fx:id="category" alignment="CENTER" layoutX="11.0" layoutY="81.0" style="&#10;" text="Category:" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" style="&#10;" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="question" alignment="CENTER" layoutX="10.0" layoutY="119.0" style="&#10;" text="Question:" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="player_answer_label" alignment="CENTER" layoutX="10.0" layoutY="183.0" style="&#10;" text="Player Answer:" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="question_value_label" alignment="CENTER" layoutX="321.0" layoutY="7.0" style="&#10;" text="Point Value:" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="player_answer" layoutX="141.0" layoutY="185.0" prefHeight="25.0" prefWidth="219.0" />
+                        <Label fx:id="category_title" alignment="CENTER" layoutX="104.0" layoutY="83.0" style="&#10;" text="Science Fiction Films" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="question_content" alignment="CENTER" layoutX="98.0" layoutY="121.0" style="&#10;" text="This company bought Lucasfilms in 2012" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="player_submit_button" layoutX="224.0" layoutY="225.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Submit" />
+                        <Label fx:id="question_value" alignment="CENTER" layoutX="442.0" layoutY="7.0" style="&#10;" text="800" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane fx:id="answer_results" layoutX="426.0" layoutY="53.0" prefHeight="218.0" prefWidth="330.0">
+                           <children>
+                              <TextField fx:id="correct_answer" editable="false" layoutX="100.0" layoutY="127.0" prefHeight="25.0" prefWidth="219.0" />
+                              <Button fx:id="correct_override_submit_button" layoutX="103.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleCorrectOverrideSubmitAction" text="Correct" />
+                              <Label fx:id="correct_answer_label" alignment="CENTER" layoutX="24.0" layoutY="128.0" style="&#10;" text="Answer:" textAlignment="CENTER" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="incorrect_override_submit_button" layoutX="191.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleIncorrectOverrideSubmitAction" text="Incorrect" />
+                              <Label alignment="CENTER" layoutX="72.0" layoutY="27.0" prefHeight="27.0" prefWidth="201.0" text="Answer was incorrect!">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="34.0" layoutY="57.0" prefHeight="35.0" prefWidth="287.0" text="Other players may choose to override scoring.">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="sector_lose_turn" prefHeight="298.0" prefWidth="774.0" visible="false">
+                     <children>
+                        <Label alignment="CENTER" style="&#10;" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="player_submit_button2" layoutX="369.0" layoutY="221.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Continue" />
+                        <Label fx:id="player_identifier21" alignment="CENTER" layoutX="350.0" layoutY="105.0" style="&#10;" text="Lose Turn" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="player_identifier22" alignment="CENTER" layoutX="318.0" layoutY="155.0" style="&#10;" text="Lose the current turn" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="sector_player_choice" prefHeight="298.0" prefWidth="774.0" visible="false">
+                     <children>
+                        <Button fx:id="player_submit_button2112" layoutX="390.0" layoutY="250.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Submit" />
+                        <Label fx:id="question_value_label2112" alignment="CENTER" layoutX="333.0" layoutY="79.0" style="&#10;" text="Player's Choice" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="category_box_player" layoutX="342.0" layoutY="194.0" prefWidth="150.0" />
+                        <Label fx:id="player_identifier21131" alignment="CENTER" layoutX="338.0" layoutY="136.0" style="&#10;" text="Choose a category" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="category8112" alignment="CENTER" layoutX="242.0" layoutY="193.0" style="&#10;" text="Category:" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="sector_opponent_choice" prefHeight="300.0" prefWidth="774.0" visible="false">
+                     <children>
+                        <Label fx:id="player_identifier211" alignment="CENTER" layoutX="266.0" layoutY="144.0" style="&#10;" text="Player 1" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="category811" alignment="CENTER" layoutX="262.0" layoutY="197.0" style="&#10;" text="Category:" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" style="&#10;" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="question_value_label211" alignment="CENTER" layoutX="314.0" layoutY="82.0" style="&#10;" text="Opponent's Choice" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="player_submit_button211" layoutX="396.0" layoutY="237.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Submit" />
+                        <ChoiceBox fx:id="category_box_opponent" layoutX="348.0" layoutY="199.0" prefWidth="150.0" />
+                        <Label fx:id="player_identifier2113" alignment="CENTER" layoutX="341.0" layoutY="144.0" style="&#10;" text="choose a category " textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="sector_free_token" prefHeight="302.0" prefWidth="774.0" visible="false">
+                     <children>
+                        <Label alignment="CENTER" style="&#10;" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="question_value_label2111" alignment="CENTER" layoutX="344.0" layoutY="106.0" style="&#10;" text="Free Token" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="player_submit_button2111" layoutX="370.0" layoutY="235.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Continue" />
+                        <Label fx:id="player_identifier21112" alignment="CENTER" layoutX="331.0" layoutY="167.0" style="&#10;" text="One token earned" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="sector_spin_again" prefHeight="302.0" prefWidth="774.0" visible="false">
+                     <children>
+                        <Label alignment="CENTER" style="&#10;" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="question_value_label21111" alignment="CENTER" layoutX="338.0" layoutY="116.0" style="&#10;" text="Spin Again" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="player_submit_button21111" layoutX="363.0" layoutY="248.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Continue" />
+                        <Label fx:id="player_identifier211112" alignment="CENTER" layoutX="327.0" layoutY="189.0" style="&#10;" text="spin wheel again" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="player_use_token" prefHeight="302.0" prefWidth="774.0">
+                     <children>
+                        <Label alignment="CENTER" style="&#10;" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="question_value_label211111" alignment="CENTER" layoutX="323.0" layoutY="116.0" style="&#10;" text="Use Free Token" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="question_content211111" alignment="CENTER" layoutX="360.0" layoutY="176.0" style="&#10;" text="Use token?" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="player_submit_button211111" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Yes" />
+                        <Button fx:id="player_submit_button2111111" layoutX="422.0" layoutY="231.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="No" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+      </children>
+    </AnchorPane>
+      <Pane fx:id="footer" prefHeight="105.0" prefWidth="1280.0">
+         <children>
+            <ImageView fitHeight="57.0" fitWidth="57.0" layoutX="21.0" layoutY="18.0">
+               <image>
+                  <Image url="@../assets/images/rocketeer.jpg" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="93.0" layoutY="79.0" prefHeight="19.0" prefWidth="755.0" text="Brought to you by Team Rocketeer: Ben Burnett, Mike Wilkinson, Nicole Ouellette, Erin Gulbranson, &amp; Heather Curtis" textAlignment="CENTER" />
+            <Hyperlink layoutY="78.0" text="[source: internetrocket.com]">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </Pane>
+  </children>
+</VBox>
