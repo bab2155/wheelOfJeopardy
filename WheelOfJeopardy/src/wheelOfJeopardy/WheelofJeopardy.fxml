@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wheelOfJeopardy.WheelofJeopardyDocumentController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../assets/css/wheelofJeopardy.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wheelOfJeopardy.WheelofJeopardyDocumentController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -61,12 +61,18 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="485.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
       <children>
+            <ImageView fx:id="spin_wheel_image" fitHeight="196.0" fitWidth="200.0" layoutX="964.0" layoutY="414.0" visible="false">
+               <image>
+                  <Image url="@../assets/images/WheelSmall.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="spin_wheel_button" layoutX="1028.0" layoutY="500.0" mnemonicParsing="false" onAction="#handleSpinWheelAction" text="SpinWheel" visible="false" />
             <Label fx:id="title" alignment="CENTER" layoutX="421.0" prefHeight="70.0" prefWidth="455.0" text="Wheel of Jeopardy">
                <font>
-                  <Font size="48.0" />
+                  <Font name="System Bold" size="48.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="player_stats" layoutX="699.0" layoutY="119.0" prefHeight="218.0" prefWidth="500.0">
+            <AnchorPane fx:id="player_stats" layoutX="699.0" layoutY="119.0" prefHeight="218.0" prefWidth="500.0" visible="false">
                <children>
                   <Label fx:id="player3_label" alignment="CENTER" layoutX="118.0" layoutY="147.0" style="&#10;" text="Player 3" textAlignment="CENTER" wrapText="false">
                      <font>
@@ -101,8 +107,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <Button fx:id="spin_wheel_button" layoutX="1047.0" layoutY="467.0" mnemonicParsing="false" onAction="#handleSpinWheelAction" text="SpinWheel" />
-            <AnchorPane fx:id="game_stats" layoutX="120.0" layoutY="72.0" prefHeight="369.0" prefWidth="635.0">
+            <AnchorPane fx:id="game_stats" layoutX="120.0" layoutY="72.0" prefHeight="369.0" prefWidth="635.0" visible="false">
                <children>
                   <TableView fx:id="category_table" layoutX="36.0" layoutY="73.0" prefHeight="191.0" prefWidth="603.0">
                     <columns>
@@ -173,24 +178,24 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="game_play" blendMode="SRC_ATOP" layoutX="157.0" layoutY="364.0" prefHeight="300.0" prefWidth="776.0" style="-fx-border-color: black;">
+            <AnchorPane fx:id="game_play" blendMode="SRC_ATOP" layoutX="157.0" layoutY="364.0" prefHeight="300.0" prefWidth="776.0" style="-fx-border-color: black;" visible="false">
                <children>
-                  <Label fx:id="player_identifier" alignment="CENTER" prefHeight="57.0" prefWidth="162.0" style="&#10;" text="Player 2" textAlignment="CENTER" wrapText="false">
+                  <Label fx:id="player_identifier" layoutX="11.0" prefHeight="57.0" prefWidth="191.0" style="&#10;" text="Player 2" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="688.0" layoutY="15.0" style="&#10;" text="0:13" textAlignment="CENTER" wrapText="false">
+                  <Label alignment="CENTER" layoutX="720.0" layoutY="15.0" style="&#10;" text="0:13" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="538.0" layoutY="15.0" style="&#10;" text="Time Remaining:" textAlignment="CENTER" wrapText="false">
+                  <Label alignment="CENTER" layoutX="577.0" layoutY="15.0" style="&#10;" text="Time Remaining:" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <AnchorPane fx:id="sector_bankruptcy" layoutY="21.0" prefHeight="277.0" prefWidth="774.0" visible="false">
+                  <AnchorPane fx:id="sector_bankruptcy" layoutY="2.0" prefHeight="296.0" prefWidth="774.0" visible="false">
                      <children>
                         <Label alignment="CENTER" style="&#10;" textAlignment="CENTER" wrapText="false">
                            <font>
@@ -202,7 +207,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Button fx:id="player_submit_button1" layoutX="370.0" layoutY="224.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Continue" />
+                        <Button fx:id="bankrupty_continue_button" layoutX="370.0" layoutY="224.0" mnemonicParsing="false" onAction="#handleBankruptcyAction" text="Continue" />
                         <Label fx:id="question_value_label11" alignment="CENTER" layoutX="245.0" layoutY="139.0" style="&#10;" text="Lose all accumulated points for this round" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
@@ -212,7 +217,7 @@
                   </AnchorPane>
                   <AnchorPane fx:id="sector_question" prefHeight="296.0" prefWidth="772.0" visible="false">
                      <children>
-                        <Label fx:id="category" alignment="CENTER" layoutX="11.0" layoutY="81.0" style="&#10;" text="Category:" textAlignment="CENTER" wrapText="false">
+                        <Label fx:id="category" alignment="CENTER" layoutX="11.0" layoutY="61.0" style="&#10;" text="Category:" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -222,12 +227,12 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="question" alignment="CENTER" layoutX="10.0" layoutY="119.0" style="&#10;" text="Question:" textAlignment="CENTER" wrapText="false">
+                        <Label fx:id="question" alignment="CENTER" layoutX="10.0" layoutY="100.0" style="&#10;" text="Question:" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="player_answer_label" alignment="CENTER" layoutX="10.0" layoutY="183.0" style="&#10;" text="Player Answer:" textAlignment="CENTER" wrapText="false">
+                        <Label fx:id="player_answer_label" alignment="CENTER" layoutX="10.0" layoutY="214.0" style="&#10;" text="Player Answer:" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -237,41 +242,51 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="player_answer" layoutX="141.0" layoutY="185.0" prefHeight="25.0" prefWidth="219.0" />
-                        <Label fx:id="category_title" alignment="CENTER" layoutX="104.0" layoutY="83.0" style="&#10;" text="Science Fiction Films" textAlignment="CENTER" wrapText="false">
+                        <TextField fx:id="player_answer" layoutX="141.0" layoutY="215.0" prefHeight="25.0" prefWidth="219.0" />
+                        <Label fx:id="category_title" alignment="TOP_LEFT" layoutX="97.0" layoutY="63.0" prefHeight="27.0" prefWidth="322.0" style="&#10;" text="Science Fiction Films" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="question_content" alignment="CENTER" layoutX="98.0" layoutY="121.0" style="&#10;" text="This company bought Lucasfilms in 2012" textAlignment="CENTER" wrapText="false">
+                        <Label fx:id="question_content" alignment="TOP_LEFT" layoutX="95.0" layoutY="100.0" prefHeight="105.0" prefWidth="359.0" style="&#10;" text="This company bought Lucasfilms in 2012" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="player_submit_button" layoutX="224.0" layoutY="225.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Submit" />
+                        <Button fx:id="player_submit_button" layoutX="224.0" layoutY="256.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Submit" />
                         <Label fx:id="question_value" alignment="CENTER" layoutX="442.0" layoutY="7.0" style="&#10;" text="800" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <AnchorPane fx:id="answer_results" layoutX="426.0" layoutY="53.0" prefHeight="218.0" prefWidth="330.0">
+                        <AnchorPane fx:id="answer_results_incorrect" layoutX="453.0" layoutY="54.0" prefHeight="252.0" prefWidth="315.0" visible="false">
                            <children>
-                              <TextField fx:id="correct_answer" editable="false" layoutX="100.0" layoutY="127.0" prefHeight="25.0" prefWidth="219.0" />
-                              <Button fx:id="correct_override_submit_button" layoutX="103.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleCorrectOverrideSubmitAction" text="Correct" />
-                              <Label fx:id="correct_answer_label" alignment="CENTER" layoutX="24.0" layoutY="128.0" style="&#10;" text="Answer:" textAlignment="CENTER" wrapText="false">
+                              <TextField fx:id="correct_answer" editable="false" layoutX="94.0" layoutY="149.0" prefHeight="25.0" prefWidth="219.0" />
+                              <Button fx:id="correct_override_submit_button" layoutX="103.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleCorrectOverrideSubmitAction" text="Correct" />
+                              <Label fx:id="correct_answer_label" alignment="CENTER" layoutX="20.0" layoutY="147.0" style="&#10;" text="Answer:" textAlignment="CENTER" wrapText="false">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="incorrect_override_submit_button" layoutX="191.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleIncorrectOverrideSubmitAction" text="Incorrect" />
-                              <Label alignment="CENTER" layoutX="72.0" layoutY="27.0" prefHeight="27.0" prefWidth="201.0" text="Answer was incorrect!">
+                              <Button fx:id="incorrect_override_submit_button" layoutX="191.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleIncorrectOverrideSubmitAction" text="Incorrect" />
+                              <Label layoutX="90.0" layoutY="15.0" prefHeight="27.0" prefWidth="201.0" text="Answer was incorrect!">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="34.0" layoutY="57.0" prefHeight="35.0" prefWidth="287.0" text="Other players may choose to override scoring.">
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="95.0" layoutY="57.0" prefHeight="70.0" prefWidth="219.0" text="Other players may choose to override scoring." wrapText="true">
                                  <font>
                                     <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="answer_results_correct" layoutX="463.0" layoutY="64.0" prefHeight="252.0" prefWidth="315.0" visible="false">
+                           <children>
+                              <Button fx:id="correct_answer_continue_button" layoutX="140.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleIncorrectOverrideSubmitAction" text="Continue" />
+                              <Label alignment="CENTER" layoutX="69.0" layoutY="99.0" prefHeight="27.0" prefWidth="201.0" text="Answer was correct!">
+                                 <font>
+                                    <Font size="18.0" />
                                  </font>
                               </Label>
                            </children>
@@ -285,7 +300,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="player_submit_button2" layoutX="369.0" layoutY="221.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Continue" />
+                        <Button fx:id="player_submit_button2" layoutX="369.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleSpinWheelAction" text="Continue" />
                         <Label fx:id="player_identifier21" alignment="CENTER" layoutX="350.0" layoutY="105.0" style="&#10;" text="Lose Turn" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="24.0" />
@@ -300,7 +315,7 @@
                   </AnchorPane>
                   <AnchorPane fx:id="sector_player_choice" prefHeight="298.0" prefWidth="774.0" visible="false">
                      <children>
-                        <Button fx:id="player_submit_button2112" layoutX="390.0" layoutY="250.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Submit" />
+                        <Button fx:id="player_choice_submit_button" layoutX="390.0" layoutY="250.0" mnemonicParsing="false" onAction="#handlePlayerChoiceSubmitAction" text="Submit" />
                         <Label fx:id="question_value_label2112" alignment="CENTER" layoutX="333.0" layoutY="79.0" style="&#10;" text="Player's Choice" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="24.0" />
@@ -321,7 +336,7 @@
                   </AnchorPane>
                   <AnchorPane fx:id="sector_opponent_choice" prefHeight="300.0" prefWidth="774.0" visible="false">
                      <children>
-                        <Label fx:id="player_identifier211" alignment="CENTER" layoutX="266.0" layoutY="144.0" style="&#10;" text="Player 1" textAlignment="CENTER" wrapText="false">
+                        <Label fx:id="opponent_identifier" alignment="CENTER" layoutX="266.0" layoutY="144.0" style="&#10;" text="Player 1" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -331,17 +346,12 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" style="&#10;" textAlignment="CENTER" wrapText="false">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
                         <Label fx:id="question_value_label211" alignment="CENTER" layoutX="314.0" layoutY="82.0" style="&#10;" text="Opponent's Choice" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Button fx:id="player_submit_button211" layoutX="396.0" layoutY="237.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Submit" />
+                        <Button fx:id="opponent_choice_submit_button211" layoutX="396.0" layoutY="237.0" mnemonicParsing="false" onAction="#handleOpponentChoiceSubmitAction" text="Submit" />
                         <ChoiceBox fx:id="category_box_opponent" layoutX="348.0" layoutY="199.0" prefWidth="150.0" />
                         <Label fx:id="player_identifier2113" alignment="CENTER" layoutX="341.0" layoutY="144.0" style="&#10;" text="choose a category " textAlignment="CENTER" wrapText="false">
                            <font>
@@ -362,7 +372,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Button fx:id="player_submit_button2111" layoutX="370.0" layoutY="235.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Continue" />
+                        <Button fx:id="player_submit_button2111" layoutX="370.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleSpinWheelAction" text="Continue" />
                         <Label fx:id="player_identifier21112" alignment="CENTER" layoutX="331.0" layoutY="167.0" style="&#10;" text="One token earned" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
@@ -382,7 +392,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Button fx:id="player_submit_button21111" layoutX="363.0" layoutY="248.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Continue" />
+                        <Button fx:id="player_submit_button21111" layoutX="363.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleSpinWheelAction" text="Continue" />
                         <Label fx:id="player_identifier211112" alignment="CENTER" layoutX="327.0" layoutY="189.0" style="&#10;" text="spin wheel again" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
@@ -390,7 +400,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="player_use_token" prefHeight="302.0" prefWidth="774.0">
+                  <AnchorPane fx:id="player_use_token" prefHeight="302.0" prefWidth="774.0" visible="false">
                      <children>
                         <Label alignment="CENTER" style="&#10;" textAlignment="CENTER" wrapText="false">
                            <font>
@@ -407,8 +417,58 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="player_submit_button211111" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Yes" />
-                        <Button fx:id="player_submit_button2111111" layoutX="422.0" layoutY="231.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="No" />
+                        <Button fx:id="player_use_token_submit" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleUseTokenSubmitAction" text="Yes" />
+                        <Button fx:id="player_submit_button2111111" layoutX="422.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleSpinWheelAction" text="No" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="game_open_panel" layoutX="289.0" layoutY="63.0" prefHeight="592.0" prefWidth="732.0">
+               <children>
+                  <ImageView fx:id="large_wheel_image" fitHeight="475.0" fitWidth="475.0" layoutX="113.0" layoutY="46.0">
+                     <image>
+                        <Image url="@../assets/images/WheelLarge.jpg" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="new_game_button" layoutX="325.0" layoutY="553.0" mnemonicParsing="false" onAction="#gameLaunch" text="New Game" />
+                  <AnchorPane fx:id="player_identifiers" layoutX="113.0" layoutY="56.0" prefHeight="397.0" prefWidth="529.0" visible="false">
+                     <children>
+                        <Button fx:id="start_game_button" layoutX="227.0" layoutY="358.0" mnemonicParsing="false" onAction="#gameStart" text="Start Game" />
+                        <Label layoutX="108.0" layoutY="271.0" text="Player 3">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="108.0" layoutY="201.0" text="Player 2">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="108.0" layoutY="129.0" text="Player 1">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="player3_name" layoutX="238.0" layoutY="265.0" prefHeight="25.0" prefWidth="200.0" text="Bruce">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="player2_name" layoutX="238.0" layoutY="195.0" prefHeight="25.0" prefWidth="200.0" text="Magneto">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="player1_name" layoutX="238.0" layoutY="125.0" prefHeight="25.0" prefWidth="200.0" text="Anakin">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <Label layoutX="138.0" layoutY="48.0" text="Please enter user names:">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>
