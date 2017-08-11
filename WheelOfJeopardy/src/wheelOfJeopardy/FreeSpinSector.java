@@ -6,7 +6,8 @@ public class FreeSpinSector extends WheelSector{
 		super("Free Spin");
 	}
 	public void performAction(Controller theController){
-		
+		int currentNumberOfTokens = theController.getCurrentPlayer().getNumberOfTokens();
+		theController.getCurrentPlayer().setNumberOfTokens(++currentNumberOfTokens);
 	}
 
 }

@@ -6,7 +6,7 @@ public class BankruptSector  extends WheelSector{
 		super("Bankrupt");
 	}
 	public void performAction(Controller theController){
-		
+		theController.getScoreBoard().bankruptPlayer(theController.getCurrentPlayer());
 	}
 
 }

@@ -6,6 +6,6 @@ public class LoseATurnSector extends WheelSector{
 		super("Lose A Turn");
 	}
 	public void performAction(Controller theController){
-		
+		theController.loseATurn();
 	}
 }

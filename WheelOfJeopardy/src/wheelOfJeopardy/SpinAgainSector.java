@@ -6,7 +6,7 @@ public class  SpinAgainSector extends WheelSector{
 		super("Spin Again");
 	}
 	public void performAction(Controller theController){
-		
+		theController.spin();
 	}
 
 }
