@@ -2,7 +2,7 @@ package wheelOfJeopardy;
 
 public abstract class WheelSector {
 
-	protected String Name;
+	public String Name;
 	
 	public WheelSector(){
 		this.Name = "";

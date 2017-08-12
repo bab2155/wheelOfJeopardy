@@ -3,6 +3,8 @@ package wheelOfJeopardy;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import wheelOfJeopardy.Wheel;
+import wheelOfJeopardy.WheelSector;
 
 public class WheelTest {
 
