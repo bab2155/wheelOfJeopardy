@@ -7,10 +7,14 @@ public class OpponentsChoiceSector extends WheelSector{
 		super("Opponents Choice");
 	}
 	
+        @Override
 	public void performAction(Controller theController){
-		
+            this.setOpponent(theController.getOpponent());
 	}
-	private void getOpponent(){
-		this.Opponent = new Player("");
+	public Player getOpponent(){
+		return this.Opponent;
 	}
+        public void setOpponent(Player theOpponent){
+            this.Opponent = theOpponent;
+        }
 }

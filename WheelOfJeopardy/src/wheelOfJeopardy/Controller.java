@@ -45,11 +45,13 @@ public class Controller {
 	}
 	
 	public WheelSector spin(){
-		WheelSector theWheelSector = this.Wheel.spin();
-		theWheelSector.performAction(this);
-		return theWheelSector;
+            return this.Wheel.spin();
 	}
 	
+        public void performWheelAction(WheelSector theWheelSector){
+            theWheelSector.performAction(this);
+        }
+        
 	public boolean canRoundContinue(){
 		int currentRoundCount = this.ScoreBoard.getRoundCount();
 		if (currentRoundCount < 50){
@@ -64,13 +66,8 @@ public class Controller {
 	public Question getQuestionForCategory(String theCategory){
 		return this.QuestionBoard.getQuestionForCategory(theCategory);
 	}
-	public void getPlayersChoice(){
-		
-	}
-	public void getOpponentsChoiceFrom(Player theOpponent){
-		
-	}
-	public Player getCurrentPlayer(){
+        
+        public Player getCurrentPlayer(){
 		return this.Players[this.CurrentPlayerNumber];
 	}
 	
@@ -92,5 +89,15 @@ public class Controller {
 			this.QuestionBoard = DatabaseManager.createQuestionBoardForRound(this.DatabaseName,this.RoundNumber);
 		}
 	}
+        
+        public Player getOpponent(){
+            //Pick current player randomly
+            Random randomGenerator = new Random();
+            int theOpponentNumber = -1;
+            while(theOpponentNumber != this.CurrentPlayerNumber){
+                theOpponentNumber = randomGenerator.nextInt(3);
+            }
+            return this.Players[theOpponentNumber];
+        }
 
 }
