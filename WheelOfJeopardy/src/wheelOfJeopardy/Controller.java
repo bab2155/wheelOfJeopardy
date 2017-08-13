@@ -63,8 +63,8 @@ public class Controller {
 	public void loseATurn(){
 		this.setCurrentPlayer();
 	}
-	public Question getQuestionForCategory(String theCategory){
-		return this.QuestionBoard.getQuestionForCategory(theCategory);
+	public Question getQuestionForCategory(String theCategory, int thePointValue){
+		return this.QuestionBoard.getQuestionForCategory(theCategory, thePointValue);
 	}
         
         public Player getCurrentPlayer(){
@@ -86,7 +86,7 @@ public class Controller {
 	public void createQuestionBoard(){
 		String theActualDatabaseNames[] = DatabaseManager.getDatabaseNames();
 		if (Arrays.asList(theActualDatabaseNames).contains(this.DatabaseName)){
-			this.QuestionBoard = DatabaseManager.createQuestionBoardForRound(this.DatabaseName,this.RoundNumber);
+//			this.QuestionBoard = DatabaseManager.createQuestionBoardForRound(this.DatabaseName,this.RoundNumber);
 		}
 	}
         

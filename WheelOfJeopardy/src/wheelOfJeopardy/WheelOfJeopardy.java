@@ -21,7 +21,7 @@ import wheelOfJeopardy.WheelofJeopardyDocumentController;
  */
 public class WheelOfJeopardy extends Application {
     
-    static WheelofJeopardyDocumentController wheelofJeopardyDC; 
+    static WheelofJeopardyDocumentController wheelofJeopardyDC;
     
     @Override
     public void start(Stage stage) throws Exception {        
@@ -44,6 +44,7 @@ public class WheelOfJeopardy extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+
     }
     
 }
