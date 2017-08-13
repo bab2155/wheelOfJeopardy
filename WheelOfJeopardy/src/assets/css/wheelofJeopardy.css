@@ -8,10 +8,14 @@ and open the template in the editor.
     Author     : Heather
 */
 
-.table-cell.category-style {
-    -fx-background-color: palegreen;
+.back-style{
+    -fx-background-color: white;
 }
- 
-.table-view .column-header.category-style {
-    -fx-base: palegreen;
+
+.button-style{
+    -fx-background-color: lightgrey;
+}
+
+.category-style {
+    -fx-background-color: palegreen;
 }
