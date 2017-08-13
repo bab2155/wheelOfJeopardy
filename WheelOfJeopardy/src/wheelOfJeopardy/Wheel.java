@@ -9,17 +9,17 @@ public class Wheel {
 		
 		WheelSector theWheelSectors[] = new WheelSector[12];
 		theWheelSectors[0] = new CategorySector(theCategories[0]);
-		theWheelSectors[1] = new CategorySector(theCategories[1]);
-		theWheelSectors[2] = new CategorySector(theCategories[2]);
-		theWheelSectors[3] = new CategorySector(theCategories[3]);
-		theWheelSectors[4] = new CategorySector(theCategories[4]);
-		theWheelSectors[5] = new CategorySector(theCategories[5]);
-		theWheelSectors[6] = new BankruptSector();
-		theWheelSectors[7] = new FreeSpinSector();
-		theWheelSectors[8] = new LoseATurnSector();
-		theWheelSectors[9] = new OpponentsChoiceSector();
-		theWheelSectors[10] = new PlayersChoiceSector();
-		theWheelSectors[11] = new SpinAgainSector();
+                theWheelSectors[1] = new BankruptSector();
+		theWheelSectors[2] = new CategorySector(theCategories[1]);
+                theWheelSectors[3] = new LoseATurnSector();
+		theWheelSectors[4] = new CategorySector(theCategories[2]);
+                theWheelSectors[5] = new SpinAgainSector();
+		theWheelSectors[6] = new CategorySector(theCategories[3]);
+                theWheelSectors[7] = new PlayersChoiceSector();
+		theWheelSectors[8] = new CategorySector(theCategories[4]);
+                theWheelSectors[9] = new OpponentsChoiceSector();
+		theWheelSectors[10] = new CategorySector(theCategories[5]);
+		theWheelSectors[11] = new FreeSpinSector();
 		this.WheelSectors = theWheelSectors;
 	}
 	public WheelSector spin(){

@@ -12,6 +12,7 @@ public class Controller {
 	private Wheel Wheel;
 	private int RoundNumber;
 	private String DatabaseName;
+        private Question LastQuestion;
 	//need to add View as an attribute
 	
 	public Controller(String theFirstPlayerName, String theSecondPlayerName, String theThirdPlayerName,String theDatabaseName){
@@ -39,19 +40,26 @@ public class Controller {
 	public void stopGame(){
 		
 	}
-	
+	public Question getLastQuestion(){
+            return this.LastQuestion;
+        }
+        
 	public ScoreBoard getScoreBoard(){
 		return this.ScoreBoard;
 	}
+        
+        public QuestionBoard getQuestionBoard(){
+            return this.QuestionBoard;
+        }
 	
 	public WheelSector spin(){
             return this.Wheel.spin();
+            
 	}
-	
-        public void performWheelAction(WheelSector theWheelSector){
-            theWheelSector.performAction(this);
+
+        public void bankruptPlayer(Player thePlayer){
+            this.ScoreBoard.bankruptPlayer(this.getCurrentPlayer());
         }
-        
 	public boolean canRoundContinue(){
 		int currentRoundCount = this.ScoreBoard.getRoundCount();
 		if (currentRoundCount < 50){
@@ -64,7 +72,9 @@ public class Controller {
 		this.setCurrentPlayer();
 	}
 	public Question getQuestionForCategory(String theCategory){
-		return this.QuestionBoard.getQuestionForCategory(theCategory);
+		Question theQuestion = this.QuestionBoard.getQuestionForCategory(theCategory);
+                this.LastQuestion = theQuestion;
+                return theQuestion;
 	}
         
         public Player getCurrentPlayer(){
@@ -98,6 +108,24 @@ public class Controller {
                 theOpponentNumber = randomGenerator.nextInt(3);
             }
             return this.Players[theOpponentNumber];
+        }
+        public void addTokenForCurrentPlayer(){
+            this.ScoreBoard.incrementTokensForPlayer(this.getCurrentPlayer());
+        }
+        
+        public void addLastQuestionPointsForCurrentPlayer(){
+            this.ScoreBoard.addPointsForPlayer(this.getCurrentPlayer(), this.LastQuestion.getPointValue());
+        }
+        public void subtractLastQuestionPointsForCurrentPlayer(){
+            this.ScoreBoard.subtractPointsForPlayer(this.getCurrentPlayer(),this.LastQuestion.getPointValue());
+        }
+        public void overrideAnswerValidationForCurrentPlayer(boolean theOverride){
+            if (theOverride){
+                this.addLastQuestionPointsForCurrentPlayer();
+            }
+            else{
+                this.subtractLastQuestionPointsForCurrentPlayer();
+            }
         }
 
 }
