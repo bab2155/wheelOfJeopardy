@@ -1,12 +1,34 @@
 package wheelOfJeopardy;
 
-public class LoseATurnSector extends WheelSector{
+public class LoseATurnSector extends WheelSector
+{
 
-	public LoseATurnSector(){
-		super("Lose A Turn");
+	/**
+	 * constructor
+	 */
+	public LoseATurnSector( )
+	{
+		super("Lose A Turn" );
 	}
-        @Override
-	public void performAction(Controller theController){
-		theController.loseATurn();
+
+    /**
+     * returns name of constructor
+     *
+     * @return String
+     */
+	public String getName( )
+	{
+		return "Lose A Turn";
+	}
+
+    /**
+     * sets the current player to next player
+     *
+     * @param theController current game state
+     */
+	@Override
+	public void performAction( Controller theController )
+	{
+		theController.loseATurn( );
 	}
 }

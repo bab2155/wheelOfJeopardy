@@ -3,8 +3,10 @@ package wheelOfJeopardy;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Controller {
-	private QuestionBoard QuestionBoard;
+public class Controller
+{
+	// Instance variables
+    private QuestionBoard QuestionBoard;
 	private Player[] Players;
 	private int CurrentPlayerNumber;
 	private ScoreBoard ScoreBoard;
@@ -13,8 +15,17 @@ public class Controller {
 	private int RoundNumber;
 	private String DatabaseName;
 	//need to add View as an attribute
-	
-	public Controller(String theFirstPlayerName, String theSecondPlayerName, String theThirdPlayerName,String theDatabaseName){
+
+    /**
+     * constructor
+     *
+     * @param theFirstPlayerName name of the first player
+     * @param theSecondPlayerName name of the second player
+     * @param theThirdPlayerName name of the third player
+     * @param theDatabaseName name of the database
+     */
+    public Controller(String theFirstPlayerName, String theSecondPlayerName, String theThirdPlayerName,String theDatabaseName)
+    {
 		this.Players[0] = new Player(theFirstPlayerName);
 		this.Players[1] = new Player(theSecondPlayerName);
 		this.Players[2] = new Player(theThirdPlayerName);
@@ -22,10 +33,13 @@ public class Controller {
 		this.ScoreBoard = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
 		
 		this.DatabaseName = theDatabaseName;
-
 	}
-	
-	public void startGame(){
+
+    /**
+     * start the game
+     */
+	public void startGame()
+    {
 		this.RoundNumber = 1;
 		
 		this.createQuestionBoard();
@@ -36,68 +50,141 @@ public class Controller {
 		Random randomGenerator = new Random();
 		this.CurrentPlayerNumber = randomGenerator.nextInt(3);
 	}
-	public void stopGame(){
-		
+
+    /**
+     * stop the game
+     */
+	public void stopGame()
+    {
+		//
 	}
-	
-	public ScoreBoard getScoreBoard(){
+
+    /**
+     * returns the current state of scoreboard
+     *
+     * @return Scoreboard
+     */
+	public ScoreBoard getScoreBoard( )
+    {
 		return this.ScoreBoard;
 	}
-	
-	public WheelSector spin(){
-            return this.Wheel.spin();
+
+    /**
+     * spins the wheel
+     *
+     * @return WheelSector
+     */
+	public WheelSector spin( )
+    {
+        return this.Wheel.spin();
 	}
-	
-        public void performWheelAction(WheelSector theWheelSector){
-            theWheelSector.performAction(this);
-        }
-        
-	public boolean canRoundContinue(){
-		int currentRoundCount = this.ScoreBoard.getRoundCount();
-		if (currentRoundCount < 50){
-			return true;
+
+    /**
+     * executes the performAction( ) method of the result of the spin
+     *
+     * @param theWheelSector the current wheel sector
+     */
+    public void performWheelAction( WheelSector theWheelSector )
+    {
+        theWheelSector.performAction(this );
+    }
+
+    /**
+     * checks the current round count
+     * returns true if currentRoundCount is less than 50; otherwise false
+     *
+     * @return boolean
+     */
+    public boolean canRoundContinue( )
+    {
+        boolean canContinue = false;
+        int currentRoundCount = this.ScoreBoard.getRoundCount( );
+		if ( currentRoundCount < 50 )
+		{
+			canContinue = true;
 		}
-		return false;
+		return canContinue;
 	}
-	
-	public void loseATurn(){
-		this.setCurrentPlayer();
+
+    /**
+     * sets the current player to next player
+     */
+	public void loseATurn( )
+	{
+		this.setCurrentPlayer( );
 	}
-	public Question getQuestionForCategory(String theCategory){
+
+    /**
+     * gets the next question for a given category
+     *
+     * @param theCategory the current category
+     * @return Question
+     */
+    public Question getQuestionForCategory( String theCategory )
+    {
 		return this.QuestionBoard.getQuestionForCategory(theCategory);
 	}
-        
-        public Player getCurrentPlayer(){
-		return this.Players[this.CurrentPlayerNumber];
+
+    /**
+     * returns the current player
+     *
+     * @return Player
+     */
+    public Player getCurrentPlayer( )
+    {
+		return this.Players[ this.CurrentPlayerNumber ];
 	}
-	
-	private void setCurrentPlayer(){
-		if (this.CurrentPlayerNumber < this.Players.length-1){
+
+    /**
+     * sets the current player to next player
+     */
+	private void setCurrentPlayer()
+	{
+		if ( this.CurrentPlayerNumber < this.Players.length-1 )
+		{
 			this.CurrentPlayerNumber = this.CurrentPlayerNumber + 1;
 		}
-		else{
+		else
+		{
 			this.CurrentPlayerNumber = 0;
 		}
 	}
-	
-	public void useTokenForCurrentPlayer(){
-		this.ScoreBoard.useTokenForPlayer(this.getCurrentPlayer());
+
+    /**
+     * allows a player to use a token
+     */
+	public void useTokenForCurrentPlayer( )
+    {
+		this.ScoreBoard.useTokenForPlayer( this.getCurrentPlayer( ) );
 	}
-	public void createQuestionBoard(){
-		String theActualDatabaseNames[] = DatabaseManager.getDatabaseNames();
-		if (Arrays.asList(theActualDatabaseNames).contains(this.DatabaseName)){
-			this.QuestionBoard = DatabaseManager.createQuestionBoardForRound(this.DatabaseName,this.RoundNumber);
+
+    /**
+     * creates the QuestionBoard
+     */
+    public void createQuestionBoard( )
+    {
+		String theActualDatabaseNames[ ] = DatabaseManager.getDatabaseNames( );
+		if ( Arrays.asList( theActualDatabaseNames ).contains( this.DatabaseName ) )
+		{
+			this.QuestionBoard = DatabaseManager.createQuestionBoardForRound( this.DatabaseName,this.RoundNumber );
 		}
 	}
-        
-        public Player getOpponent(){
-            //Pick current player randomly
-            Random randomGenerator = new Random();
-            int theOpponentNumber = -1;
-            while(theOpponentNumber != this.CurrentPlayerNumber){
-                theOpponentNumber = randomGenerator.nextInt(3);
-            }
-            return this.Players[theOpponentNumber];
+
+    /**
+     * randomly chooses an opposing player
+     *
+     * @return Player
+     */
+    public Player getOpponent( )
+    {
+        //Pick current player randomly
+        Random randomGenerator = new Random( );
+        int theOpponentNumber = -1;
+        while( theOpponentNumber == this.CurrentPlayerNumber )
+        {
+            theOpponentNumber = randomGenerator.nextInt(3 );
         }
+        return this.Players[ theOpponentNumber ];
+    }
 
 }

@@ -9,7 +9,8 @@ package wheelOfJeopardy;
  *
  * @author MikeWilkinson
  */
-public interface TimeKeeperListener {
+public interface TimeKeeperListener
+{
     
     void onTimeChange();
 }

@@ -1,13 +1,34 @@
 package wheelOfJeopardy;
 
-public class BankruptSector  extends WheelSector{
+public class BankruptSector extends WheelSector
+{
 
-	public BankruptSector(){
+	/**
+     * constructor
+	 */
+    public BankruptSector( )
+	{
 		super("Bankrupt");
 	}
-        @Override
-	public void performAction(Controller theController){
-		theController.getScoreBoard().bankruptPlayer(theController.getCurrentPlayer());
+
+    /**
+     * returns the name of the sector
+     * @return a String
+     */
+	public String getName( )
+    {
+        return "Bankrupt";
+    }
+
+    /**
+     * sets the score of current player to zero
+     *
+     * @param theController current game state
+     */
+    @Override
+	public void performAction(Controller theController)
+    {
+        theController.getCurrentPlayer( ).setScore( 0 );
 	}
 
 }

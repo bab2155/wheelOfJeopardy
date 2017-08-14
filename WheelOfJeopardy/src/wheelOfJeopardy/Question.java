@@ -1,9 +1,9 @@
 package wheelOfJeopardy;
 
 public class Question {
-	
+
 	private final String Question;
-	
+
 	private final String Answer;
 	
 	public Question(String theQuestionText, String theAnswerText){
