@@ -61,6 +61,60 @@
     </MenuBar>
     <AnchorPane fx:id="game_screen" maxHeight="-1.0" maxWidth="-1.0" prefHeight="485.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
       <children>
+            <AnchorPane fx:id="game_end" layoutX="367.0" layoutY="105.0" prefHeight="518.0" prefWidth="563.0" visible="false">
+               <children>
+                  <Label layoutX="214.0" layoutY="63.0" text="Game Ended">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="256.0" layoutY="124.0" text="Scores">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="player1_final_name" layoutX="185.0" layoutY="181.0" text="Player1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="player2_final_name" layoutX="188.0" layoutY="232.0" text="Player2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="player3_final_name" layoutX="189.0" layoutY="285.0" text="Player3">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="player1_final_score" layoutX="329.0" layoutY="181.0" text="Player1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="player2_final_score" layoutX="329.0" layoutY="232.0" text="Player1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="player3_final_score" layoutX="329.0" layoutY="285.0" text="Player1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="winner_label" layoutX="261.0" layoutY="373.0" text="Winner:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="winner_name" alignment="TOP_CENTER" layoutX="179.0" layoutY="413.0" prefHeight="91.0" prefWidth="227.0" text="Winner" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
             <ImageView fx:id="spin_wheel_image" fitHeight="196.0" fitWidth="200.0" layoutX="964.0" layoutY="414.0" visible="false">
                <image>
                   <Image url="@../assets/images/WheelSmall.jpg" />
@@ -180,7 +234,12 @@
             </AnchorPane>
             <AnchorPane fx:id="game_play" blendMode="SRC_ATOP" layoutX="157.0" layoutY="364.0" prefHeight="302.0" prefWidth="782.0" style="-fx-border-color: black;" visible="false">
                <children>
-                  <Label fx:id="player_identifier" layoutX="11.0" prefHeight="57.0" prefWidth="191.0" style="&#10;" text="Player 2" textAlignment="CENTER">
+                  <Label fx:id="player_display_name" layoutX="10.0" layoutY="1.0" prefHeight="57.0" prefWidth="191.0" style="&#10;" text="DisplayName" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="player_identifier" layoutX="11.0" prefHeight="57.0" prefWidth="191.0" style="&#10;" text="Player 2" textAlignment="CENTER" visible="false">
                      <font>
                         <Font size="24.0" />
                      </font>
