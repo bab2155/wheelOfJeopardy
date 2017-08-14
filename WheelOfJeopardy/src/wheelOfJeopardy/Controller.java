@@ -6,14 +6,15 @@ import java.util.Random;
 public class Controller
 {
 	// Instance variables
-    private QuestionBoard QuestionBoard;
+        private QuestionBoard QuestionBoard;
 	private Player[] Players;
 	private int CurrentPlayerNumber;
-	private ScoreBoard ScoreBoard;
+	private final ScoreBoard ScoreBoard;
 	private TimeKeeper TimeKeeper;
 	private Wheel Wheel;
 	private int RoundNumber;
-	private String DatabaseName;
+	private final String DatabaseName;
+        private Question LastQuestion;
 	//need to add View as an attribute
 
     /**
@@ -38,7 +39,7 @@ public class Controller
     /**
      * start the game
      */
-	public void startGame()
+    public void startGame()
     {
 		this.RoundNumber = 1;
 		
@@ -54,41 +55,33 @@ public class Controller
     /**
      * stop the game
      */
-	public void stopGame()
+    public void stopGame()
     {
 		//
-	}
+    }
 
     /**
      * returns the current state of scoreboard
      *
      * @return Scoreboard
      */
-	public ScoreBoard getScoreBoard( )
+    public ScoreBoard getScoreBoard( )
     {
-		return this.ScoreBoard;
-	}
+	return this.ScoreBoard;
+    }
 
     /**
      * spins the wheel
      *
      * @return WheelSector
      */
-	public WheelSector spin( )
+    public WheelSector spin( )
     {
+        this.ScoreBoard.decrementRoundCount();
         return this.Wheel.spin();
-	}
-
-    /**
-     * executes the performAction( ) method of the result of the spin
-     *
-     * @param theWheelSector the current wheel sector
-     */
-    public void performWheelAction( WheelSector theWheelSector )
-    {
-        theWheelSector.performAction(this );
     }
 
+    
     /**
      * checks the current round count
      * returns true if currentRoundCount is less than 50; otherwise false
@@ -121,9 +114,10 @@ public class Controller
      * @return Question
      */
     public Question getQuestionForCategory( String theCategory )
-    {
-		return this.QuestionBoard.getQuestionForCategory(theCategory);
-	}
+    {   Question theQuestion = this.QuestionBoard.getQuestionForCategory(theCategory);
+        this.LastQuestion = theQuestion;
+        return theQuestion;
+    }
 
     /**
      * returns the current player
@@ -132,8 +126,8 @@ public class Controller
      */
     public Player getCurrentPlayer( )
     {
-		return this.Players[ this.CurrentPlayerNumber ];
-	}
+	return this.Players[ this.CurrentPlayerNumber ];
+    }
 
     /**
      * sets the current player to next player
@@ -186,5 +180,39 @@ public class Controller
         }
         return this.Players[ theOpponentNumber ];
     }
+    
+    /**
+     * adds a token for the current player
+     */
+      public void addTokenForCurrentPlayer(){
+         this.ScoreBoard.incrementTokensForPlayer(this.getCurrentPlayer());
+      }
+      
+      /**
+       * adds the points for the last question for the current player
+       */
+      public void addLastQuestionPointsForCurrentPlayer(){
+        this.ScoreBoard.addPointsForPlayer(this.getCurrentPlayer(), this.LastQuestion.getPointValue());
+      }
+      
+      /**
+       * subtracts the points for the last question for the current player
+       */
+      public void subtractLastQuestionPointsForCurrentPlayer(){
+        this.ScoreBoard.subtractPointsForPlayer(this.getCurrentPlayer(),this.LastQuestion.getPointValue());
+      }
+       
+      /**
+       * overrides the answer validation for the current player
+       * @param theOverride 
+       */
+      public void overrideAnswerValidationForCurrentPlayer(boolean theOverride){
+        if (theOverride){
+            this.addLastQuestionPointsForCurrentPlayer();
+        }
+        else{
+            this.subtractLastQuestionPointsForCurrentPlayer();
+        }
+      }
 
 }

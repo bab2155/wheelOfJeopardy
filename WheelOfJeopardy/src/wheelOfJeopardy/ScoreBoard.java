@@ -30,7 +30,7 @@ public class ScoreBoard {
 	public void useTokenForPlayer(Player thePlayer){
 		
 	}
-	public void subtractPointsForPlayer(Player thePlayer){
+	public void subtractPointsForPlayer(Player thePlayer, int theNumberOfPoints){
 		
 	}
 	public void incrementTokensForPlayer(Player thePlayer){

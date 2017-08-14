@@ -1,16 +1,16 @@
 package wheelOfJeopardy;
 
-public abstract class WheelSector
+public class WheelSector
 {
 	// Instance variables
-	public String name;
+	public String Name;
 
 	/**
 	 * default constructor
 	 */
 	public WheelSector( )
 	{
-		this.name = "";
+		this.Name = "";
 	}
 
 	/**
@@ -20,7 +20,7 @@ public abstract class WheelSector
 	 */
 	public WheelSector( String theName )
 	{
-		this.name = theName;
+		this.Name = theName;
 	}
 
 	/**
@@ -28,12 +28,10 @@ public abstract class WheelSector
 	 *
 	 * @return name - the name of the sector
 	 */
-	abstract String getName( );
+	public String getName( ){
+            return this.Name;
+        };
 
-	/**
-	 *
-	 * @param theController current game state
-	 */
-	abstract void performAction( Controller theController );
+	
 }
 
