@@ -11,6 +11,7 @@ public class ScoreBoard {
 		this.Player1 = firstPlayer;
 		this.Player2 = secondPlayer;
 		this.Player3 = thirdPlayer;
+                this.RoundCount = 50;
 	}
 	public void addPointsForPlayer(Player thePlayer, int numberOfPoints){
 		

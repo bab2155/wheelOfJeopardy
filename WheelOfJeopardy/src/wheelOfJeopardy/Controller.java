@@ -9,7 +9,7 @@ public class Controller
         private QuestionBoard QuestionBoard;
 	private Player[] Players;
 	private int CurrentPlayerNumber;
-	private final ScoreBoard ScoreBoard;
+	private ScoreBoard ScoreBoard;
 	private TimeKeeper TimeKeeper;
 	private Wheel Wheel;
 	private int RoundNumber;
@@ -60,6 +60,21 @@ public class Controller
 		//
     }
 
+    /**
+     * continues the game to round 2
+     */
+    public void startRound2()
+    {
+        this.RoundNumber = 2;
+		
+	this.createQuestionBoard();
+		
+	this.Wheel = new Wheel(this.QuestionBoard.getAllCategories());
+        
+        this.ScoreBoard = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
+
+    }
+    
     /**
      * returns the current state of scoreboard
      *
