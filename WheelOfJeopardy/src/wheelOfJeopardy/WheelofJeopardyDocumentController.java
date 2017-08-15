@@ -146,6 +146,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private String[] usedQuestion = new String[30];
     String[] firstRoundScore = new String[3];
     
+    private Controller controller = new Controller();
+    private ScoreBoard scoreboard;
+    
     //Add styling
     @FXML void addCSS(){
         //anchors
@@ -621,14 +624,22 @@ public class WheelofJeopardyDocumentController implements Initializable {
     public void handleGameStart(ActionEvent event) {
         player_identifiers.setVisible(false);
         player1_label.setText(player1_name.getText());
+        this.controller.setPlayer1(player1_name.getText());
         player2_label.setText(player2_name.getText());
+        this.controller.setPlayer2(player1_name.getText());
         player3_label.setText(player3_name.getText());
-        player1_tokens.setText("0");
-        player2_tokens.setText("0");
-        player3_tokens.setText("0");
-        player1_score.setText("0");
-        player2_score.setText("0");
-        player3_score.setText("0");
+        this.controller.setPlayer3(player1_name.getText());
+        this.controller.setupScoreBoard();
+        this.scoreboard = this.controller.getScoreBoard();
+        Player player1 = this.scoreboard.getPlayerNumber(1);
+        Player player2 = this.scoreboard.getPlayerNumber(2);
+        Player player3 = this.scoreboard.getPlayerNumber(3);
+        player1_tokens.setText("" + player1.getNumberOfTokens());
+        player2_tokens.setText("" + player2.getNumberOfTokens());
+        player3_tokens.setText("" +player3.getNumberOfTokens());
+        player1_score.setText("" +player1.getScore());
+        player2_score.setText("" + player1.getScore());
+        player3_score.setText("" + player1.getScore());
         setGameStatsVisible(true);
         setPlayerStatsVisible(true);
         

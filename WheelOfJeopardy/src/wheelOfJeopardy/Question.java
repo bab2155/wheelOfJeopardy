@@ -24,22 +24,14 @@ public class Question {
 		return this.category;
 	}
         public String getAnswer(){
-            return this.Answer;
+            return this.answer;
         }
         public int getPointValue(){
-            return this.PointValue;
+            return this.value;
         }
 
 	public String getQuestion(){
 		return this.question;
-	}
-
-	public String getAnswer(){
-		return this.answer;
-	}
-
-	public int getValue(){
-		return this.value;
 	}
 
 	public boolean getUsed(){

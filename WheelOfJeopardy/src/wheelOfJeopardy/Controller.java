@@ -13,7 +13,7 @@ public class Controller
 	private TimeKeeper TimeKeeper;
 	private Wheel Wheel;
 	private int RoundNumber;
-	private final String DatabaseName;
+	private String DatabaseName;
         private Question LastQuestion;
 	//need to add View as an attribute
 
@@ -34,8 +34,32 @@ public class Controller
 		this.ScoreBoard = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
 		
 		this.DatabaseName = theDatabaseName;
-	}
+    }
+    
+    public Controller(){
+        this.DatabaseName = "";
+    }
+    
+    public void setPlayer1(String theFirstPlayerName){
+        this.Players[0] = new Player(theFirstPlayerName);
+    }
 
+    
+    public void setPlayer2(String theSecondPlayerName){
+        this.Players[1] = new Player(theSecondPlayerName);
+    }
+    
+    public void setPlayer3(String theThirdPlayerName){
+        this.Players[2] = new Player(theThirdPlayerName);
+    }
+    
+    public void setupScoreBoard(){
+        this.ScoreBoard = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
+    }
+    
+    public void setDatabaseName(String theDatabaseName){
+        this.DatabaseName = theDatabaseName;
+    }
     /**
      * start the game
      */
@@ -53,13 +77,28 @@ public class Controller
 	}
 
     /**
-     * stop the game
+     * stop the game and declare the winner
+     * @return 
      */
-    public void stopGame()
+    public Player stopGame()
     {
-		//
+        Player theWinner = this.Players[0];
+	for (int playerIndex = 1; playerIndex < this.Players.length; playerIndex++){
+            if (this.Players[playerIndex].getScore() > theWinner.getScore()){
+                theWinner = this.Players[playerIndex];
+            }
+        }
+        return theWinner;
     }
 
+    
+    public QuestionBoard getQuestionBoard(){
+        return this.QuestionBoard;
+    }
+    
+    public int getRoundNumber(){
+        return this.RoundNumber;
+    }
     /**
      * continues the game to round 2
      */
@@ -105,14 +144,41 @@ public class Controller
      */
     public boolean canRoundContinue( )
     {
-        boolean canContinue = false;
+        boolean canContinue = true;
+        
+        //check the current round count from the scoreboard
         int currentRoundCount = this.ScoreBoard.getRoundCount( );
-		if ( currentRoundCount < 50 )
-		{
-			canContinue = true;
-		}
-		return canContinue;
+        if ( currentRoundCount == 0 )
+        {
+            canContinue = false;
 	}
+        
+        int maxPointValue = 0;
+        if (this.RoundNumber == 1){
+            maxPointValue = 1000;
+        }
+        else if(this.RoundNumber == 2){
+            maxPointValue = 2000;
+        }
+        
+        //Check if any questions remain for the round
+        boolean areThereQuestionsLeft = false;
+        String[] theCategories = this.QuestionBoard.getAllCategories();
+        for (String theCategory:theCategories){
+            if (this.QuestionBoard.getQuestionForCategory(theCategory, maxPointValue) != null){
+                areThereQuestionsLeft = true;
+                break;
+            } 
+        }
+        
+        if (!areThereQuestionsLeft){
+            canContinue = false;
+        }
+        
+        return canContinue;
+        
+        
+    }
 
     /**
      * sets the current player to next player
@@ -126,6 +192,7 @@ public class Controller
      * gets the next question for a given category
      *
      * @param theCategory the current category
+     * @param thePointValue
      * @return Question
      */
     public Question getQuestionForCategory( String theCategory, int thePointValue )

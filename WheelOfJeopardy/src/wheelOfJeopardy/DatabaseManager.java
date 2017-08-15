@@ -1,17 +1,11 @@
 package wheelOfJeopardy;
 
 import com.google.gson.Gson;
-import com.oracle.javafx.jmx.json.JSONReader;
-import jdk.nashorn.internal.parser.JSONParser;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.InputStream;
 import java.util.*;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 public class DatabaseManager {
