@@ -2,20 +2,26 @@ package wheelOfJeopardy;
 
 public class Question {
 	
-	private final String Question;
-	private final int  PointValue;
-	private final String Answer;
+	public String category;
+	public String question;
+	public String answer;
+	public int value;
+	public boolean used;
+
+	/* private final String Question;
 	
-	public Question(String theQuestionText, String theAnswerText, int thePointValue){
-		this.Question = theQuestionText;
-		this.Answer = theAnswerText;
-                this.PointValue = thePointValue;
+	private final String Answer;
+	*/
+	public Question(String theQuestionText, String theAnswerText){
+		this.question = theQuestionText;
+		this.answer = theAnswerText;
 	}
 	public boolean verifyAnswer(String theUserAnswer){
 		return true;
 	}
-	public String getQuestion(){
-		return this.Question;
+
+	public String getCategory(){
+		return this.category;
 	}
         public String getAnswer(){
             return this.Answer;
@@ -23,5 +29,26 @@ public class Question {
         public int getPointValue(){
             return this.PointValue;
         }
+
+	public String getQuestion(){
+		return this.question;
+	}
+
+	public String getAnswer(){
+		return this.answer;
+	}
+
+	public int getValue(){
+		return this.value;
+	}
+
+	public boolean getUsed(){
+		return this.used;
+	}
+
+	public void setUsed(boolean status){
+		this.used = status;
+	}
+
 
 }

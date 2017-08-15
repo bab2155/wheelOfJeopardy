@@ -128,8 +128,8 @@ public class Controller
      * @param theCategory the current category
      * @return Question
      */
-    public Question getQuestionForCategory( String theCategory )
-    {   Question theQuestion = this.QuestionBoard.getQuestionForCategory(theCategory);
+    public Question getQuestionForCategory( String theCategory, int thePointValue )
+    {   Question theQuestion = this.QuestionBoard.getQuestionForCategory(theCategory,thePointValue);
         this.LastQuestion = theQuestion;
         return theQuestion;
     }
@@ -166,16 +166,10 @@ public class Controller
     {
 		this.ScoreBoard.useTokenForPlayer( this.getCurrentPlayer( ) );
 	}
-
-    /**
-     * creates the QuestionBoard
-     */
-    public void createQuestionBoard( )
-    {
-		String theActualDatabaseNames[ ] = DatabaseManager.getDatabaseNames( );
-		if ( Arrays.asList( theActualDatabaseNames ).contains( this.DatabaseName ) )
-		{
-			this.QuestionBoard = DatabaseManager.createQuestionBoardForRound( this.DatabaseName,this.RoundNumber );
+	public void createQuestionBoard(){
+		String theActualDatabaseNames[] = DatabaseManager.getDatabaseNames();
+		if (Arrays.asList(theActualDatabaseNames).contains(this.DatabaseName)){
+//			this.QuestionBoard = DatabaseManager.createQuestionBoardForRound(this.DatabaseName,this.RoundNumber);
 		}
 	}
 

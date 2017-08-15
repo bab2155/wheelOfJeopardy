@@ -14,11 +14,19 @@ public class ScoreBoard {
                 this.RoundCount = 50;
 	}
 	public void addPointsForPlayer(Player thePlayer, int numberOfPoints){
+		thePlayer.setScore(thePlayer.getScore() + numberOfPoints);
 		
 	}
 	public Player getPlayerNumber(int playerNumber){
-		return this.Player1;
+
+		switch (playerNumber){
+			case 1: return this.Player1;
+			case 2: return this.Player2;
+			case 3: return this.Player3;
+		}
+		return null;
 	}
+
 	public void decrementRoundCount(){
 		--this.RoundCount;
 	}
@@ -26,15 +34,17 @@ public class ScoreBoard {
 		return this.RoundCount;
 	}
 	public void bankruptPlayer(Player thePlayer){
-		
+		thePlayer.setScore(0);
 	}
+
 	public void useTokenForPlayer(Player thePlayer){
-		
+		thePlayer.useAToken();
 	}
-	public void subtractPointsForPlayer(Player thePlayer, int theNumberOfPoints){
-		
+
+	public void subtractPointsForPlayer(Player thePlayer, int points){
+		thePlayer.setScore(thePlayer.getScore() - points);
 	}
 	public void incrementTokensForPlayer(Player thePlayer){
-		
+		thePlayer.setNumberOfTokens(thePlayer.getNumberOfTokens() + 1);
 	}
 }
