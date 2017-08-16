@@ -807,9 +807,31 @@ public class WheelofJeopardyDocumentController implements Initializable {
     //Handle Spin Wheel action
     @FXML
     private void handleSpinWheelAction(ActionEvent event) {
-        Random randomGen = new Random();
-        int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-        gamePlay(randomNum, player_identifier.getText(), "no", false);
+        if(answer_results_incorrect.isVisible()){
+            handleIncorrectOverrideSubmitAction(event);
+        } else if (answer_results_correct.isVisible()){
+            handleCorrectAnswerContinueAction(event);
+        } else if (sector_question.isVisible()){
+            handlePlayerSubmitAction(event);
+        } else if (sector_bankruptcy.isVisible()){
+            handleBankruptyContinueAction(event);
+        } else if (sector_lose_turn.isVisible()){
+            handleLoseTurnContinueAction(event);
+        }else if (sector_free_token.isVisible()){
+            handleSpinAgainContinueAction(event);
+        } else if(sector_player_choice.isVisible()){
+            handlePlayerChoiceSubmitAction(event);
+        } else if(sector_opponent_choice.isVisible()){
+            handleOpponentChoiceSubmitAction(event);
+        } else if(sector_spin_again.isVisible()){
+            handleSpinAgainContinueAction(event);
+        } else if(player_use_token.isVisible()){
+            handleNoUseTokenSubmitAction(event);
+        } else {
+            Random randomGen = new Random();
+            int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
+            gamePlay(randomNum, player_identifier.getText(), "no", false);
+        }
     }
     
     //Handle Player Submit button action
