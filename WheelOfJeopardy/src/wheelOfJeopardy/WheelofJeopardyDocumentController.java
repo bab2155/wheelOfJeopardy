@@ -5,7 +5,6 @@
  */
 package wheelOfJeopardy;
 
-import com.sun.deploy.util.ArrayUtil;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +18,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -51,6 +52,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML private Label scores_label;
     @FXML private Label player_identifier;
     @FXML private Label opponent_identifier;
+    @FXML private Label player_display_name;
     @FXML private Label question;
     @FXML private Label category;
     @FXML private Label player_answer_label;
@@ -65,6 +67,17 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML private Label category4_label;
     @FXML private Label category5_label;
     @FXML private Label category6_label;
+    @FXML private Label player1_final_name;
+    @FXML private Label player2_final_name;
+    @FXML private Label player3_final_name;
+    @FXML private Label player1_final_score;
+    @FXML private Label player2_final_score;
+    @FXML private Label player3_final_score;
+    @FXML private Label winner_name;
+    
+    @FXML private MenuItem help;
+    @FXML private AnchorPane help_anchor_pane;
+    @FXML private Button close_help_button;
     
     @FXML private Button player_submit_button;
     @FXML private Button correct_override_submit_button;
@@ -119,6 +132,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML private AnchorPane sector_opponent_choice;
     @FXML private AnchorPane sector_spin_again;
     @FXML private AnchorPane player_use_token;
+    @FXML private AnchorPane game_end;
     
     @FXML  private Pane footer;
     
@@ -145,6 +159,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private String[] answersHC = new String[30];
     private String[] usedQuestion = new String[30];
     String[] firstRoundScore = new String[3];
+    Integer[] finalScore = new Integer[3];
     
     //Add styling
     @FXML void addCSS(){
@@ -329,6 +344,10 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorFreeTokenVisible(false);
     }
     
+    @FXML
+    private void setGameEndVisible(Boolean visible){
+        game_end.setVisible(visible);
+    }
     
     //Label updates
     @FXML
@@ -371,13 +390,46 @@ public class WheelofJeopardyDocumentController implements Initializable {
         firstRoundScore[2] = player3_score.getText();
     }
     
-    @FXML String[] getFinalScore(){
-        String[] finalScore = new String[3];
-        finalScore[0] = String.valueOf(firstRoundScore[0]) + String.valueOf(player1_score.getText());
-        finalScore[1] = String.valueOf(firstRoundScore[0]) + String.valueOf(player1_score.getText());
-        finalScore[3] = String.valueOf(firstRoundScore[0]) + String.valueOf(player1_score.getText());
+    
+    @FXML void setFinalScore(){
+        finalScore[0] = Integer.parseInt(firstRoundScore[0]) + Integer.parseInt(player1_score.getText());
+        finalScore[1] = Integer.parseInt(firstRoundScore[1]) + Integer.parseInt(player2_score.getText());
+        finalScore[2] = Integer.parseInt(firstRoundScore[2])+ Integer.parseInt(player3_score.getText());
+    }
+    
+    
+    @FXML void setPlayerWinner(){
+        String topPlayer = "";
+
+        int topScore = finalScore[0];
         
-        return finalScore;
+        if(finalScore[1] > topScore){
+            topScore = finalScore[1];
+        }
+        if(finalScore[2] > topScore){
+            topScore = finalScore[2];
+        }
+        
+        if(finalScore[0] == topScore){
+            topPlayer += player1_final_name.getText();
+        }
+        if (finalScore[1] == topScore){
+            if(topPlayer.length() > 0){
+                topPlayer += " & ";
+            }
+            
+            topPlayer += player2_final_name.getText();
+        }
+        
+        if (finalScore[2] == topScore){
+            if(topPlayer.length() > 0){
+                topPlayer += " & ";
+            }
+            
+            topPlayer += player3_final_name.getText();
+        }
+        
+        winner_name.setText(topPlayer);
     }
 
     
@@ -424,12 +476,21 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML
     private String[] getCategories(){
         String[] categories = new String[6];
-        categories[0] = "American History";
-        categories[1] = "Single-Named Singers";
-        categories[2] = "Science";
-        categories[3] = "Literature";
-        categories[4] = "Business";
-        categories[5] = "Movies";
+        if(round_value.getText().equalsIgnoreCase("2")){
+            categories[0] = "Criminal Behavior";
+            categories[1] = "Board Games";
+            categories[2] = "Pop Culture";
+            categories[3] = "Palindromes";
+            categories[4] = "Geography";
+            categories[5] = "Botany";  
+        } else {
+            categories[0] = "American History";
+            categories[1] = "Single-Named Singers";
+            categories[2] = "Science";
+            categories[3] = "Literature";
+            categories[4] = "Business";
+            categories[5] = "Movies";
+        }
         
         return categories;
     }
@@ -449,7 +510,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
        questionsHC[1] = "In 1964 the Warren Commission concluded that this man acted alone in killing President Kennedy";
        questionsHC[2] = "Under the Jones Act of 1917, residents of this Caribbean island gained U.S. citizenship";
        questionsHC[3] = "Introduced by Europeans, this disease that wiped out entire tribes had its last known U.S. case in 1949";
-       questionsHC[4] = "Missing question cat1";
+       questionsHC[4] = "In terms of square miles, what is the largest city in the US?";
        
        //catetgory 2, 5-9
        questionsHC[5] = "Royals' singer made Time magazine's list of the most influential teens of 2013";
@@ -460,8 +521,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
        
        //category 3, 10-14
        questionsHC[10] = "By definition, it's the branch of chemistry that deals with non-carbon compounds";
-       questionsHC[11] = "Hydrogen has three isotopes: protium with its nucleus made up of one proton, deuterium with one proton and one neutron, and a third radioactive isotope with an additional neutron giving it a mass number of 3; hence, this name";
-       questionsHC[12] = "The Celsius temperature scale is also known as this scale because it's divided into 100 parts”, \"answer\":\"centigrade";
+       questionsHC[11] = "Hydrogen has 3 isotopes: protium with 1 proton, deuterium with 1 proton and 1 neutron, and a third with 1 proton and 2 neutrons giving it a mass number of 3; hence, this name";
+       questionsHC[12] = "The Celsius temperature scale is also known as this scale because it's divided into 100 parts";
        questionsHC[13] = "It seems to defy gravity when a liquid goes up tubes by means of this action";
        questionsHC[14] = "The original \"handy man\" was this early human whose name means just that";
        
@@ -488,13 +549,59 @@ public class WheelofJeopardyDocumentController implements Initializable {
     }
     
     @FXML 
+    private void hardCodedQuestionsR2(){
+       
+       //category 1, 0-4
+       questionsHC[0] = "Lying under oath";
+       questionsHC[1] = "Illegally avoiding paying the government on state, federal or local levels";
+       questionsHC[2] = "2-word term for stealing and using someone's personal information to commit fraud";
+       questionsHC[3] = "A federal statute fighting this type of crime includes assault motivated by disability, gender identity & sexual orientation";
+        questionsHC[4] = "A word for taking over a plane led to this word for taking someone's automobile";
+        
+       //catetgory 2, 5-9
+       questionsHC[5] = "In this board game you must solve the case of millionaire Samuel Black, murdered in his own mansion";
+       questionsHC[6] = "It's ‘the classic naval combat game’";
+       questionsHC[7] = "Good deeds allow you to climb up, but watch out for the slides in this game where you try to reach the 100 square";
+       questionsHC[8] = "Use your skull in all of the activities of this game whose name is a synonym for ‘skull’";
+       questionsHC[9] = "In 2016 news an A.I. program beat a champion of this 2-letter game with 361 pieces";
+       
+       //category 3, 10-14
+       questionsHC[10] = "Beyonce has more than 60 million followers on this photo-sharing app whose logo looks like a Polaroid camera";
+       questionsHC[11] = "Twenty One Pilots ‘wish we could turn back time to the good old days... but now we're’ this title";
+       questionsHC[12] = "Creepers love the gaming channel stampylonghead & its devotion to this ubiquitous Mojang game";
+       questionsHC[13] = "In 2016 this member of One Direction became a dad to a lad named Freddie";
+       questionsHC[14] = "Avicii, a 26-year-old superstar in EDM, this type of music, has announced he is retiring";
+       
+       //category 4, 15-19 
+       questionsHC[15] = "Once used as a courtesy before a woman's name, it now precedes \"secretary\" to address a female Cabinet member";
+       questionsHC[16] = "Helene Gordon introduced this fashion magazine in 1945 on paper she said was as coarse and yellow as ‘French bread’";
+       questionsHC[17] = "O Magazine has a section on flashes of understanding--these moments";
+       questionsHC[18] = "These prose narratives of the Middle Ages dealt with the legendary events of Iceland & Norway";
+       questionsHC[19] = "2-word palindrome meaning a comic-strip ‘menace’ violated God's law";
+       
+       //category 5, 20-24 
+       questionsHC[20] = "Until 1935 Iran was known by this name";
+       questionsHC[21] = "This is the only state in the world without an official capital’";
+       questionsHC[22] = "It covers more than 26,000 square miles, mainly in Tanzania & Uganda";
+       questionsHC[23] = "This dry, windswept region covers almost all of southern Argentina";
+       questionsHC[24] = "You might say this region of Croatia that extends about 230 miles along the coast has a ‘spotty’ reputation";
+       
+       //category 5, 25-29
+       questionsHC[25] = "You might say this region of Croatia that extends about 230 miles along the coast has a ‘spotty’ reputation";
+       questionsHC[26] = "This flower shares its name with a character in ‘Peter Pan’";
+       questionsHC[27] = "You are ‘barking’ up this tree, looking for small flowers";
+       questionsHC[28] = "Equisetum is the genus of the flowerless perennial called giant this for its brushy look";
+       questionsHC[29] = "This tree is so named for the challenge its prickly leaves would pose to certain simian climbers";
+    }
+    
+    @FXML 
     private void hardCodedAnswers(){
        //category 1, 0-4
        answersHC[0] = "Prohibition";
        answersHC[1] = "Oswald";
        answersHC[2] = "Puerto Rico";
        answersHC[3] = "smallpox";
-       answersHC[4] = "no answer";
+       answersHC[4] = "Juneau";
        
        //catetgory 2, 5-9
        answersHC[5] = "Lorde";
@@ -532,6 +639,51 @@ public class WheelofJeopardyDocumentController implements Initializable {
        answersHC[29] = "Ridley Scott";
     }
     
+    @FXML 
+    private void hardCodedAnswersR2(){
+       //category 1, 0-4
+       answersHC[0] = "perjury";
+       answersHC[1] = "ta evasion";
+       answersHC[2] = "identity theft";
+       answersHC[3] = "hate crime";
+       answersHC[4] = "carjacking";
+       
+       //catetgory 2, 5-9
+       answersHC[5] = "Clue";
+       answersHC[6] = "Battleship";
+       answersHC[7] = "Chutes and Ladders";
+       answersHC[8] = "Cranium";
+       answersHC[9] = "go";
+       
+       //category 3, 10-14
+       answersHC[10] = "Instagram";
+       answersHC[11] = "Stressed Out";
+       answersHC[12] = "Minecraft";
+       answersHC[13] = "Louis Tomlinson";
+       answersHC[14] = "electronic dance music";
+       
+       //category 4, 15-19 
+       answersHC[15] = "madam";
+       answersHC[16] = "Elle";
+       answersHC[17] = "aha";
+       answersHC[18] = "sagas";
+       answersHC[19] = "Dennis Sinned";
+       
+       //category 5, 20-24 
+       answersHC[20] = "Persia";
+       answersHC[21] = "Nauru";
+       answersHC[22] = "Lake Victoria";
+       answersHC[23] = "Patagonia";
+       answersHC[24] = "Dalmatia";
+       
+       //category 6, 25-29
+       answersHC[25] = "snapdragons";
+       answersHC[26] = "tiger lily";
+       answersHC[27] = "dogwood";
+       answersHC[28] = "brushy horsetail";
+       answersHC[29] = "monkey puzzle tree";
+    }
+    
     private String[] getQuestionValue(String category_name) {
         String[] categories = getCategories();
         String[] returnQuestion = new String[4];
@@ -551,7 +703,11 @@ public class WheelofJeopardyDocumentController implements Initializable {
                     returnQuestion[0] = categories[k];
                     returnQuestion[1] = questionsHC[i + k*offset];
                     returnQuestion[2] = answersHC[i + k*offset];
-                    returnQuestion[3] = String.valueOf((i+1)*100);
+                    if(round_value.getText().equalsIgnoreCase("1")){
+                        returnQuestion[3] = String.valueOf((i+1)*100);
+                    } else {
+                        returnQuestion[3] = String.valueOf((i+1)*200);
+                    }
                     usedQuestion[i + k*offset] = "true";
                     return returnQuestion;
                     }
@@ -564,7 +720,11 @@ public class WheelofJeopardyDocumentController implements Initializable {
                     returnQuestion[0] = categories[j];
                     returnQuestion[1] = questionsHC[i + j*offset];
                     returnQuestion[2] = answersHC[i + j*offset];
-                    returnQuestion[3] = String.valueOf((i+1)*100);
+                    if(round_value.getText().equalsIgnoreCase("1")){
+                        returnQuestion[3] = String.valueOf((i+1)*100);
+                    } else {
+                        returnQuestion[3] = String.valueOf((i+1)*200);
+                    }
                     usedQuestion[i + j*offset] = "true";
                     return returnQuestion;
                     }
@@ -631,15 +791,16 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player3_score.setText("0");
         setGameStatsVisible(true);
         setPlayerStatsVisible(true);
+        round_value.setText("1");
         
-        populateGameStats("1", getCategories());
+        populateGameStats("1");
         setGamePlayVisible(true);
         spin_wheel_image.setVisible(true);
         spin_wheel_button.setVisible(true);
         spin_wheel_button.setDisable(false);
         game_play.toFront();
 
-        gamePlay(2, "player1", "0", false);
+        gamePlay(2, "player1", "no", false);
     }
     
     
@@ -648,7 +809,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private void handleSpinWheelAction(ActionEvent event) {
         Random randomGen = new Random();
         int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-        gamePlay(randomNum, player_identifier.getText(), "0", false);
+        gamePlay(randomNum, player_identifier.getText(), "no", false);
     }
     
     //Handle Player Submit button action
@@ -683,7 +844,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         } else {
             Random randomGen = new Random();
             int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-            gamePlay(randomNum, player_identifier.getText(), "0", false);
+            gamePlay(randomNum, player_identifier.getText(), "no", false);
         }
     }
     
@@ -702,7 +863,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         } else {
             Random randomGen = new Random();
             int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-            gamePlay(randomNum, player_identifier.getText(), "0", false);
+            gamePlay(randomNum, player_identifier.getText(), "no", false);
         }
     }
     
@@ -722,7 +883,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         } else {
             Random randomGen = new Random();
             int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-            gamePlay(randomNum, player_identifier.getText(), "0", false);
+            gamePlay(randomNum, player_identifier.getText(), "no", false);
         }
     }
     
@@ -742,11 +903,12 @@ public class WheelofJeopardyDocumentController implements Initializable {
             populateQuestion(player, categoryTitle, questionContent, answerContent, pointValue);
             player_answer.setDisable(false);
         } else if(free_spin_type == 2){
+            spin_count ++;
             setPlayerTokens(player, "-1");
-            gamePlay(randomNum, player_identifier.getText(), "0", true);
+            gamePlay(randomNum, player_identifier.getText(), "no", true);
         } else if(free_spin_type == 3){
             setPlayerTokens(player, "-1");
-            gamePlay(randomNum, player_identifier.getText(), "0", true);
+            gamePlay(randomNum, player_identifier.getText(), "no", true);
         }
        
     }
@@ -765,18 +927,19 @@ public class WheelofJeopardyDocumentController implements Initializable {
             player_submit_button.setVisible(false);
             setAnswerResultsIncorrectVisible(true);
         } else {
+            spin_count ++;
             Random randomGen = new Random();
             int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-            gamePlay(randomNum, player_identifier.getText(), "0", false);
+            gamePlay(randomNum, player_identifier.getText(), "no", false);
         }
     }
     
     //Handle player's choice
     @FXML
     private void handlePlayerChoiceSubmitAction(ActionEvent event) {
-        String category_selected = "";
+        String category_selected = "no";
         if(!category_box_player.getSelectionModel().isEmpty()){
-            category_box_player.getSelectionModel().getSelectedItem().toString();
+            category_selected = category_box_player.getSelectionModel().getSelectedItem().toString();
         }
         
         String[] categories = getCategories();
@@ -784,6 +947,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_box_player.getItems().remove(s);
         }
         category_box_player.setValue("");
+        spin_count ++; //Have to update to not count as a spin
         
         gamePlay(7, player_identifier.getText(), category_selected, false);
     }
@@ -791,9 +955,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
     //Handle opponent's choice
     @FXML
     private void handleOpponentChoiceSubmitAction(ActionEvent event) {
-        String category_selected = "";
+        String category_selected = "no";
         if(!category_box_opponent.getSelectionModel().isEmpty()){
-            category_box_opponent.getSelectionModel().getSelectedItem().toString();
+            category_selected = category_box_opponent.getSelectionModel().getSelectedItem().toString();
         }
 
         String[] categories = getCategories();
@@ -801,6 +965,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_box_opponent.getItems().remove(s);
         }
         category_box_opponent.setValue("");
+        spin_count ++; //Have to update to not count as a spin
+        
         gamePlay(7, player_identifier.getText(), category_selected, false);
     }
     
@@ -817,7 +983,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setPlayerTokens(player_identifier.getText(), String.valueOf(total_tokens));
         Random randomGen = new Random();
         int randomNum = randomGen.nextInt(9);
-        gamePlay(randomNum, player_identifier.getText(), "0", false);
+        gamePlay(randomNum, player_identifier.getText(), "no", false);
     }
     
     //Handle lose turn submit action
@@ -829,7 +995,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         } else {
             Random randomGen = new Random();
             int randomNum = randomGen.nextInt(9);
-            gamePlay(randomNum, player_identifier.getText(), "0", false);
+            gamePlay(randomNum, player_identifier.getText(), "no", false);
         }
     }
     
@@ -838,7 +1004,21 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private void handleSpinAgainContinueAction(ActionEvent event) {
         Random randomGen = new Random();
         int randomNum = randomGen.nextInt(9);
-        gamePlay(randomNum, player_identifier.getText(), "", false);
+        gamePlay(randomNum, player_identifier.getText(), "no", false);
+    }
+    
+    @FXML 
+    private void handleHelp(ActionEvent event){
+        help_anchor_pane.toFront();
+        help_anchor_pane.setVisible(true); 
+        close_help_button.toFront();
+        close_help_button.setDisable(false);
+    }
+    
+    @FXML 
+    private void handleHelpClose(ActionEvent event){
+        help_anchor_pane.setVisible(false); 
+        close_help_button.setDisable(true);
     }
     
     @FXML
@@ -853,6 +1033,27 @@ public class WheelofJeopardyDocumentController implements Initializable {
         
         return false;
     }
+    
+    @FXML void setPlayerDisplayName(String player){
+        if(player.equalsIgnoreCase("player1")) {
+             player_display_name.setText(player1_name.getText());
+        } else if(player.equalsIgnoreCase("player2")){
+            player_display_name.setText(player2_name.getText());
+        } else {
+            player_display_name.setText(player3_name.getText());
+        }
+    }
+    
+    @FXML void setOpponentDisplayName(String player){
+        if(player.equalsIgnoreCase("player1")) {
+            opponent_identifier.setText(player1_name.getText());
+        } else if(player.equalsIgnoreCase("player2")){
+            opponent_identifier.setText(player2_name.getText());
+        } else {
+            opponent_identifier.setText(player3_name.getText());
+        }
+    }
+        
     //Sector data population
     @FXML
     public void populateQuestion(String player, String categoryTitle, String questionContent, String answerContent, String pointValue){
@@ -860,6 +1061,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         sector_question.toFront();
         question_value.setText(pointValue);
         player_identifier.setText(player);
+        setPlayerDisplayName(player);
         category_title.setText(categoryTitle);
         question_content.setText(questionContent);
         correct_answer.setText(answerContent);
@@ -888,6 +1090,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorsInvisible();
         sector_bankruptcy.toFront();
         player_identifier.setText(player);
+        setPlayerDisplayName(player);
         setSectorBankruptcyVisible(true);
     }
     
@@ -895,6 +1098,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorsInvisible();
         sector_free_token.toFront();
         player_identifier.setText(player);
+        setPlayerDisplayName(player);
         setPlayerTokens(player, "1");
         setSectorFreeTokenVisible(true);
     }
@@ -903,6 +1107,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorsInvisible();
         sector_spin_again.toFront();
         player_identifier.setText(player);
+        setPlayerDisplayName(player);
         setSectorSpinAgainVisible(true);
     }
     
@@ -910,6 +1115,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorsInvisible();
         sector_lose_turn.toFront();
         player_identifier.setText(player);
+        setPlayerDisplayName(player);
         setSectorLoseTurnVisible(true);
     }
     
@@ -917,6 +1123,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorsInvisible();
         sector_player_choice.toFront();
         player_identifier.setText(player);
+        setPlayerDisplayName(player);
         for (String s: categories) { 
             category_box_player.getItems().add(s);
         }
@@ -926,7 +1133,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
     public void populateOpponentChoice(String player, String opponent, String[] categories){
         setSectorsInvisible();
         sector_opponent_choice.toFront();
-        opponent_identifier.setText(opponent);
+        setPlayerDisplayName(player);
+        player_identifier.setText(player);
+        setOpponentDisplayName(opponent);
         for (String s: categories) { 
             category_box_opponent.getItems().add(s);
         }
@@ -937,12 +1146,14 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorsInvisible();
         player_use_token.toFront();
         player_identifier.setText(player);
+        setPlayerDisplayName(player);
         setUseTokenVisible(true);
     }
         
-    public void populateGameStats(String round, String[] categories){
+    public void populateGameStats(String round){
         round_value.setText(round);
         data = getInitialTableData(round);
+        String[] categories = getCategories();
         category1_label.setText(categories[0]);
         category2_label.setText(categories[1]);
         category3_label.setText(categories[2]);
@@ -960,9 +1171,6 @@ public class WheelofJeopardyDocumentController implements Initializable {
         
     }
     
-    public void updateGameStats(){
-        //update round and game timer?
-    }
     
     public void highlightCategoryTable(String category, boolean highlight){
         if(highlight){
@@ -1015,7 +1223,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         } 
 
         //Round 1
-        if (round.equalsIgnoreCase("1")){
+        if (round_value.getText().equalsIgnoreCase("1")){
             if (points.equalsIgnoreCase("100")){
                 row_position = 0;
             } else if (points.equalsIgnoreCase("200")){
@@ -1080,7 +1288,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     }
         
     private ObservableList getInitialTableData(String round) {
-        if(round.equalsIgnoreCase("1")){
+        if(round_value.getText().equalsIgnoreCase("1")){
             list.add(row1);
             list.add(row2);
             list.add(row3);
@@ -1110,20 +1318,35 @@ public class WheelofJeopardyDocumentController implements Initializable {
         usedQuestionsHC();
     } 
     
+
     //Main controller
     public void gamePlay(int counter, String player, String categoryValue, boolean useFreeToken){
         spin_count--;
         setSpinCounter(Integer.toString(spin_count));
         if(spin_count == 0){
             if(round_value.getText().equalsIgnoreCase("1")){
-                setRound("2");
-                spin_count = 10;
+                setFirstRoundScore();
+                player1_score.setText("0");
+                player2_score.setText("0");
+                player3_score.setText("0");
+                player1_tokens.setText("0");
+                player2_tokens.setText("0");
+                player3_tokens.setText("0");
+                
+                populateGameStats("2");
+                hardCodedAnswersR2();
+                hardCodedQuestionsR2();
+                usedQuestionsHC();
+                spin_count = 50;
                 setSpinCounter(Integer.toString(spin_count));
+                Random randomGen = new Random();
+                int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
+                gamePlay(randomNum, player_identifier.getText(), "no", false);
             } else if (round_value.getText().equalsIgnoreCase("2")){
-                //trigger game end
+                endGame();
             }
         } else {
-            if(!useFreeToken){
+            if(!useFreeToken && categoryValue.equalsIgnoreCase("no")){
                 player = getNextPlayer(player);
             }
 
@@ -1150,6 +1373,10 @@ public class WheelofJeopardyDocumentController implements Initializable {
                     populateFreeToken(player);
                     break;
                 case 7:
+                    if(categoryValue.equalsIgnoreCase("no")){
+                        categoryValue = "0";
+                    }
+                    
                     String[] questionValue = getQuestionValue(categoryValue);
                     populateQuestion(player, questionValue[0], questionValue[1], questionValue[2], questionValue[3]);
                     break;
@@ -1159,6 +1386,28 @@ public class WheelofJeopardyDocumentController implements Initializable {
             }
         }
      } 
+    
+    @FXML private void endGame(){
+        setSectorsInvisible();
+        setGamePlayVisible(false);
+        setPlayerStatsVisible(false);
+        setGameStatsVisible(false);
+        setFinalScore();
+        player1_final_score.setText(String.valueOf(finalScore[0]));
+        player2_final_score.setText(String.valueOf(finalScore[1]));
+        player3_final_score.setText(String.valueOf(finalScore[2]));
+        player1_final_name.setText(player1_name.getText());
+        player2_final_name.setText(player2_name.getText());
+        player3_final_name.setText(player3_name.getText());
+        
+        setPlayerWinner();
+        spin_wheel_image.setVisible(false);
+        spin_wheel_button.setVisible(false);
+        spin_wheel_button.setDisable(true);
+        game_end.toFront();
+        setGameEndVisible(true);
+        
+    }
      
     @Override
     public void initialize(URL url, ResourceBundle rb) {
