@@ -100,8 +100,6 @@ public class DatabaseManager {
 		List<List<Integer>> questionValues = new ArrayList<>();
 		questionValues.add(0, Arrays.asList(round1values));
 		questionValues.add(1, Arrays.asList(round2values));
-		Iterator round1iter = questionValues.get(0).iterator();
-		Iterator round2iter = questionValues.get(1).iterator();
 
 		// Initialize list of HashMaps for category questions for each round
 		List<HashMap<String, ArrayList<Question>>> categoryQuestions = new ArrayList<HashMap<String,
