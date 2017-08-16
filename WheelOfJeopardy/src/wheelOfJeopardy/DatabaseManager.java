@@ -123,8 +123,7 @@ public class DatabaseManager {
 
 		for(int i=0; i<=1; i++) {
 			HashMap<String, ArrayList<Question>> allQuestions = new HashMap<String, ArrayList<Question>>();
-//			Iterator valueIter = questionValues.get(i).iterator();
-//			Object curValue = valueIter.next();
+
 
 			for (Question question : theQuestions) {
 
