@@ -13,9 +13,13 @@ and open the template in the editor.
 }
 
 .button-style{
-    -fx-background-color: lightgrey;
 }
 
 .category-style {
     -fx-background-color: palegreen;
+}
+
+.help-style{
+    -fx-background-color: bisque;
+    -fx-border-color: palegoldenrod;
 }

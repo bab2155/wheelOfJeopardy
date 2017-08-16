@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -24,43 +23,38 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+            <MenuItem fx:id="help" mnemonicParsing="false" onAction="#handleHelp" text="About Wheel of Jeopardy" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
     <AnchorPane fx:id="game_screen" maxHeight="-1.0" maxWidth="-1.0" prefHeight="485.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
       <children>
+            <AnchorPane fx:id="help_anchor_pane" blendMode="SRC_ATOP" layoutX="347.0" layoutY="78.0" prefHeight="604.0" prefWidth="592.0" styleClass="help-style" visible="false">
+               <children>
+                  <Label alignment="TOP_LEFT" layoutX="49.0" layoutY="123.0" prefHeight="191.0" prefWidth="455.0" text="Wheel of Jeopardy is a combination of the Wheel of Fortune and Jeopardy games. It is designed for three players. Players will be prompted for a display name on input. Game play rotates through players using a randomnly generated method to decide if players will answer a question or address a different action." wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="TOP_LEFT" layoutX="51.0" layoutY="343.0" prefHeight="171.0" prefWidth="491.0" text="Other players will have to opportunity to make the final call if a player question answer is not determined to correctly match the provided answer. There are a total of two rounds, at fifty spins each. " wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="close_help_button" disable="true" layoutX="222.0" layoutY="536.0" mnemonicParsing="false" onAction="#handleHelpClose" prefHeight="35.0" prefWidth="150.0" text="Close" />
+                  <Label layoutX="255.0" layoutY="38.0" text="Help">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
             <AnchorPane fx:id="game_end" layoutX="367.0" layoutY="105.0" prefHeight="518.0" prefWidth="563.0" visible="false">
                <children>
                   <Label layoutX="214.0" layoutY="63.0" text="Game Ended">
@@ -276,7 +270,7 @@
                   </AnchorPane>
                   <AnchorPane fx:id="sector_question" focusTraversable="true" prefHeight="296.0" prefWidth="772.0" visible="false">
                      <children>
-                        <Label fx:id="category" alignment="CENTER" layoutX="11.0" layoutY="61.0" style="&#10;" text="Category:" textAlignment="CENTER" wrapText="false">
+                        <Label fx:id="category" alignment="CENTER" layoutX="11.0" layoutY="58.0" style="&#10;" text="Category:" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -286,12 +280,12 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="question" alignment="CENTER" layoutX="10.0" layoutY="100.0" style="&#10;" text="Question:" textAlignment="CENTER" wrapText="false">
+                        <Label fx:id="question" alignment="CENTER" layoutX="10.0" layoutY="92.0" style="&#10;" text="Question:" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="player_answer_label" alignment="CENTER" layoutX="10.0" layoutY="227.0" style="&#10;" text="Player Answer:" textAlignment="CENTER" wrapText="false">
+                        <Label fx:id="player_answer_label" alignment="CENTER" layoutX="10.0" layoutY="245.0" style="&#10;" text="Player Answer:" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -301,18 +295,18 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="player_answer" layoutX="141.0" layoutY="230.0" prefHeight="25.0" prefWidth="219.0" />
-                        <Label fx:id="category_title" alignment="TOP_LEFT" layoutX="97.0" layoutY="63.0" prefHeight="27.0" prefWidth="322.0" style="&#10;" text="Science Fiction Films" textAlignment="CENTER" wrapText="false">
+                        <TextField fx:id="player_answer" layoutX="141.0" layoutY="248.0" prefHeight="25.0" prefWidth="219.0" />
+                        <Label fx:id="category_title" alignment="TOP_LEFT" layoutX="97.0" layoutY="59.0" prefHeight="27.0" prefWidth="322.0" style="&#10;" text="Science Fiction Films" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="question_content" alignment="TOP_LEFT" layoutX="95.0" layoutY="100.0" prefHeight="127.0" prefWidth="359.0" style="&#10;" text="This company bought Lucasfilms in 2012" wrapText="true">
+                        <Label fx:id="question_content" alignment="TOP_LEFT" layoutX="95.0" layoutY="93.0" prefHeight="149.0" prefWidth="359.0" style="&#10;" text="This company bought Lucasfilms in 2012" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="player_submit_button" layoutX="224.0" layoutY="279.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Submit" />
+                        <Button fx:id="player_submit_button" layoutX="224.0" layoutY="280.0" mnemonicParsing="false" onAction="#handlePlayerSubmitAction" text="Submit" />
                         <Label fx:id="question_value" alignment="CENTER" layoutX="442.0" layoutY="7.0" style="&#10;" text="800" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="20.0" />
