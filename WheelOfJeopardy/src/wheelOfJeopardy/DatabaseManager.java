@@ -12,7 +12,7 @@ public class DatabaseManager {
 
 	String dbName;
 	String dbPath;
-	String databaseDir = "/Users/ben/Projects/wheelOfJeopardy/WheelOfJeopardy/src/assets/database/";
+	String databaseDir = "./src/assets/database/";
 	Question[] gameQuestions;
 	String[] round1Categories;
 	String[] round2Categories;
@@ -51,7 +51,7 @@ public class DatabaseManager {
 		Question[] questions = null;
 
 		try{
-			JsonReader jr = new JsonReader(new FileReader(databaseName));
+			JsonReader jr = new JsonReader(new FileReader("./src/assets/database/" +databaseName));
 			questions = new Gson().fromJson(jr, Question[].class);
 
 		} catch (Exception e){
@@ -82,8 +82,8 @@ public class DatabaseManager {
 		int i,j;
 		for(int x=0; x<12; x++){
 
-			if(x<=5){i=1; j=x;}
-			else{i=2; j=x-6;}
+			if(x<=5){i=0; j=x;}
+			else{i=1; j=x-6;}
 
 			categories[i][j] = allcat.get(x);
 		}
@@ -92,8 +92,7 @@ public class DatabaseManager {
 
 	}
 
-	private static List<HashMap<String, ArrayList<Question>>> getCategoryQuestions(String[][] theRoundCategories,
-																																								 Question[] theQuestions){
+	private static List<HashMap<String, ArrayList<Question>>> getCategoryQuestions(String[][] theRoundCategories,Question[] theQuestions){
 
 		Integer round1values[] = {100, 200, 300, 400, 500};
 		Integer round2values[] = {200, 400, 600, 800, 1000};

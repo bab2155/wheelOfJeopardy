@@ -66,6 +66,8 @@ public class Controller
     public void startGame()
     {
 		this.RoundNumber = 1;
+                
+                this.DatabaseName = "questions.json";
 		
 		this.createQuestionBoards();
 		
