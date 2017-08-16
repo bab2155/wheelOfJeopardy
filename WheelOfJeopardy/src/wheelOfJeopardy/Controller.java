@@ -6,7 +6,7 @@ import java.util.Random;
 public class Controller
 {
 	// Instance variables
-        private QuestionBoard QuestionBoard;
+        private QuestionBoard[] QuestionBoards = new QuestionBoard[2];
 	private Player[] Players = new Player[3];
 	private int CurrentPlayerNumber;
 	private ScoreBoard ScoreBoard;
@@ -67,9 +67,9 @@ public class Controller
     {
 		this.RoundNumber = 1;
 		
-		this.createQuestionBoard();
+		this.createQuestionBoards();
 		
-		this.Wheel = new Wheel(this.QuestionBoard.getAllCategories());
+		this.Wheel = new Wheel(this.QuestionBoards[this.RoundNumber-1].getAllCategories());
 		
 		//Pick current player randomly
 		Random randomGenerator = new Random();
@@ -93,7 +93,7 @@ public class Controller
 
     
     public QuestionBoard getQuestionBoard(){
-        return this.QuestionBoard;
+        return this.QuestionBoards[this.RoundNumber-1];
     }
     
     public int getRoundNumber(){
@@ -105,10 +105,8 @@ public class Controller
     public void startRound2()
     {
         this.RoundNumber = 2;
-		
-	this.createQuestionBoard();
-		
-	this.Wheel = new Wheel(this.QuestionBoard.getAllCategories());
+				
+	this.Wheel = new Wheel(this.QuestionBoards[this.RoundNumber-1].getAllCategories());
         
         this.ScoreBoard = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
 
@@ -163,9 +161,9 @@ public class Controller
         
         //Check if any questions remain for the round
         boolean areThereQuestionsLeft = false;
-        String[] theCategories = this.QuestionBoard.getAllCategories();
+        String[] theCategories = this.getQuestionBoard().getAllCategories();
         for (String theCategory:theCategories){
-            if (this.QuestionBoard.getQuestionForCategory(theCategory, maxPointValue) != null){
+            if (this.getQuestionBoard().getQuestionForCategory(theCategory, maxPointValue) != null){
                 areThereQuestionsLeft = true;
                 break;
             } 
@@ -196,7 +194,7 @@ public class Controller
      * @return Question
      */
     public Question getQuestionForCategory( String theCategory, int thePointValue )
-    {   Question theQuestion = this.QuestionBoard.getQuestionForCategory(theCategory,thePointValue);
+    {   Question theQuestion = this.getQuestionBoard().getQuestionForCategory(theCategory,thePointValue);
         this.LastQuestion = theQuestion;
         return theQuestion;
     }
@@ -233,10 +231,10 @@ public class Controller
     {
 		this.ScoreBoard.useTokenForPlayer( this.getCurrentPlayer( ) );
 	}
-	public void createQuestionBoard(){
+	public void createQuestionBoards(){
 		String theActualDatabaseNames[] = DatabaseManager.getDatabaseNames();
 		if (Arrays.asList(theActualDatabaseNames).contains(this.DatabaseName)){
-//			this.QuestionBoard = DatabaseManager.createQuestionBoardForRound(this.DatabaseName,this.RoundNumber);
+                     this.QuestionBoards = DatabaseManager.createQuestionBoards(DatabaseName);
 		}
 	}
 

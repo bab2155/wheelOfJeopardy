@@ -151,7 +151,7 @@ public class DatabaseManager {
 	 * @param theRoundNumber
 	 * @return
 	 */
-	public static QuestionBoard[] createQuestionBoardForRound(String theDatabaseName, int theRoundNumber){
+	public static QuestionBoard[] createQuestionBoards(String theDatabaseName){
 
 		Question[] dbQuestions = getAllDatabaseQuestions(theDatabaseName);
 		String[][] roundCategories = setRoundCategories(dbQuestions);
@@ -173,7 +173,8 @@ public class DatabaseManager {
 
 		/* Get all files from db directory */
 //		File dbStore = new File(this.databaseDir);
-		File dbStore = new File("../assets/database/");
+		File dbStore = new File("./src/assets/database/");
+                System.out.println(dbStore.getAbsolutePath());
 		File[] files = dbStore.listFiles();
 		List<String> filenames = new ArrayList<String>();
 
