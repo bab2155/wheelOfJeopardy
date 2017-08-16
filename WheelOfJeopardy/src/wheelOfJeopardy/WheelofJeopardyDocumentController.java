@@ -707,7 +707,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player_answer.setText("");
         correct_answer.setText("");
         player_answer.setDisable(false);
-        this.controller.addLastQuestionPointsForCurrentPlayer();
+        this.controller.addPointsForCurrentPlayer(Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
         //setPlayerScore(player_identifier.getText(), question_value.getText());
         /**free_spin_type = 2;
@@ -730,7 +730,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         correct_answer.setText("");
         player_answer.setDisable(false);
         free_spin_type = 2;
-        this.controller.subtractLastQuestionPointsForCurrentPlayer();
+        this.controller.subtractPointsForCurrentPlayer(Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
         //String negativeScore = "-" + question_value.getText();
         //setPlayerScore(player_identifier.getText(), negativeScore);
@@ -1119,8 +1119,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player2_tokens.setText("" + player2.getNumberOfTokens());
         player3_tokens.setText("" +player3.getNumberOfTokens());
         player1_score.setText("" +player1.getScore());
-        player2_score.setText("" + player1.getScore());
-        player3_score.setText("" + player1.getScore());
+        player2_score.setText("" + player2.getScore());
+        player3_score.setText("" + player3.getScore());
        //lookup Java string comparisons
        /* if(player.equalsIgnoreCase(player1_label.getText())){
             player1_score.setText(points);

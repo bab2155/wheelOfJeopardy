@@ -12,9 +12,10 @@ public class Question {
 	
 	private final String Answer;
 	*/
-	public Question(String theQuestionText, String theAnswerText){
+	public Question(String theQuestionText, String theAnswerText,int value){
 		this.question = theQuestionText;
 		this.answer = theAnswerText;
+                this.value = value;
 	}
 	public boolean verifyAnswer(String theUserAnswer){
 		return true;

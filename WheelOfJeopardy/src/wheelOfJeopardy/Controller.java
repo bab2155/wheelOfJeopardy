@@ -14,7 +14,6 @@ public class Controller
 	private Wheel Wheel;
 	private int RoundNumber;
 	private String DatabaseName;
-        private Question LastQuestion;
 	//need to add View as an attribute
 
     /**
@@ -69,15 +68,25 @@ public class Controller
                 
                 this.DatabaseName = "questions.json";
 		
-		this.createQuestionBoards();
+		//this.createQuestionBoards();
 		
-		this.Wheel = new Wheel(this.QuestionBoards[this.RoundNumber-1].getAllCategories());
+		//this.Wheel = new Wheel(this.QuestionBoards[this.RoundNumber-1].getAllCategories());
 		
+                String[] categories = new String[6];
+                categories[0] = "American History";
+                categories[1] = "Single-Named Singers";
+                categories[2] = "Science";
+                categories[3] = "Literature";
+                categories[4] = "Business";
+                categories[5] = "Movies";
+                this.Wheel = new Wheel(categories);
 		//Pick current player randomly
 		Random randomGenerator = new Random();
 		this.CurrentPlayerNumber = randomGenerator.nextInt(3);
     }
 
+ 
+    
     /**
      * stop the game and declare the winner
      * @return 
@@ -197,7 +206,6 @@ public class Controller
      */
     public Question getQuestionForCategory( String theCategory, int thePointValue )
     {   Question theQuestion = this.getQuestionBoard().getQuestionForCategory(theCategory,thePointValue);
-        this.LastQuestion = theQuestion;
         return theQuestion;
     }
 
@@ -249,12 +257,12 @@ public class Controller
     {
         //Pick current player randomly
         Random randomGenerator = new Random( );
-        int theOpponentNumber = -1;
+        int theOpponentNumber = this.CurrentPlayerNumber;
         while( theOpponentNumber == this.CurrentPlayerNumber )
         {
-            theOpponentNumber = randomGenerator.nextInt(3 );
+            theOpponentNumber = randomGenerator.nextInt(3);
         }
-        return this.Players[ theOpponentNumber ];
+        return this.Players[theOpponentNumber];
     }
     
     /**
@@ -267,29 +275,17 @@ public class Controller
       /**
        * adds the points for the last question for the current player
        */
-      public void addLastQuestionPointsForCurrentPlayer(){
-        this.ScoreBoard.addPointsForPlayer(this.getCurrentPlayer(), this.LastQuestion.getPointValue());
+      public void addPointsForCurrentPlayer(int theNumberOfPoints){
+        this.ScoreBoard.addPointsForPlayer(this.getCurrentPlayer(), theNumberOfPoints);
       }
       
       /**
        * subtracts the points for the last question for the current player
        */
-      public void subtractLastQuestionPointsForCurrentPlayer(){
-        this.ScoreBoard.subtractPointsForPlayer(this.getCurrentPlayer(),this.LastQuestion.getPointValue());
+      public void subtractPointsForCurrentPlayer(int theNumberOfPoints){
+        this.ScoreBoard.subtractPointsForPlayer(this.getCurrentPlayer(),theNumberOfPoints);
       }
        
-      /**
-       * overrides the answer validation for the current player
-       * @param theOverride 
-       */
-      public void overrideAnswerValidationForCurrentPlayer(boolean theOverride){
-        if (theOverride){
-            this.addLastQuestionPointsForCurrentPlayer();
-        }
-        else{
-            this.subtractLastQuestionPointsForCurrentPlayer();
-        }
-      }
       public void bankruptCurrentPlayer(){
           this.getScoreBoard().bankruptPlayer(this.getCurrentPlayer());
       }
