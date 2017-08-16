@@ -117,8 +117,7 @@ public class DatabaseManager {
 
 		for(int i=0; i<=1; i++) {
 			HashMap<String, ArrayList<Question>> allQuestions = new HashMap<String, ArrayList<Question>>();
-//			Iterator valueIter = questionValues.get(i).iterator();
-//			Object curValue = valueIter.next();
+
 
 			for (Question question : theQuestions) {
 
@@ -167,17 +166,6 @@ public class DatabaseManager {
 
 		QuestionBoard[] gameQuestionBoards = tmp.toArray(new QuestionBoard[2]);
 
-
-//		HashSet<String> categorySet = new HashSet<String>();
-//
-//		for(int i=1; i < this.gameQuestions.length; i++){
-//			categorySet.add(this.gameQuestions[i].getCategory());
-//		}
-
-//		String[] categories = categorySet.toArray(new String[categorySet.size()]);
-//		QuestionBoard questionBoard = new QuestionBoard(roundCategories, this.gameQuestions);
-
-//		return questionBoard;
 		return gameQuestionBoards;
 
 	}
