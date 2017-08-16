@@ -1356,6 +1356,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
 
     //Main controller
     public void gamePlay(WheelSector theWheelSector){
+        
+        /**
         spin_count--;
         setSpinCounter(Integer.toString(spin_count));
         if(spin_count == 0){
@@ -1384,7 +1386,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
             //if(!useFreeToken){
                 //player = getNextPlayer(player);
             //}
-
+          **/
             game_play.toFront();
    
                 if (theWheelSector instanceof BankruptSector){
@@ -1409,6 +1411,17 @@ public class WheelofJeopardyDocumentController implements Initializable {
                     String[] questionValue = getQuestionValue(theWheelSector.getName());
                     populateQuestion(questionValue[0], questionValue[1], questionValue[2], questionValue[3]);
                 }
+                
+                setSpinCounter(Integer.toString(this.scoreboard.getRoundCount()));
+                boolean roundCheck = this.controller.canRoundContinue();
+                if (!roundCheck){
+                    if (this.controller.getRoundNumber() == 1){
+                        this.controller.startRound2();
+                 }
+                else{
+                    Player theWinner = this.controller.stopGame();
+                }
+                
                 
                
             }
