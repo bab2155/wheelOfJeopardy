@@ -50,8 +50,7 @@
   },
   {
     "category":"Single-Named Singers",
-    "question":"6 months after his death, this rock icon's Minnesota home & studio complex was open to the public for
-    tours",
+    "question":"6 months after his death, this rock icon's Minnesota home & studio complex was open to the public for tours",
     "answer":"Prince",
     "value":600,
     "used":false
@@ -72,18 +71,14 @@
   },
   {
     "category":"Science",
-    "question":"By definition,
-    it's the branch of chemistry that deals with non-carbon compounds",
+    "question":"By definition, it's the branch of chemistry that deals with non-carbon compounds",
     "answer":"inorganic",
     "value":200,
     "used":false
   },
   {
     "category":"Science",
-    "question":"Hydrogen has three isotopes: protium with its nucleus made up of one proton,
-    deuterium with one proton and one neutron,
-    and a third radioactive isotope with an additional neutron giving it a mass number of 3; hence,
-    this name",
+    "question":"Hydrogen has three isotopes: protium with its nucleus made up of one proton, deuterium with one proton and one neutron, and a third radioactive isotope with an additional neutron giving it a mass number of 3; hence, this name",
     "answer":"tritium",
     "value":400,
     "used":false
@@ -111,16 +106,14 @@
   },
   {
     "category":"Literature",
-    "question":"Mary Mapes Dodge penned this guy,\"Or, The Silver skates\"; within her lifetime,
-    the book appeared in more than 100 editions",
+    "question":"Mary Mapes Dodge penned this guy,\"Or, The Silver skates\"; within her lifetime, the book appeared in more than 100 editions",
     "answer":"Hans Brinker",
     "value":200,
     "used":false
   },
   {
     "category":"Literature",
-    "question":"After leaving Rochester-- the man,
-    not the city--this Bronte title woman finds herself destitute and friendless",
+    "question":"After leaving Rochester-- the man, not the city--this Bronte title woman finds herself destitute and friendless",
     "answer":"Jane Eyre",
     "value":400,
     "used":false
@@ -134,16 +127,14 @@
   },
   {
     "category":"Literature",
-    "question":"’T.S. Garp cried in the airplane that was bringing him home to be famous in his violent country’,
-    penned this novelist",
+    "question":"’T.S. Garp cried in the airplane that was bringing him home to be famous in his violent country’, penned this novelist",
     "answer":"John Irving",
     "value":800,
     "used":false
   },
   {
     "category":"Literature",
-    "question":"Though the play did not hit Broadway until 1946,
-    ‘The Iceman Cometh’ by him first cameth in 1939",
+    "question":"Though the play did not hit Broadway until 1946, ‘The Iceman Cometh’ by him first cameth in 1939",
     "answer":"Eugene O’Neill",
     "value":1000,
     "used":false
@@ -171,8 +162,7 @@
   },
   {
     "category":"Business",
-    "question":"In 1999,
-    this shark & a pal sold their broadcast.com to Yahoo for $5.7 billion",
+    "question":"In 1999, this shark & a pal sold their broadcast.com to Yahoo for $5.7 billion",
     "answer":"Mark Cuban",
     "value":800,
     "used":false
@@ -228,8 +218,7 @@
   },
   {
     "category":"Criminal Behavior",
-    "question":"Illegally avoiding paying the government on state,
-    federal or local levels",
+    "question":"Illegally avoiding paying the government on state, federal or local levels",
     "answer":"ta evasion",
     "value":400,
     "used":false
@@ -243,8 +232,7 @@
   },
   {
     "category":"Criminal Behavior",
-    "question":"A federal statute fighting this type of crime includes assault motivated by disability,
-    gender identity & sexual orientation",
+    "question":"A federal statute fighting this type of crime includes assault motivated by disability, gender identity & sexual orientation",
     "answer":"hate crime",
     "value":800,
     "used":false
@@ -258,8 +246,7 @@
   },
   {
     "category":"Board Games",
-    "question":"In this board game you must solve the case of millionaire Samuel Black,
-    murdered in his own mansion",
+    "question":"In this board game you must solve the case of millionaire Samuel Black, murdered in his own mansion",
     "answer":"Clue",
     "value":200,
     "used":false
@@ -273,8 +260,7 @@
   },
   {
     "category":"Board Games",
-    "question":"Good deeds allow you to climb up,
-    but watch out for the slides in this game where you try to reach the 100 square",
+    "question":"Good deeds allow you to climb up, but watch out for the slides in this game where you try to reach the 100 square",
     "answer":"Chutes and Ladders",
     "value":600,
     "used":false
@@ -323,18 +309,14 @@
   },
   {
     "category":"Pop Culture",
-    "question":"Avicii,
-    a 26-year-old superstar in EDM,
-    this type of music,
-    has announced he is retiring",
+    "question":"Avicii, a 26-year-old superstar in EDM,this type of music, has announced he is retiring",
     "answer":"electronic dance music",
     "value":1000,
     "used":false
   },
   {
     "category":"Palindromes",
-    "question":"Once used as a courtesy before a woman's name,
-    it now precedes \"secretary\" to address a female Cabinet member",
+    "question":"Once used as a courtesy before a woman's name, it now precedes \"secretary\" to address a female Cabinet member",
     "answer":"madam",
     "value":200,
     "used":false
@@ -383,17 +365,14 @@
   },
   {
     "category":"Geography",
-    "question":"It covers more than 26,
-    000 square miles,
-    mainly in Tanzania & Uganda",
+    "question":"It covers more than 26,000 square miles,mainly in Tanzania & Uganda",
     "answer":"Lake Victoria",
     "value":600,
     "used":false
   },
   {
     "category":"Geography",
-    "question":"This dry,
-    windswept region covers almost all of southern Argentina",
+    "question":"This dry,windswept region covers almost all of southern Argentina",
     "answer":"Patagonia",
     "value":800,
     "used":false
@@ -407,8 +386,7 @@
   },
   {
     "category":"Botany",
-    "question":"Disappointing but true,
-    these flowers don't breathe fire",
+    "question":"Disappointing but true,these flowers don't breathe fire",
     "answer":"snapdragons",
     "value":200,
     "used":false
@@ -422,8 +400,7 @@
   },
   {
     "category":"Botany",
-    "question":"You are ‘barking’ up this tree,
-    looking for small flowers",
+    "question":"You are ‘barking’ up this tree,looking for small flowers",
     "answer":"dogwood",
     "value":600,
     "used":false
