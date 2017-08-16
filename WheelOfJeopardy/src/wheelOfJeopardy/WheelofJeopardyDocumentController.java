@@ -737,6 +737,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
         if(checkForToken()){
             populateUseToken();
         } 
+        else{
+            this.controller.loseATurn();
+        }
         /**
          * else {
             Random randomGen = new Random();
@@ -750,6 +753,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML
     private void handleUseTokenSubmitAction(ActionEvent event) {
         this.controller.useTokenForCurrentPlayer();
+        this.updatePlayerStats();
         /*
         String player = player_identifier.getText();
         Random randomGen = new Random();
@@ -802,7 +806,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private void handlePlayerChoiceSubmitAction(ActionEvent event) {
         String category_selected = "";
         if(!category_box_player.getSelectionModel().isEmpty()){
-            category_box_player.getSelectionModel().getSelectedItem().toString();
+            category_selected = category_box_player.getSelectionModel().getSelectedItem().toString();
         }
         
         String[] categories = getCategories();
@@ -811,7 +815,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         }
         category_box_player.setValue("");
         
-        CategorySector theCategorySector = new CategorySector(categories[0]);
+        CategorySector theCategorySector = new CategorySector(category_selected);
         
         gamePlay(theCategorySector);
     }
@@ -821,7 +825,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private void handleOpponentChoiceSubmitAction(ActionEvent event) {
         String category_selected = "";
         if(!category_box_opponent.getSelectionModel().isEmpty()){
-            category_box_opponent.getSelectionModel().getSelectedItem().toString();
+            category_selected = category_box_opponent.getSelectionModel().getSelectedItem().toString();
         }
 
         String[] categories = getCategories();
@@ -829,7 +833,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_box_opponent.getItems().remove(s);
         }
         category_box_opponent.setValue("");
-        CategorySector theCategorySector = new CategorySector(categories[0]);
+        CategorySector theCategorySector = new CategorySector(category_selected);
         
         gamePlay(theCategorySector);
         //gamePlay(7, player_identifier.getText(), category_selected, false);
@@ -936,7 +940,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         sector_free_token.toFront();
         player_identifier.setText(this.controller.getCurrentPlayer().getName());
         this.controller.addTokenForCurrentPlayer();
-        this.updateGameStats();
+        this.updatePlayerStats();
         //setPlayerTokens(player, "1");
         setSectorFreeTokenVisible(true);
     }
@@ -1183,9 +1187,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
                 //player = getNextPlayer(player);
             //}
 
-       
             game_play.toFront();
-            
+   
                 if (theWheelSector instanceof BankruptSector){
                     populateBankruptcy();
                 }
@@ -1208,6 +1211,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
                     String[] questionValue = getQuestionValue(theWheelSector.getName());
                     populateQuestion(questionValue[0], questionValue[1], questionValue[2], questionValue[3]);
                 }
+                
+               
             }
         }
     
