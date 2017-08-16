@@ -7,7 +7,7 @@ public class Controller
 {
 	// Instance variables
         private QuestionBoard QuestionBoard;
-	private Player[] Players;
+	private Player[] Players = new Player[3];
 	private int CurrentPlayerNumber;
 	private ScoreBoard ScoreBoard;
 	private TimeKeeper TimeKeeper;
@@ -74,7 +74,7 @@ public class Controller
 		//Pick current player randomly
 		Random randomGenerator = new Random();
 		this.CurrentPlayerNumber = randomGenerator.nextInt(3);
-	}
+    }
 
     /**
      * stop the game and declare the winner
@@ -289,6 +289,9 @@ public class Controller
         else{
             this.subtractLastQuestionPointsForCurrentPlayer();
         }
+      }
+      public void bankruptCurrentPlayer(){
+          this.getScoreBoard().bankruptPlayer(this.getCurrentPlayer());
       }
 
 }

@@ -34,16 +34,15 @@ public class Player {
 	}
 
 	public void useAToken() {
-		Controller controller = new Controller();
 		if (this.NumberOfTokens > 0) {
 			this.NumberOfTokens = this.NumberOfTokens--;
 			//Controller allows for another turn
-			controller.useTokenForCurrentPlayer();
+			
 		} else {//no tokens to use
 			//display error to user
 			Player.infoBox("You do not have enough tokens", "TOKEN ERROR");
 			//goto next player
-			controller.setCurrentPlayer();
+			
 		}
 	}
 
