@@ -119,8 +119,17 @@ public class Controller
     public void startRound2()
     {
         this.RoundNumber = 2;
-				
-	this.Wheel = new Wheel(this.QuestionBoards[this.RoundNumber-1].getAllCategories());
+	
+        String[] categories = new String[6];
+        categories[0] = "Criminal Behavior";
+        categories[1] = "Board Games";
+        categories[2] = "Pop Culture";
+        categories[3] = "Palindromes";
+        categories[4] = "Geography";
+        categories[5] = "Botany";  
+        this.Wheel = new Wheel(categories);
+        
+	//this.Wheel = new Wheel(this.QuestionBoards[this.RoundNumber-1].getAllCategories());
         
     }
     

@@ -153,7 +153,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     public RowPointValues row10 = new RowPointValues("1000", "1000", "1000", "1000", "1000", "1000");
     
     private Integer free_spin_type = 0;
-    private Integer spin_count = 50;
+    private Integer spin_count = 2;
     private Integer round_count = 1;
     private String[] questionsHC = new String[30];
     private String[] answersHC = new String[30];
@@ -981,7 +981,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_box_player.getItems().remove(s);
         }
         category_box_player.setValue("");
-        spin_count ++; //Have to update to not count as a spin
+        //spin_count ++; //Have to update to not count as a spin
         
         CategorySector theCategorySector = new CategorySector(category_selected);
         
@@ -1377,10 +1377,15 @@ public class WheelofJeopardyDocumentController implements Initializable {
         spin_count--;
         setSpinCounter(Integer.toString(spin_count));
         **/
-        if(Integer.parseInt(spin_counter.getText()) == 0){
+        //spin_count = Integer.parseInt(spin_counter.getText());
+        
+        spin_count--;
+        setSpinCounter(Integer.toString(spin_count));
+        if(spin_count == 0){
             if(round_value.getText().equalsIgnoreCase("1")){
                 this.controller.startRound2();
                 this.scoreboard = this.controller.getScoreBoard();
+                this.updatePlayerStats();
                 /**setFirstRoundScore();
                 player1_score.setText("0");
                 player2_score.setText("0");
@@ -1393,7 +1398,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
                 hardCodedAnswersR2();
                 hardCodedQuestionsR2();
                 usedQuestionsHC();
-                spin_count = 50;
+                spin_count = 2;
                 setSpinCounter(Integer.toString(this.scoreboard.getRoundCount()));
                 /**
                 Random randomGen = new Random();
