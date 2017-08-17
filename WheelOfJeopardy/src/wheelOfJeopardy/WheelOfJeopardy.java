@@ -36,6 +36,8 @@ public class WheelOfJeopardy extends Application {
         
         wheelofJeopardyDC.launchGame();
         
+        
+        
     }
     
 

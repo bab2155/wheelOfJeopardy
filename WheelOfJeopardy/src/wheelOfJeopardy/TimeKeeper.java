@@ -40,9 +40,9 @@ public class TimeKeeper
      */
     public void startTimer( int theDuration )
     {
-		this.NumberOfSeconds = theDuration;
+	this.NumberOfSeconds = theDuration;
         this.Timer.scheduleAtFixedRate( this.Task, 0, 1000 );
-	}
+    }
 
     /**
      * stop the timer

@@ -238,7 +238,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="720.0" layoutY="15.0" style="&#10;" text="0:13" textAlignment="CENTER" wrapText="false">
+                  <Label fx:id="spin_timer" alignment="CENTER" layoutX="720.0" layoutY="15.0" style="&#10;" text="0:30" textAlignment="CENTER" wrapText="false">
                      <font>
                         <Font size="18.0" />
                      </font>

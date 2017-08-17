@@ -28,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.application.Platform;
 
 
 /**
@@ -45,6 +46,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML private Label round_label;
     @FXML private Label round_value;
     @FXML private Label game_timer_label;
+    @FXML private Label spin_timer;
     @FXML private Label player1_label;
     @FXML private Label player2_label;
     @FXML private Label player3_label;
@@ -163,6 +165,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
     
     private Controller controller = new Controller();
     private ScoreBoard scoreboard;
+    
+    private TimeKeeper timeKeeper = new TimeKeeper();
     
     //Add styling
     @FXML void addCSS(){
@@ -365,8 +369,15 @@ public class WheelofJeopardyDocumentController implements Initializable {
     }
     
     @FXML
-    private void setTimer(String timer){
-        game_timer.setText(timer);
+    private void setActionTimer(){
+        Platform.runLater(() -> {
+            int numberOfSeconds = timeKeeper.getNumberOfSeconds();
+            spin_timer.setText("0:" +Integer.toString(numberOfSeconds));
+            if (numberOfSeconds == 0){
+                gamePlay(new LoseATurnSector());
+            }
+        });
+        
     }
     
      /**
@@ -801,6 +812,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
         spin_wheel_button.setDisable(false);
         game_play.toFront();
         
+        this.timeKeeper.addListener(() -> {
+            setActionTimer();
+        });
 
        // gamePlay(2, "player1", "0", false);
     }
@@ -817,6 +831,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     //Handle Player Submit button action
     @FXML
     private void handlePlayerSubmitAction(ActionEvent event) {
+        timeKeeper.stopTimer();
         player_submit_button.setVisible(false);
         player_answer.setDisable(true);
         
@@ -895,6 +910,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     //Handle player's choice
     @FXML
     private void handlePlayerChoiceSubmitAction(ActionEvent event) {
+        this.timeKeeper.stopTimer();
         String category_selected = "no";
         if(!category_box_player.getSelectionModel().isEmpty()){
             category_selected = category_box_player.getSelectionModel().getSelectedItem().toString();
@@ -915,6 +931,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     //Handle opponent's choice
     @FXML
     private void handleOpponentChoiceSubmitAction(ActionEvent event) {
+        this.timeKeeper.stopTimer();
         String category_selected = "no";
         if(!category_box_opponent.getSelectionModel().isEmpty()){
             category_selected = category_box_opponent.getSelectionModel().getSelectedItem().toString();
@@ -1009,6 +1026,12 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player_submit_button.setVisible(true);
         correct_answer.setEditable(false);
         setSectorQuestionVisible(true);
+        
+        
+        
+        this.timeKeeper.startTimer(60);
+        
+        
     }
     
     //Populate answer correct
@@ -1067,6 +1090,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_box_player.getItems().add(s);
         }
         setSectorPlayerChoiceVisible(true);
+        
+        this.timeKeeper.startTimer(15);
     }
     
     public void populateOpponentChoice(){
@@ -1079,6 +1104,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_box_opponent.getItems().add(s);
         }
         setSectorOpponentChoiceVisible(true);
+        
+        this.timeKeeper.startTimer(15);
     }
 
     public void populateUseToken(){
