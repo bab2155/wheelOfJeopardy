@@ -9,7 +9,7 @@ public class Controller
         private QuestionBoard[] QuestionBoards = new QuestionBoard[2];
 	private Player[] Players = new Player[3];
 	private int CurrentPlayerNumber;
-	private ScoreBoard[] ScoreBoards;
+	private ScoreBoard[] ScoreBoards = new ScoreBoard[2];
 	private TimeKeeper TimeKeeper;
 	private Wheel Wheel;
 	private int RoundNumber;
@@ -53,8 +53,9 @@ public class Controller
         this.Players[2] = new Player(theThirdPlayerName);
     }
     
-    public void setupScoreBoard(){
-        this.ScoreBoards[this.RoundNumber-1] = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
+    public void setupScoreBoards(){
+        this.ScoreBoards[0] = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
+        this.ScoreBoards[1] = new ScoreBoard(new Player(this.Players[0].getName()),new Player(this.Players[1].getName()),new Player(this.Players[2].getName()));
     }
     
     public void setDatabaseName(String theDatabaseName){
