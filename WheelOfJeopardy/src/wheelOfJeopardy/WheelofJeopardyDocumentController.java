@@ -167,6 +167,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private ScoreBoard scoreboard;
     
     private TimeKeeper timeKeeper = new TimeKeeper();
+    private boolean isTimerForQuestion = false;
     
     //Add styling
     @FXML void addCSS(){
@@ -374,7 +375,17 @@ public class WheelofJeopardyDocumentController implements Initializable {
             int numberOfSeconds = timeKeeper.getNumberOfSeconds();
             spin_timer.setText("0:" +Integer.toString(numberOfSeconds));
             if (numberOfSeconds == 0){
+               if (isTimerForQuestion){
                 gamePlay(new LoseATurnSector());
+                isTimerForQuestion = false;
+               }
+               else{
+                String[] wheelCategories = getCategories();
+                Random randomGenerator = new Random();
+                int randomCategoryIndex = randomGenerator.nextInt(wheelCategories.length);
+                String categoryName = wheelCategories[randomCategoryIndex];
+                gamePlay(new CategorySector(categoryName));
+                }
             }
         });
         
@@ -812,9 +823,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         spin_wheel_button.setDisable(false);
         game_play.toFront();
         
-        this.timeKeeper.addListener(() -> {
-            setActionTimer();
-        });
+        
 
        // gamePlay(2, "player1", "0", false);
     }
@@ -832,6 +841,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML
     private void handlePlayerSubmitAction(ActionEvent event) {
         timeKeeper.stopTimer();
+        isTimerForQuestion = false;
         player_submit_button.setVisible(false);
         player_answer.setDisable(true);
         
@@ -1028,6 +1038,11 @@ public class WheelofJeopardyDocumentController implements Initializable {
         correct_answer.setEditable(false);
         setSectorQuestionVisible(true);
         
+        this.timeKeeper = new TimeKeeper();
+        this.isTimerForQuestion = true;
+        this.timeKeeper.addListener(() -> {
+            setActionTimer();
+        });
         
         spin_timer.setVisible(true);
         this.timeKeeper.startTimer(60);
@@ -1091,6 +1106,12 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_box_player.getItems().add(s);
         }
         setSectorPlayerChoiceVisible(true);
+        
+        this.timeKeeper = new TimeKeeper();
+        this.timeKeeper.addListener(() -> {
+            setActionTimer();
+        });
+        
         spin_timer.setVisible(true);
         this.timeKeeper.startTimer(15);
     }
@@ -1106,6 +1127,10 @@ public class WheelofJeopardyDocumentController implements Initializable {
         }
         setSectorOpponentChoiceVisible(true);
         
+        this.timeKeeper = new TimeKeeper();
+        this.timeKeeper.addListener(() -> {
+            setActionTimer();
+        });
         this.timeKeeper.startTimer(15);
     }
 
