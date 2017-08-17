@@ -851,6 +851,23 @@ public class WheelofJeopardyDocumentController implements Initializable {
             populateAnswerCorrect();
         }
     }
+    
+    @FXML
+    private void handleTimerAction(ActionEvent event){
+        if(answer_results_incorrect.isVisible()){
+            //user submitted incorrect answer by timeout
+            //move on to next player and do not remove points
+            Random randomGen = new Random();
+            int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
+            gamePlay(randomNum, player_identifier.getText(), "no", false);
+        } else if (answer_results_correct.isVisible()){
+            handleCorrectAnswerContinueAction(event);
+        } else if (sector_question.isVisible()){
+            handlePlayerSubmitAction(event);
+        } else {
+            handleSpinWheelAction(event);
+        }
+    }
         
     @FXML
     private void handleCorrectAnswerContinueAction(ActionEvent event){
@@ -866,7 +883,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         } else {
             Random randomGen = new Random();
             int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-            gamePlay(randomNum, player_identifier.getText(), "no", false);
+            gamePlay(randomNum, player_identifier.getText(), "0", true);
         }
     }
     
@@ -885,7 +902,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         } else {
             Random randomGen = new Random();
             int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-            gamePlay(randomNum, player_identifier.getText(), "no", false);
+            gamePlay(randomNum, player_identifier.getText(), "", true);
         }
     }
     
@@ -971,7 +988,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         category_box_player.setValue("");
         spin_count ++; //Have to update to not count as a spin
         
-        gamePlay(7, player_identifier.getText(), category_selected, false);
+        gamePlay(7, player_identifier.getText(), category_selected, true);
     }
     
     //Handle opponent's choice
@@ -989,7 +1006,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         category_box_opponent.setValue("");
         spin_count ++; //Have to update to not count as a spin
         
-        gamePlay(7, player_identifier.getText(), category_selected, false);
+        gamePlay(7, player_identifier.getText(), category_selected, true);
     }
     
     //Handle bankruptcy submit action
@@ -1026,7 +1043,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private void handleSpinAgainContinueAction(ActionEvent event) {
         Random randomGen = new Random();
         int randomNum = randomGen.nextInt(9);
-        gamePlay(randomNum, player_identifier.getText(), "no", false);
+        gamePlay(randomNum, player_identifier.getText(), "no", true);
     }
     
     @FXML 
@@ -1342,7 +1359,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     
 
     //Main controller
-    public void gamePlay(int counter, String player, String categoryValue, boolean useFreeToken){
+    public void gamePlay(int counter, String player, String categoryValue, boolean keepCurrentPlayer){
         spin_count--;
         setSpinCounter(Integer.toString(spin_count));
         if(spin_count == 0){
@@ -1368,7 +1385,12 @@ public class WheelofJeopardyDocumentController implements Initializable {
                 endGame();
             }
         } else {
-            if(!useFreeToken && categoryValue.equalsIgnoreCase("no")){
+            /*if(!useFreeToken && categoryValue.equalsIgnoreCase("no")){
+                player = getNextPlayer(player);
+            } else if(!keepCurrentPlayer){
+                
+            }*/
+            if(!keepCurrentPlayer){
                 player = getNextPlayer(player);
             }
 
