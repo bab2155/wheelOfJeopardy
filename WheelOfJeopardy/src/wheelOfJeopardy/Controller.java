@@ -9,7 +9,7 @@ public class Controller
         private QuestionBoard[] QuestionBoards = new QuestionBoard[2];
 	private Player[] Players = new Player[3];
 	private int CurrentPlayerNumber;
-	private ScoreBoard ScoreBoard;
+	private ScoreBoard[] ScoreBoards;
 	private TimeKeeper TimeKeeper;
 	private Wheel Wheel;
 	private int RoundNumber;
@@ -30,8 +30,9 @@ public class Controller
 		this.Players[1] = new Player(theSecondPlayerName);
 		this.Players[2] = new Player(theThirdPlayerName);
 	
-		this.ScoreBoard = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
-		
+		this.ScoreBoards[0] = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
+		this.ScoreBoards[1] = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
+                
 		this.DatabaseName = theDatabaseName;
     }
     
@@ -53,7 +54,7 @@ public class Controller
     }
     
     public void setupScoreBoard(){
-        this.ScoreBoard = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
+        this.ScoreBoards[this.RoundNumber-1] = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
     }
     
     public void setDatabaseName(String theDatabaseName){
@@ -85,14 +86,15 @@ public class Controller
 		this.CurrentPlayerNumber = randomGenerator.nextInt(3);
     }
 
- 
-    
     /**
      * stop the game and declare the winner
      * @return 
      */
     public Player stopGame()
     {
+        this.Players[0].setScore(this.getScoreBoard().getPlayerNumber(1).getScore() + this.Players[0].getScore());
+        this.Players[1].setScore(this.getScoreBoard().getPlayerNumber(2).getScore() + this.Players[1].getScore());
+        this.Players[2].setScore(this.getScoreBoard().getPlayerNumber(3).getScore() + this.Players[2].getScore());
         Player theWinner = this.Players[0];
 	for (int playerIndex = 1; playerIndex < this.Players.length; playerIndex++){
             if (this.Players[playerIndex].getScore() > theWinner.getScore()){
@@ -119,8 +121,6 @@ public class Controller
 				
 	this.Wheel = new Wheel(this.QuestionBoards[this.RoundNumber-1].getAllCategories());
         
-        this.ScoreBoard = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
-
     }
     
     /**
@@ -130,7 +130,7 @@ public class Controller
      */
     public ScoreBoard getScoreBoard( )
     {
-	return this.ScoreBoard;
+	return this.ScoreBoards[this.RoundNumber-1];
     }
 
     /**
@@ -140,7 +140,7 @@ public class Controller
      */
     public WheelSector spin( )
     {
-        this.ScoreBoard.decrementRoundCount();
+        this.getScoreBoard().decrementRoundCount();
         return this.Wheel.spin();
     }
 
@@ -156,7 +156,7 @@ public class Controller
         boolean canContinue = true;
         
         //check the current round count from the scoreboard
-        int currentRoundCount = this.ScoreBoard.getRoundCount( );
+        int currentRoundCount = this.getScoreBoard().getRoundCount( );
         if ( currentRoundCount == 0 )
         {
             canContinue = false;
@@ -239,7 +239,7 @@ public class Controller
      */
 	public void useTokenForCurrentPlayer( )
     {
-		this.ScoreBoard.useTokenForPlayer( this.getCurrentPlayer( ) );
+		this.getScoreBoard().useTokenForPlayer( this.getCurrentPlayer( ) );
 	}
 	public void createQuestionBoards(){
 		String theActualDatabaseNames[] = DatabaseManager.getDatabaseNames();
@@ -269,25 +269,28 @@ public class Controller
      * adds a token for the current player
      */
       public void addTokenForCurrentPlayer(){
-         this.ScoreBoard.incrementTokensForPlayer(this.getCurrentPlayer());
+         this.getScoreBoard().incrementTokensForPlayer(this.getCurrentPlayer());
       }
       
       /**
        * adds the points for the last question for the current player
        */
       public void addPointsForCurrentPlayer(int theNumberOfPoints){
-        this.ScoreBoard.addPointsForPlayer(this.getCurrentPlayer(), theNumberOfPoints);
+        this.getScoreBoard().addPointsForPlayer(this.getCurrentPlayer(), theNumberOfPoints);
       }
       
       /**
        * subtracts the points for the last question for the current player
        */
       public void subtractPointsForCurrentPlayer(int theNumberOfPoints){
-        this.ScoreBoard.subtractPointsForPlayer(this.getCurrentPlayer(),theNumberOfPoints);
+        this.getScoreBoard().subtractPointsForPlayer(this.getCurrentPlayer(),theNumberOfPoints);
       }
        
       public void bankruptCurrentPlayer(){
           this.getScoreBoard().bankruptPlayer(this.getCurrentPlayer());
       }
 
+      public Player getPlayerNumber(int thePlayerNumber){
+          return this.Players[thePlayerNumber -1];
+      }
 }
