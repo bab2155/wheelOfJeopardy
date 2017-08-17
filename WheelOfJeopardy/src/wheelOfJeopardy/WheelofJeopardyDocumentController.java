@@ -382,11 +382,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
                }
                else{
                 String[] wheelCategories = getCategories();
-                Random randomGenerator = new Random();
-                int randomCategoryIndex = randomGenerator.nextInt(wheelCategories.length);
-                String categoryName = wheelCategories[randomCategoryIndex];
-                gamePlay(new CategorySector(categoryName));
-                }
+                gamePlay(new CategorySector(wheelCategories[0]));
+               }
             }
         });
         
@@ -399,9 +396,6 @@ public class WheelofJeopardyDocumentController implements Initializable {
             int minutes = (totalSeconds % 3600) /60;
             int seconds = totalSeconds % 60;
             game_timer.setText(String.format("%02d:%02d",minutes,seconds));
-            if (minutes == 60){
-                endGame();
-            }
             
         });
         
@@ -1348,7 +1342,14 @@ public class WheelofJeopardyDocumentController implements Initializable {
         //spin_count = Integer.parseInt(spin_counter.getText());
         int spinCount = this.scoreboard.getRoundCount();
         setSpinCounter(Integer.toString(spinCount));
-        if(spinCount == 0){
+        boolean areThereUnusedQuestions = false;
+        for (String usedQuestion:usedQuestion){
+            if (usedQuestion == "false"){
+                areThereUnusedQuestions = true;
+                break;
+            }
+        }
+        if(spinCount == 0 || !areThereUnusedQuestions){
             if(this.controller.getRoundNumber() == 1){
                 this.controller.startRound2();
                 this.scoreboard = this.controller.getScoreBoard();
