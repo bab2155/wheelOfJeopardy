@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
  * @author MikeWilkinson
  */
 public class TimeKeeperTest {
+    private int actualTime;
     
     public TimeKeeperTest() {
     }
@@ -44,10 +45,16 @@ public class TimeKeeperTest {
     public void testStartTimer() {
         int theDuration = 60;
         TimeKeeper instance = new TimeKeeper();
+        instance.addListener(() -> {
+            setActualTime(instance.getNumberOfSeconds());
+        });
         instance.startTimer(theDuration);
-        assertEquals(0,instance.getNumberOfSeconds());
+        assertEquals(this.actualTime,instance.getNumberOfSeconds());
     }
 
+    private void setActualTime(int numberOfSeconds){
+        this.actualTime = numberOfSeconds;
+    }
     /**
      * Test of stopTimer method, of class TimeKeeper.
      */

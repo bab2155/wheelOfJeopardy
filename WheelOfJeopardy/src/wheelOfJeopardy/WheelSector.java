@@ -12,6 +12,6 @@ public abstract class WheelSector {
 		this.Name = theName;
 	}
 	
-	abstract void performAction(Controller theController);
+	
 }
 

@@ -10,14 +10,17 @@ import java.util.TimerTask;
 public class TimeKeeper {
 
         private int NumberOfSeconds;
-        private final List<TimeKeeperListener> Listeners = new ArrayList<TimeKeeperListener>(); 
+        private final List<TimeKeeperListener> Listeners = new ArrayList<>(); 
 	Timer Timer = new Timer();
-        TimerTask Task = new TimerTask(){
+        TimerTask Task;
+
+    public TimeKeeper() {
+        this.Task = new TimerTask(){
             @Override
             public void run(){
-                for (TimeKeeperListener theListener : Listeners){
+                Listeners.stream().forEach((theListener) -> {
                     theListener.onTimeChange();
-                }
+                });
 
                 if (NumberOfSeconds == 0){
                     Timer.cancel();
@@ -28,6 +31,7 @@ public class TimeKeeper {
                 }
             }
         };
+    }
         
 	public void startTimer(int theDuration){
 		this.NumberOfSeconds = theDuration;
