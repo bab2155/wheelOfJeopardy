@@ -1372,14 +1372,13 @@ public class WheelofJeopardyDocumentController implements Initializable {
 
     //Main controller
     public void gamePlay(WheelSector theWheelSector){
-        spin_counter.setText(Integer.toString(this.scoreboard.getRoundCount()));
+        //spin_counter.setText(Integer.toString(this.scoreboard.getRoundCount()));
         /**
         spin_count--;
         setSpinCounter(Integer.toString(spin_count));
         **/
         //spin_count = Integer.parseInt(spin_counter.getText());
-        
-        spin_count--;
+        spin_count = this.scoreboard.getRoundCount();
         setSpinCounter(Integer.toString(spin_count));
         if(spin_count == 0){
             if(round_value.getText().equalsIgnoreCase("1")){
@@ -1398,7 +1397,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
                 hardCodedAnswersR2();
                 hardCodedQuestionsR2();
                 usedQuestionsHC();
-                spin_count = 2;
+                //spin_count = 2;
                 setSpinCounter(Integer.toString(this.scoreboard.getRoundCount()));
                 /**
                 Random randomGen = new Random();
