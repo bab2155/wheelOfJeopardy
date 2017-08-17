@@ -168,6 +168,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     
     private TimeKeeper timeKeeper = new TimeKeeper();
     private boolean isTimerForQuestion = false;
+    private TimeKeeper gameTimer = new TimeKeeper();
     
     //Add styling
     @FXML void addCSS(){
@@ -373,7 +374,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private void setActionTimer(){
         Platform.runLater(() -> {
             int numberOfSeconds = timeKeeper.getNumberOfSeconds();
-            spin_timer.setText("0:" +Integer.toString(numberOfSeconds));
+            spin_timer.setText(String.format("00:%02d",numberOfSeconds));
             if (numberOfSeconds == 0){
                if (isTimerForQuestion){
                 gamePlay(new LoseATurnSector());
@@ -387,6 +388,21 @@ public class WheelofJeopardyDocumentController implements Initializable {
                 gamePlay(new CategorySector(categoryName));
                 }
             }
+        });
+        
+    }
+    
+    @FXML
+    private void setGameTimer(){
+        Platform.runLater(() -> {
+            int totalSeconds = gameTimer.getNumberOfSeconds();
+            int minutes = (totalSeconds % 3600) /60;
+            int seconds = totalSeconds % 60;
+            game_timer.setText(String.format("%02d:%02d",minutes,seconds));
+            if (minutes == 60){
+                endGame();
+            }
+            
         });
         
     }
@@ -823,7 +839,11 @@ public class WheelofJeopardyDocumentController implements Initializable {
         spin_wheel_button.setDisable(false);
         game_play.toFront();
         
+        this.gameTimer.addListener(() -> {
+            setGameTimer();
+        });
         
+        this.gameTimer.startStopWatch();
 
        // gamePlay(2, "player1", "0", false);
     }
@@ -1131,6 +1151,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         this.timeKeeper.addListener(() -> {
             setActionTimer();
         });
+        spin_timer.setVisible(true);
         this.timeKeeper.startTimer(15);
     }
 
@@ -1313,6 +1334,11 @@ public class WheelofJeopardyDocumentController implements Initializable {
     //Main controller
     public void gamePlay(WheelSector theWheelSector){
         player_display_name.setText(this.controller.getCurrentPlayer().getName());
+        String[] categories = getCategories();
+        for (String category:categories){
+            highlightCategoryTable(category, false);
+        }
+        
         //setPlayerDisplayName(this.controller.getCurrentPlayer());
         //spin_counter.setText(Integer.toString(this.scoreboard.getRoundCount()));
         /**

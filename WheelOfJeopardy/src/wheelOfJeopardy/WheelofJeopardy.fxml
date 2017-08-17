@@ -199,7 +199,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="game_timer" alignment="CENTER" layoutX="145.0" layoutY="35.0" style="&#10;" text="25:23" textAlignment="CENTER" wrapText="false">
+                  <Label fx:id="game_timer" alignment="CENTER" layoutX="145.0" layoutY="35.0" style="&#10;" text="25:23" textAlignment="CENTER" wrapText="false" visible="true">
                      <font>
                         <Font size="18.0" />
                      </font>

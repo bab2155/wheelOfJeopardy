@@ -11,6 +11,7 @@ public class TimeKeeper
 {
     // Instance variables
     private int NumberOfSeconds;
+    private boolean increasingInTime = false;
     private final List<TimeKeeperListener> Listeners = new ArrayList<TimeKeeperListener>( );
 	Timer Timer = new Timer( );
 
@@ -22,13 +23,18 @@ public class TimeKeeper
                 theListener.onTimeChange( );
             }
 
-            if ( NumberOfSeconds == 0 ){
-                Timer.cancel();
-                Timer.purge();
+            if (!increasingInTime){
+                if ( NumberOfSeconds == 0){
+                    Timer.cancel();
+                    Timer.purge();
+                }
+                else
+                {
+                    --NumberOfSeconds;
+                }
             }
-            else
-            {
-                --NumberOfSeconds;
+            else{
+                ++NumberOfSeconds;
             }
         }
     };
@@ -44,6 +50,12 @@ public class TimeKeeper
         this.Timer.scheduleAtFixedRate( this.Task, 0, 1000 );
     }
 
+    public void startStopWatch()
+    {
+        this.increasingInTime = true;
+        this.Timer.scheduleAtFixedRate( this.Task, 0, 1000 );
+    }
+    
     /**
      * stop the timer
      */
