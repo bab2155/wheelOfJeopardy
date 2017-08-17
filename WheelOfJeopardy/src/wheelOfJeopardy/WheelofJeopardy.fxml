@@ -199,7 +199,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="game_timer" alignment="CENTER" layoutX="145.0" layoutY="35.0" style="&#10;" text="25:23" textAlignment="CENTER" wrapText="false">
+                  <Label fx:id="game_timer" alignment="CENTER" layoutX="145.0" layoutY="35.0" style="&#10;" text="25:23" textAlignment="CENTER" wrapText="false" visible="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -228,17 +228,17 @@
             </AnchorPane>
             <AnchorPane fx:id="game_play" blendMode="SRC_ATOP" layoutX="157.0" layoutY="364.0" prefHeight="302.0" prefWidth="782.0" style="-fx-border-color: black;" visible="false">
                <children>
-                  <Label fx:id="player_display_name" layoutX="10.0" layoutY="1.0" prefHeight="57.0" prefWidth="191.0" style="&#10;" text="DisplayName" textAlignment="CENTER">
+                  <Label fx:id="player_display_name" layoutX="10.0" layoutY="1.0" prefHeight="57.0" prefWidth="191.0" style="&#10;" text="" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="player_identifier" layoutX="11.0" prefHeight="57.0" prefWidth="191.0" style="&#10;" text="Player 2" textAlignment="CENTER" visible="false">
+                  <Label fx:id="player_identifier" layoutX="11.0" prefHeight="57.0" prefWidth="191.0" style="&#10;" text="" textAlignment="CENTER" visible="false">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="720.0" layoutY="15.0" style="&#10;" text="0:13" textAlignment="CENTER" wrapText="false">
+                  <Label fx:id="spin_timer" alignment="CENTER" layoutX="720.0" layoutY="15.0" style="&#10;" text="0:60" textAlignment="CENTER" wrapText="false" visible="false">
                      <font>
                         <Font size="18.0" />
                      </font>
