@@ -358,17 +358,18 @@ public class WheelofJeopardyDocumentController implements Initializable {
         round_value.setText(round);
     }
     
+    /**
     @FXML
     private void setSpinCounter(String counter){
         spin_counter.setText(counter);
     }
-    
+    **/
     @FXML
     private void setTimer(String timer){
         game_timer.setText(timer);
     }
     
-     
+     /**
     @FXML 
     private void setPlayerScore(String player, String score){
         
@@ -386,25 +387,27 @@ public class WheelofJeopardyDocumentController implements Initializable {
             player3_score.setText(Integer.toString(total_score));
         }
     }
-    
+    **/
+    /**
     @FXML
     private void setFirstRoundScore(){
         firstRoundScore[0] = player1_score.getText();
         firstRoundScore[1] = player2_score.getText();
         firstRoundScore[2] = player3_score.getText();
     }
-    
-    
+    **/
+    /**
     @FXML void setFinalScore(){
         finalScore[0] = Integer.parseInt(firstRoundScore[0]) + Integer.parseInt(player1_score.getText());
         finalScore[1] = Integer.parseInt(firstRoundScore[1]) + Integer.parseInt(player2_score.getText());
         finalScore[2] = Integer.parseInt(firstRoundScore[2])+ Integer.parseInt(player3_score.getText());
     }
+    **/
     
-    
-    @FXML void setPlayerWinner(){
+    @FXML void setPlayerWinner(Player theWinner){
+        /**
         String topPlayer = "";
-
+       
         int topScore = finalScore[0];
         
         if(finalScore[1] > topScore){
@@ -432,8 +435,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
             
             topPlayer += player3_final_name.getText();
         }
-        
-        winner_name.setText(topPlayer);
+        **/
+        winner_name.setText(theWinner.getName());
     }
 
     
@@ -1412,20 +1415,49 @@ public class WheelofJeopardyDocumentController implements Initializable {
                     populateQuestion(questionValue[0], questionValue[1], questionValue[2], questionValue[3]);
                 }
                 
-                setSpinCounter(Integer.toString(this.scoreboard.getRoundCount()));
+                spin_counter.setText(Integer.toString(this.scoreboard.getRoundCount()));
                 boolean roundCheck = this.controller.canRoundContinue();
                 if (!roundCheck){
                     if (this.controller.getRoundNumber() == 1){
+
+                        //setFirstRoundScore();
                         this.controller.startRound2();
+                        this.scoreboard = this.controller.getScoreBoard();
                  }
                 else{
-                    Player theWinner = this.controller.stopGame();
+                    endGame();
                 }
                 
                 
                
             }
         }
+    @FXML private void endGame(){
+        Player theWinner = this.controller.stopGame();
+        setSectorsInvisible();
+        setGamePlayVisible(false);
+        setPlayerStatsVisible(false);
+        setGameStatsVisible(false);
+        //setFinalScore();
+        Player player1 = this.controller.getPlayerNumber(1);
+        Player player2 = this.controller.getPlayerNumber(2);
+        Player player3 = this.controller.getPlayerNumber(3);
+        
+        player1_final_score.setText(String.valueOf(player1.getScore()));
+        player2_final_score.setText(String.valueOf(player2.getScore()));
+        player3_final_score.setText(String.valueOf(player3.getScore()));
+        player1_final_name.setText(player1.getName());
+        player2_final_name.setText(player2.getName());
+        player3_final_name.setText(player3.getName());
+        
+        setPlayerWinner(theWinner);
+        spin_wheel_image.setVisible(false);
+        spin_wheel_button.setVisible(false);
+        spin_wheel_button.setDisable(true);
+        game_end.toFront();
+        setGameEndVisible(true);
+        
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
