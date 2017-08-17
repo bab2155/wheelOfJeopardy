@@ -845,6 +845,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         } else {
             populateAnswerCorrect();
         }
+        spin_timer.setVisible(false);
     }
         
     @FXML
@@ -924,7 +925,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         //spin_count ++; //Have to update to not count as a spin
         
         CategorySector theCategorySector = new CategorySector(category_selected);
-        
+        spin_timer.setVisible(false);
         gamePlay(theCategorySector);
     }
     
@@ -943,7 +944,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         }
         category_box_opponent.setValue("");
         CategorySector theCategorySector = new CategorySector(category_selected);
-        
+        spin_timer.setVisible(false);
         gamePlay(theCategorySector);
         //gamePlay(7, player_identifier.getText(), category_selected, false);
     }
@@ -1028,7 +1029,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorQuestionVisible(true);
         
         
-        
+        spin_timer.setVisible(true);
         this.timeKeeper.startTimer(60);
         
         
@@ -1090,7 +1091,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_box_player.getItems().add(s);
         }
         setSectorPlayerChoiceVisible(true);
-        
+        spin_timer.setVisible(true);
         this.timeKeeper.startTimer(15);
     }
     
@@ -1286,6 +1287,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
 
     //Main controller
     public void gamePlay(WheelSector theWheelSector){
+        player_display_name.setText(this.controller.getCurrentPlayer().getName());
+        //setPlayerDisplayName(this.controller.getCurrentPlayer());
         //spin_counter.setText(Integer.toString(this.scoreboard.getRoundCount()));
         /**
         spin_count--;
