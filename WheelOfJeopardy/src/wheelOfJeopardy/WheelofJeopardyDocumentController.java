@@ -152,14 +152,14 @@ public class WheelofJeopardyDocumentController implements Initializable {
     public RowPointValues row9 = new RowPointValues("800", "800", "800", "800", "800", "800");
     public RowPointValues row10 = new RowPointValues("1000", "1000", "1000", "1000", "1000", "1000");
     
-    private Integer free_spin_type = 0;
-    private Integer spin_count = 2;
-    private Integer round_count = 1;
+    //private Integer free_spin_type = 0;
+    //private Integer spin_count = 2;
+    //private Integer round_count = 1;
     private String[] questionsHC = new String[30];
     private String[] answersHC = new String[30];
     private String[] usedQuestion = new String[30];
-    String[] firstRoundScore = new String[3];
-    Integer[] finalScore = new Integer[3];
+    //String[] firstRoundScore = new String[3];
+    //Integer[] finalScore = new Integer[3];
     
     private Controller controller = new Controller();
     private ScoreBoard scoreboard;
@@ -439,7 +439,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         winner_name.setText(theWinner.getName());
     }
 
-    
+    /**
     @FXML 
     private void setPlayerTokens(String player, String token){
         if(player.equalsIgnoreCase("player1")) {
@@ -456,8 +456,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
             player3_tokens.setText(Integer.toString(total_tokens));
         }
     }
+    * **/
     
-    
+    /**
     @FXML 
     private String getPlayerScore(String player){
         
@@ -470,7 +471,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
             return player3_score.getText();
         }
     }
+    **/
     
+    /**
     @FXML 
     private String getPlayerTokens(String player){
         if(player.equalsIgnoreCase("player1")) {
@@ -481,7 +484,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
             return player3_tokens.getText();
         }
     }
-    
+    **/
     @FXML
     private String[] getCategories(){
         String[] categories = new String[6];
@@ -785,23 +788,13 @@ public class WheelofJeopardyDocumentController implements Initializable {
         this.controller.setupScoreBoards();
         this.scoreboard = this.controller.getScoreBoard();
         
-        /*Player player1 = this.scoreboard.getPlayerNumber(1);
-        Player player2 = this.scoreboard.getPlayerNumber(2);
-        Player player3 = this.scoreboard.getPlayerNumber(3);
-        player1_tokens.setText("" + player1.getNumberOfTokens());
-        player2_tokens.setText("" + player2.getNumberOfTokens());
-        player3_tokens.setText("" +player3.getNumberOfTokens());
-        player1_score.setText("" +player1.getScore());
-        player2_score.setText("" + player1.getScore());
-        player3_score.setText("" + player1.getScore());
-        */
         this.updatePlayerStats();
         
         setGameStatsVisible(true);
         setPlayerStatsVisible(true);
-        round_value.setText("1");
+        round_value.setText(Integer.toString(this.controller.getRoundNumber()));
         
-        populateGameStats("1");
+        populateGameStats();
         setGamePlayVisible(true);
         spin_wheel_image.setVisible(true);
         spin_wheel_button.setVisible(true);
@@ -817,11 +810,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML
     private void handleSpinWheelAction(ActionEvent event) {
         WheelSector theWheelSector = this.controller.spin();
-        /**
-        Random randomGen = new Random();
-        int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-        gamePlay(randomNum, player_identifier.getText(), "0", false);
-        **/
+        
         gamePlay(theWheelSector);
     }
     
@@ -832,7 +821,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player_answer.setDisable(true);
         
         if (!player_answer.getText().equalsIgnoreCase(correct_answer.getText())){
-            free_spin_type = 1;
+            //free_spin_type = 1;
             if(checkForToken()){
                 populateUseToken();
             } else {
@@ -852,16 +841,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player_answer.setDisable(false);
         this.scoreboard.addPointsForPlayer(this.controller.getCurrentPlayer(), Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
-        /**
-        free_spin_type = 2;
-        if(checkForToken()){
-            populateUseToken();
-        } else {
-            Random randomGen = new Random();
-            int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-            gamePlay(randomNum, player_identifier.getText(), "no", false);
-        }
-        * **/
+        
     }
     
     //Handle Correct Answer Override button action    
@@ -874,16 +854,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player_answer.setDisable(false);
         this.controller.addPointsForCurrentPlayer(Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
-        //setPlayerScore(player_identifier.getText(), question_value.getText());
-        /**free_spin_type = 2;
-        if(checkForToken()){
-            populateUseToken();
-        } else {
-            Random randomGen = new Random();
-            int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-            gamePlay(randomNum, player_identifier.getText(), "no", false);
-        }
-        * **/
+        
     }
     
     //Handle Incorrect Answer Override button action
@@ -894,24 +865,16 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player_answer.setText("");
         correct_answer.setText("");
         player_answer.setDisable(false);
-        free_spin_type = 2;
         this.controller.subtractPointsForCurrentPlayer(Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
-        //String negativeScore = "-" + question_value.getText();
-        //setPlayerScore(player_identifier.getText(), negativeScore);
+        
         if(checkForToken()){
             populateUseToken();
         } 
         else{
             this.controller.loseATurn();
         }
-        /**
-         * else {
-            Random randomGen = new Random();
-            int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-            gamePlay(randomNum, player_identifier.getText(), "no", false);
-        }
-        * **/
+        
     }
     
     //Handle using a token yes action
@@ -919,53 +882,14 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private void handleUseTokenSubmitAction(ActionEvent event) {
         this.controller.useTokenForCurrentPlayer();
         this.updatePlayerStats();
-        /*
-        String player = player_identifier.getText();
-        Random randomGen = new Random();
-        int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
         
-        if(free_spin_type == 1){
-            String questionContent = question_content.getText();
-            String categoryTitle = category_title.getText();
-            String answerContent = correct_answer.getText();
-            String pointValue = question_value.getText();
-            setPlayerTokens(player, "-1");
-            populateQuestion(player, categoryTitle, questionContent, answerContent, pointValue);
-            player_answer.setDisable(false);
-        } else if(free_spin_type == 2){
-            spin_count ++;
-            setPlayerTokens(player, "-1");
-            gamePlay(randomNum, player_identifier.getText(), "no", true);
-        } else if(free_spin_type == 3){
-            setPlayerTokens(player, "-1");
-            gamePlay(randomNum, player_identifier.getText(), "no", true);
-        }
-        */
-       
     }
     
     //Handle using a token no action
     @FXML
     private void handleNoUseTokenSubmitAction(ActionEvent event) {
         this.controller.loseATurn();
-        /**
-        String player = player_identifier.getText();
-        if(free_spin_type == 1){
-            String questionContent = question_content.getText();
-            String categoryTitle = category_title.getText();
-            String answerContent = correct_answer.getText();
-            String pointValue = question_value.getText();
-            populateQuestion(player, categoryTitle, questionContent, answerContent, pointValue);
-            player_answer.setDisable(true);
-            player_submit_button.setVisible(false);
-            setAnswerResultsIncorrectVisible(true);
-        } else {
-            spin_count ++;
-            Random randomGen = new Random();
-            int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-            gamePlay(randomNum, player_identifier.getText(), "no", false);
-        }
-        * **/
+       
     }
     
     //Handle player's choice
@@ -1011,22 +935,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML
     private void handleBankruptyContinueAction(ActionEvent event) {
         this.controller.bankruptCurrentPlayer();
-        /*Integer total_score = Integer.parseInt(getPlayerScore(player_identifier.getText()));
-        total_score = -total_score;
-        
-        Integer total_tokens = Integer.parseInt(getPlayerTokens(player_identifier.getText()));
-        total_tokens = -total_tokens;
-        
-        setPlayerScore(player_identifier.getText(), String.valueOf(total_score));
-        setPlayerTokens(player_identifier.getText(), String.valueOf(total_tokens));
-        Random randomGen = new Random();
-        int randomNum = randomGen.nextInt(9);
-                */
-        //setPlayerScore(this.controller.getCurrentPlayer(), String.valueOf(total_score));
-        //setPlayerTokens(player_identifier.getText(), String.valueOf(total_tokens));
         this.updatePlayerStats();
         this.controller.loseATurn();
-        //gamePlay(randomNum, player_identifier.getText(), "0", false);
     }
     
     //Handle lose turn submit action
@@ -1037,28 +947,15 @@ public class WheelofJeopardyDocumentController implements Initializable {
         }
         else{
             this.controller.loseATurn();
-            //theCurrentPlayer = this.controller.getCurrentPlayer();
         }
         
-        /*
-        if(checkForToken(player_identifier.getText())){
-            free_spin_type = 3;
-            populateUseToken(player_identifier.getText());
-        } else {
-            Random randomGen = new Random();
-            int randomNum = randomGen.nextInt(9);
-            gamePlay(randomNum, player_identifier.getText(), "no", false);
-        }
-        */
     }
     
    //Handle spin again continue action
     @FXML
     private void handleSpinAgainContinueAction(ActionEvent event) {
         WheelSector theWheelSector = this.controller.spin();
-        //Random randomGen = new Random();
-        //int randomNum = randomGen.nextInt(9);
-        //gamePlay(randomNum, player_identifier.getText(), "", false);
+        
     }
     @FXML 
     private void handleHelp(ActionEvent event){
@@ -1191,9 +1088,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setUseTokenVisible(true);
     }
         
-    public void populateGameStats(String round){
-        round_value.setText(round);
-        data = getInitialTableData(round);
+    public void populateGameStats(){
+        round_value.setText(Integer.toString(this.controller.getRoundNumber()));
+        data = getInitialTableData(Integer.toString(this.controller.getRoundNumber()));
         String[] categories = getCategories();
         category1_label.setText(categories[0]);
         category2_label.setText(categories[1]);
@@ -1209,7 +1106,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
         category4.setCellValueFactory(new PropertyValueFactory("cell_4"));
         category5.setCellValueFactory(new PropertyValueFactory("cell_5"));
         category6.setCellValueFactory(new PropertyValueFactory("cell_6"));    
-        
+        int spinCount = this.scoreboard.getRoundCount();
+        setSpinCounter(Integer.toString(spinCount));
     }
     
     
@@ -1324,18 +1222,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player1_score.setText("" +player1.getScore());
         player2_score.setText("" + player2.getScore());
         player3_score.setText("" + player3.getScore());
-       //lookup Java string comparisons
-       /* if(player.equalsIgnoreCase(player1_label.getText())){
-            player1_score.setText(points);
-            player1_tokens.setText(tokens);
-        } else if (player.equalsIgnoreCase(player2_label.getText())){
-            player2_score.setText(points);
-            player2_tokens.setText(tokens);
-        } else {
-            player3_score.setText(points);
-            player3_tokens.setText(tokens);    
-        }
-               */
+       
     }
         
     private ObservableList getInitialTableData(String round) {
@@ -1378,32 +1265,19 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSpinCounter(Integer.toString(spin_count));
         **/
         //spin_count = Integer.parseInt(spin_counter.getText());
-        spin_count = this.scoreboard.getRoundCount();
-        setSpinCounter(Integer.toString(spin_count));
-        if(spin_count == 0){
-            if(round_value.getText().equalsIgnoreCase("1")){
+        int spinCount = this.scoreboard.getRoundCount();
+        setSpinCounter(Integer.toString(spinCount));
+        if(spinCount == 0){
+            if(this.controller.getRoundNumber() == 1){
                 this.controller.startRound2();
                 this.scoreboard = this.controller.getScoreBoard();
                 this.updatePlayerStats();
-                /**setFirstRoundScore();
-                player1_score.setText("0");
-                player2_score.setText("0");
-                player3_score.setText("0");
-                player1_tokens.setText("0");
-                player2_tokens.setText("0");
-                player3_tokens.setText("0");
-                **/
-                populateGameStats("2");
+                populateGameStats();
                 hardCodedAnswersR2();
                 hardCodedQuestionsR2();
                 usedQuestionsHC();
-                //spin_count = 2;
                 setSpinCounter(Integer.toString(this.scoreboard.getRoundCount()));
-                /**
-                Random randomGen = new Random();
-                int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-                gamePlay(randomNum, player_identifier.getText(), "no", false);
-                * **/
+                
             } else if (round_value.getText().equalsIgnoreCase("2")){
                 endGame();
             }
