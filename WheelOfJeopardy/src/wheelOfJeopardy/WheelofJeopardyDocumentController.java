@@ -861,12 +861,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player_answer.setDisable(true);
         
         if (!player_answer.getText().equalsIgnoreCase(correct_answer.getText())){
-            //free_spin_type = 1;
-            if(checkForToken()){
-                populateUseToken();
-            } else {
-                setAnswerResultsIncorrectVisible(true);
-            }
+            setAnswerResultsIncorrectVisible(true);    
         } else {
             populateAnswerCorrect();
         }
@@ -912,9 +907,12 @@ public class WheelofJeopardyDocumentController implements Initializable {
         this.controller.subtractPointsForCurrentPlayer(Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
         
-        
-        this.controller.loseATurn();
-        
+        if(checkForToken()){
+            populateUseToken();
+        } 
+        else{
+            this.controller.loseATurn();
+        }
         
     }
     
