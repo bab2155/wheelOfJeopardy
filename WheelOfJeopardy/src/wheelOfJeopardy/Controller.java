@@ -136,6 +136,8 @@ public class Controller
         this.Players[1].setScore(0);
         this.Players[2].setScore(0);
         
+        this.ScoreBoard.setRoundCount(50);
+        
 	//this.Wheel = new Wheel(this.QuestionBoards[this.RoundNumber-1].getAllCategories());
         
     }
