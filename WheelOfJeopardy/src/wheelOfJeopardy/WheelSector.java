@@ -1,17 +1,37 @@
 package wheelOfJeopardy;
 
-public abstract class WheelSector {
-
+public class WheelSector
+{
+	// Instance variables
 	public String Name;
-	
-	public WheelSector(){
+
+	/**
+	 * default constructor
+	 */
+	public WheelSector( )
+	{
 		this.Name = "";
 	}
-	
-	public WheelSector(String theName){
+
+	/**
+	 * overloaded constructor
+	 *
+	 * @param theName name of the category
+	 */
+	public WheelSector( String theName )
+	{
 		this.Name = theName;
 	}
+
+	/**
+	 * returns the name of the sector
+	 *
+	 * @return name - the name of the sector
+	 */
+	public String getName( ){
+            return this.Name;
+        };
+
 	
-	abstract void performAction(Controller theController);
 }
 
