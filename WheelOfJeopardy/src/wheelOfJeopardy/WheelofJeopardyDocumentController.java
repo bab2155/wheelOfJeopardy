@@ -912,12 +912,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
         this.controller.subtractPointsForCurrentPlayer(Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
         
-        if(checkForToken()){
-            populateUseToken();
-        } 
-        else{
-            this.controller.loseATurn();
-        }
+        
+        this.controller.loseATurn();
+        
         
     }
     
