@@ -520,20 +520,24 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML
     private String[] getCategories(){
         String[] categories = new String[6];
+        QuestionBoard[] questionBoards = this.controller.QuestionBoards;
+
         if(round_value.getText().equalsIgnoreCase("2")){
-            categories[0] = "Criminal Behavior";
-            categories[1] = "Board Games";
-            categories[2] = "Pop Culture";
-            categories[3] = "Palindromes";
-            categories[4] = "Geography";
-            categories[5] = "Botany";  
+            categories = questionBoards[0].getAllCategories();
+//            categories[0] = "Criminal Behavior";
+//            categories[1] = "Board Games";
+//            categories[2] = "Pop Culture";
+//            categories[3] = "Palindromes";
+//            categories[4] = "Geography";
+//            categories[5] = "Botany";
         } else {
-            categories[0] = "American History";
-            categories[1] = "Single-Named Singers";
-            categories[2] = "Science";
-            categories[3] = "Literature";
-            categories[4] = "Business";
-            categories[5] = "Movies";
+            categories = questionBoards[1].getAllCategories();
+//            categories[0] = "American History";
+//            categories[1] = "Single-Named Singers";
+//            categories[2] = "Science";
+//            categories[3] = "Literature";
+//            categories[4] = "Business";
+//            categories[5] = "Movies";
         }
         
         return categories;

@@ -1,12 +1,13 @@
 package wheelOfJeopardy;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Random;
 
 public class Controller
 {
 	// Instance variables
-        private QuestionBoard[] QuestionBoards = new QuestionBoard[2];
+  public QuestionBoard[] QuestionBoards = new QuestionBoard[2];
 	private Player[] Players = new Player[3];
 	private int CurrentPlayerNumber;
 	private ScoreBoard ScoreBoard;
@@ -15,6 +16,7 @@ public class Controller
 	private int RoundNumber;
 	private String DatabaseName;
         private int[] firstRoundScores = new int[3];
+	public URL testme;
 	//need to add View as an attribute
 
     /**
@@ -37,7 +39,9 @@ public class Controller
     }
     
     public Controller(){
-        this.DatabaseName = "";
+        this.DatabaseName = "questions.json";
+        createQuestionBoards();
+
     }
     
     public void setPlayer1(String theFirstPlayerName){
@@ -67,7 +71,7 @@ public class Controller
     {
 		this.RoundNumber = 1;
                 
-                this.DatabaseName = "questions.json";
+//                this.DatabaseName = "questions.json";
 		
 		//this.createQuestionBoards();
 		
@@ -261,10 +265,11 @@ public class Controller
 		this.getScoreBoard().useTokenForPlayer( this.getCurrentPlayer( ) );
 	}
 	public void createQuestionBoards(){
-		String theActualDatabaseNames[] = DatabaseManager.getDatabaseNames();
-		if (Arrays.asList(theActualDatabaseNames).contains(this.DatabaseName)){
-                     this.QuestionBoards = DatabaseManager.createQuestionBoards(DatabaseName);
-		}
+	  this.QuestionBoards = DatabaseManager.createQuestionBoards(this.DatabaseName);
+//		String theActualDatabaseNames[] = DatabaseManager.getDatabaseNames();
+//		if (Arrays.asList(theActualDatabaseNames).contains(this.DatabaseName)){
+//                     this.QuestionBoards = DatabaseManager.createQuestionBoards(DatabaseName);
+//		}
 	}
 
     /**

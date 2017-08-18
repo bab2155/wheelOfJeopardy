@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileReader;
+import java.net.URL;
 import java.util.*;
 
 import com.google.gson.stream.JsonReader;
@@ -50,8 +51,10 @@ public class DatabaseManager {
 
 		Question[] questions = null;
 
+
 		try{
-			JsonReader jr = new JsonReader(new FileReader("./src/assets/database/" +databaseName));
+
+			JsonReader jr = new JsonReader(new FileReader("WheelOfJeopardy/src/assets/database/" +databaseName));
 			questions = new Gson().fromJson(jr, Question[].class);
 
 		} catch (Exception e){
@@ -105,23 +108,32 @@ public class DatabaseManager {
 		List<HashMap<String, ArrayList<Question>>> categoryQuestions = new ArrayList<HashMap<String,
 				ArrayList<Question>>>();
 
+
 		// Initialize categories in HashMap
 		for(int i=0; i<=1; i++){
+			categoryQuestions.add(new HashMap<String, ArrayList<Question>>());
 			for(String category : theRoundCategories[i]){
 				categoryQuestions.get(i).put(category, new ArrayList<Question>());
+
 			}
 		}
 
 		for(int i=0; i<=1; i++) {
 			HashMap<String, ArrayList<Question>> allQuestions = new HashMap<String, ArrayList<Question>>();
 
+			// Initialize categories in HashMap
+			for(int j=0; j<=1; j++){
+				for(String category : theRoundCategories[j]){
+					allQuestions.put(category, new ArrayList<Question>());
+				}
+			}
 
+			// See if current question category exists in round categories
 			for (Question question : theQuestions) {
-
-				// See if current question category exists in round categories
-				if (categoryQuestions.get(i).containsKey(question.category)) {
+				if(allQuestions.containsKey(question.category)){
 					allQuestions.get(question.category).add(question);
 				}
+
 			}
 
 			// Shuffle all questions
@@ -129,9 +141,18 @@ public class DatabaseManager {
 				Collections.shuffle(allQuestions.get(category));
 
 				for (Integer roundvalue : questionValues.get(i)) {
-					Question toAdd = allQuestions.get(category).stream().filter(question -> question.value == roundvalue)
+					int theRoundValue;
+					if (i == 0){
+						theRoundValue = roundvalue * 2;
+					} else{
+						theRoundValue = roundvalue;
+					}
+					Question toAdd = allQuestions.get(category).stream().filter(question -> question.value == theRoundValue)
 							.findFirst()
 							.get();
+					if (i==0){
+						toAdd.value = toAdd.value/2;
+					}
 					categoryQuestions.get(i).get(category).add(toAdd);
 				}
 
@@ -170,7 +191,7 @@ public class DatabaseManager {
 
 		/* Get all files from db directory */
 //		File dbStore = new File(this.databaseDir);
-		File dbStore = new File("./src/assets/database/");
+		File dbStore = new File("WheelOfJeopardy/src/assets/database/");
                 System.out.println(dbStore.getAbsolutePath());
 		File[] files = dbStore.listFiles();
 		List<String> filenames = new ArrayList<String>();
