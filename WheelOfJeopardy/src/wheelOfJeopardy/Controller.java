@@ -227,8 +227,22 @@ public class Controller
      * @param thePointValue
      * @return Question
      */
-    public Question getQuestionForCategory( String theCategory, int thePointValue )
-    {   Question theQuestion = this.getQuestionBoard().getQuestionForCategory(theCategory,thePointValue);
+    public Question getQuestionForCategory( String theCategory)
+    {   
+        int multiplier = 100;
+        if (this.RoundNumber == 2){
+            multiplier = 200;
+        }
+       
+        Question theQuestion = null;
+        for (int idx = 1 * multiplier; idx < 6 * multiplier; idx++){
+            Question tmpQuestion = this.getQuestionBoard().getQuestionForCategory(theCategory,idx);
+            if (tmpQuestion != null){
+                theQuestion = tmpQuestion;
+                break;
+            }
+        }
+        
         return theQuestion;
     }
 

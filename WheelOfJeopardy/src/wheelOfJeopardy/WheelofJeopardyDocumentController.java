@@ -401,145 +401,19 @@ public class WheelofJeopardyDocumentController implements Initializable {
         
     }
     
-     /**
-    @FXML 
-    private void setPlayerScore(String player, String score){
-        
-        if(player.equalsIgnoreCase("player1")) {
-             Integer total_score = Integer.parseInt(player1_score.getText());
-             total_score += Integer.parseInt(score);
-             player1_score.setText(Integer.toString(total_score));
-        } else if(player.equalsIgnoreCase("player2")){
-            Integer total_score = Integer.parseInt(player2_score.getText());
-            total_score += Integer.parseInt(score);
-            player2_score.setText(Integer.toString(total_score));
-        } else {
-            Integer total_score = Integer.parseInt(player3_score.getText());
-            total_score += Integer.parseInt(score);
-            player3_score.setText(Integer.toString(total_score));
-        }
-    }
-    **/
-    /**
-    @FXML
-    private void setFirstRoundScore(){
-        firstRoundScore[0] = player1_score.getText();
-        firstRoundScore[1] = player2_score.getText();
-        firstRoundScore[2] = player3_score.getText();
-    }
-    **/
-    /**
-    @FXML void setFinalScore(){
-        finalScore[0] = Integer.parseInt(firstRoundScore[0]) + Integer.parseInt(player1_score.getText());
-        finalScore[1] = Integer.parseInt(firstRoundScore[1]) + Integer.parseInt(player2_score.getText());
-        finalScore[2] = Integer.parseInt(firstRoundScore[2])+ Integer.parseInt(player3_score.getText());
-    }
-    **/
     
     @FXML void setPlayerWinner(Player theWinner){
-        /**
-        String topPlayer = "";
        
-        int topScore = finalScore[0];
-        
-        if(finalScore[1] > topScore){
-            topScore = finalScore[1];
-        }
-        if(finalScore[2] > topScore){
-            topScore = finalScore[2];
-        }
-        
-        if(finalScore[0] == topScore){
-            topPlayer += player1_final_name.getText();
-        }
-        if (finalScore[1] == topScore){
-            if(topPlayer.length() > 0){
-                topPlayer += " & ";
-            }
-            
-            topPlayer += player2_final_name.getText();
-        }
-        
-        if (finalScore[2] == topScore){
-            if(topPlayer.length() > 0){
-                topPlayer += " & ";
-            }
-            
-            topPlayer += player3_final_name.getText();
-        }
-        **/
         winner_name.setText(theWinner.getName());
     }
 
-    /**
-    @FXML 
-    private void setPlayerTokens(String player, String token){
-        if(player.equalsIgnoreCase("player1")) {
-             Integer total_tokens = Integer.parseInt(player1_tokens.getText());
-             total_tokens += Integer.parseInt(token);
-             player1_tokens.setText(Integer.toString(total_tokens));
-        } else if(player.equalsIgnoreCase("player2")){
-            Integer total_tokens = Integer.parseInt(player2_tokens.getText());
-            total_tokens += Integer.parseInt(token);
-            player2_tokens.setText(Integer.toString(total_tokens));
-        } else {
-            Integer total_tokens = Integer.parseInt(player3_tokens.getText());
-            total_tokens += Integer.parseInt(token);
-            player3_tokens.setText(Integer.toString(total_tokens));
-        }
-    }
-    * **/
     
-    /**
-    @FXML 
-    private String getPlayerScore(String player){
-        
-        
-        if(player.equalsIgnoreCase("player1")) {
-             return player1_score.getText();
-        } else if(player.equalsIgnoreCase("player2")){
-            return player2_score.getText();
-        } else {
-            return player3_score.getText();
-        }
-    }
-    **/
-    
-    /**
-    @FXML 
-    private String getPlayerTokens(String player){
-        if(player.equalsIgnoreCase("player1")) {
-             return player1_tokens.getText();
-        } else if(player.equalsIgnoreCase("player2")){
-            return player2_tokens.getText();
-        } else {
-            return player3_tokens.getText();
-        }
-    }
-    **/
+
     @FXML
     private String[] getCategories(){
         String[] categories = new String[6];
         QuestionBoard[] questionBoards = this.controller.QuestionBoards;
-
-        if(round_value.getText().equalsIgnoreCase("2")){
-            categories = questionBoards[0].getAllCategories();
-//            categories[0] = "Criminal Behavior";
-//            categories[1] = "Board Games";
-//            categories[2] = "Pop Culture";
-//            categories[3] = "Palindromes";
-//            categories[4] = "Geography";
-//            categories[5] = "Botany";
-        } else {
-            categories = questionBoards[1].getAllCategories();
-//            categories[0] = "American History";
-//            categories[1] = "Single-Named Singers";
-//            categories[2] = "Science";
-//            categories[3] = "Literature";
-//            categories[4] = "Business";
-//            categories[5] = "Movies";
-        }
-        
+        categories = questionBoards[this.controller.getRoundNumber()-1].getAllCategories();
         return categories;
     }
     
@@ -549,7 +423,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
             usedQuestion[i] = "false";
         }
     }
-    
+    /**
     @FXML 
     private void hardCodedQuestions(){
        
@@ -800,7 +674,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         }
     }
     
-    
+    **/
     
     //Handle Game start action
     @FXML
@@ -1045,14 +919,14 @@ public class WheelofJeopardyDocumentController implements Initializable {
         
     //Sector data population
     @FXML
-    public void populateQuestion(String categoryTitle, String questionContent, String answerContent, String pointValue){
+    public void populateQuestion(String categoryTitle, Question theQuestion){
         setSectorsInvisible();
         sector_question.toFront();
-        question_value.setText(pointValue);
+        question_value.setText(Integer.toString(theQuestion.getPointValue()));
         player_identifier.setText(this.controller.getCurrentPlayer().getName());
         category_title.setText(categoryTitle);
-        question_content.setText(questionContent);
-        correct_answer.setText(answerContent);
+        question_content.setText(theQuestion.getQuestion());
+        correct_answer.setText(theQuestion.getAnswer());
         highlightCategoryTable(categoryTitle, true);
         player_submit_button.setVisible(true);
         correct_answer.setEditable(false);
@@ -1282,9 +1156,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     }
     
     
-    public void populatePlayerStats(){
-        //player names
-    }
+    
     
     public void updatePlayerStats(){
         Player player1 = this.scoreboard.getPlayerNumber(1);
@@ -1325,9 +1197,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
     public void launchGame(){
         game_open_panel.setVisible(true);
         addCSS();
-        hardCodedAnswers();
-        hardCodedQuestions();
-        usedQuestionsHC();
+        //hardCodedAnswers();
+        //hardCodedQuestions();
+        //usedQuestionsHC();
     } 
     
 
@@ -1340,20 +1212,13 @@ public class WheelofJeopardyDocumentController implements Initializable {
             highlightCategoryTable(category, false);
         }
         
-        //setPlayerDisplayName(this.controller.getCurrentPlayer());
-        //spin_counter.setText(Integer.toString(this.scoreboard.getRoundCount()));
-        /**
-        spin_count--;
-        setSpinCounter(Integer.toString(spin_count));
-        **/
-        //spin_count = Integer.parseInt(spin_counter.getText());
         int spinCount = this.scoreboard.getRoundCount();
         setSpinCounter(Integer.toString(spinCount));
+        String[] theCategories = getCategories();
         boolean areThereUnusedQuestions = false;
-        for (String usedQuestion:usedQuestion){
-            if (usedQuestion == "false"){
+        for (String theCategory:theCategories){
+            if(this.controller.getQuestionForCategory(theCategory) != null){
                 areThereUnusedQuestions = true;
-                break;
             }
         }
         if(spinCount == 0 || !areThereUnusedQuestions){
@@ -1361,9 +1226,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
                 this.controller.startRound2();
                 this.updatePlayerStats();
                 populateGameStats();
-                hardCodedAnswersR2();
-                hardCodedQuestionsR2();
-                usedQuestionsHC();
+                //hardCodedAnswersR2();
+                //hardCodedQuestionsR2();
+                //usedQuestionsHC();
                 setSpinCounter(Integer.toString(this.scoreboard.getRoundCount()));
                 
             } else if (round_value.getText().equalsIgnoreCase("2")){
@@ -1396,8 +1261,20 @@ public class WheelofJeopardyDocumentController implements Initializable {
                     populateFreeToken();
                 }
                 if (theWheelSector instanceof CategorySector){
-                    String[] questionValue = getQuestionValue(theWheelSector.getName());
-                    populateQuestion(questionValue[0], questionValue[1], questionValue[2], questionValue[3]);
+                    //String[] questionValue = getQuestionValue(theWheelSector.getName());
+                    String theCategory = theWheelSector.getName();
+                    
+                    Question theQuestion = this.controller.getQuestionForCategory(theCategory);
+                    if (theQuestion == null){
+                        for (String categoryToCheck:getCategories()){
+                            theQuestion = this.controller.getQuestionForCategory(categoryToCheck);
+                            if(theQuestion != null){
+                                theCategory = categoryToCheck;
+                            }
+                        }
+                    }
+                    theQuestion.setUsed(true);
+                    populateQuestion(theCategory, theQuestion);
                 }
                 
                 
