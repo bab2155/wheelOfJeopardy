@@ -1355,6 +1355,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
         if(spinCount == 0 || !areThereUnusedQuestions){
             if(this.controller.getRoundNumber() == 1){
                 this.controller.startRound2();
+                this.controller.setPlayer1(player1_name.getText());
+                this.controller.setPlayer2(player2_name.getText());
+                this.controller.setPlayer3(player3_name.getText());
                 this.scoreboard = this.controller.getScoreBoard();
                 this.updatePlayerStats();
                 populateGameStats();
