@@ -873,22 +873,6 @@ public class WheelofJeopardyDocumentController implements Initializable {
         spin_timer.setVisible(false);
     }
     
-    @FXML
-    private void handleTimerAction(ActionEvent event){
-        if(answer_results_incorrect.isVisible()){
-            //user submitted incorrect answer by timeout
-            //move on to next player and do not remove points
-            Random randomGen = new Random();
-            int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
-            gamePlay(randomNum, player_identifier.getText(), "no", false);
-        } else if (answer_results_correct.isVisible()){
-            handleCorrectAnswerContinueAction(event);
-        } else if (sector_question.isVisible()){
-            handlePlayerSubmitAction(event);
-        } else {
-            handleSpinWheelAction(event);
-        }
-    }
         
     @FXML
     private void handleCorrectAnswerContinueAction(ActionEvent event){
