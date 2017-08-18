@@ -846,6 +846,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     //Handle Spin Wheel action
     @FXML
     private void handleSpinWheelAction(ActionEvent event) {
+
         WheelSector theWheelSector = this.controller.spin();
         
         gamePlay(theWheelSector);
@@ -871,6 +872,23 @@ public class WheelofJeopardyDocumentController implements Initializable {
         }
         spin_timer.setVisible(false);
     }
+    
+    @FXML
+    private void handleTimerAction(ActionEvent event){
+        if(answer_results_incorrect.isVisible()){
+            //user submitted incorrect answer by timeout
+            //move on to next player and do not remove points
+            Random randomGen = new Random();
+            int randomNum = randomGen.nextInt((7 - 1) + 1) + 1;
+            gamePlay(randomNum, player_identifier.getText(), "no", false);
+        } else if (answer_results_correct.isVisible()){
+            handleCorrectAnswerContinueAction(event);
+        } else if (sector_question.isVisible()){
+            handlePlayerSubmitAction(event);
+        } else {
+            handleSpinWheelAction(event);
+        }
+    }
         
     @FXML
     private void handleCorrectAnswerContinueAction(ActionEvent event){
@@ -879,6 +897,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player_answer.setText("");
         correct_answer.setText("");
         player_answer.setDisable(false);
+
         this.scoreboard.addPointsForPlayer(this.controller.getCurrentPlayer(), Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
         
@@ -892,6 +911,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player_answer.setText("");
         correct_answer.setText("");
         player_answer.setDisable(false);
+
         this.controller.addPointsForCurrentPlayer(Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
         
@@ -948,6 +968,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         category_box_player.setValue("");
         //spin_count ++; //Have to update to not count as a spin
         
+
         CategorySector theCategorySector = new CategorySector(category_selected);
         spin_timer.setVisible(false);
         gamePlay(theCategorySector);
@@ -967,6 +988,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_box_opponent.getItems().remove(s);
         }
         category_box_opponent.setValue("");
+
         CategorySector theCategorySector = new CategorySector(category_selected);
         spin_timer.setVisible(false);
         gamePlay(theCategorySector);
@@ -996,6 +1018,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
    //Handle spin again continue action
     @FXML
     private void handleSpinAgainContinueAction(ActionEvent event) {
+
         WheelSector theWheelSector = this.controller.spin();
         
     }
@@ -1326,6 +1349,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     
 
     //Main controller
+
     public void gamePlay(WheelSector theWheelSector){
         player_display_name.setText(this.controller.getCurrentPlayer().getName());
         String[] categories = getCategories();
@@ -1364,6 +1388,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
                 endGame();
             }
         } else {
+
             //if(!useFreeToken){
                 //player = getNextPlayer(player);
             //}

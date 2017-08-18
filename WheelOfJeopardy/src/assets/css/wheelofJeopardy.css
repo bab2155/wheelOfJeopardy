@@ -19,6 +19,14 @@ and open the template in the editor.
     -fx-background-color: palegreen;
 }
 
+.table-row-cell:empty {
+    -fx-background-color: white;
+}
+ 
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
+
 .help-style{
     -fx-background-color: bisque;
     -fx-border-color: palegoldenrod;
