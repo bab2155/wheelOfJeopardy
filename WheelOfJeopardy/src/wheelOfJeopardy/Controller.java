@@ -9,7 +9,7 @@ public class Controller
         private QuestionBoard[] QuestionBoards = new QuestionBoard[2];
 	private Player[] Players = new Player[3];
 	private int CurrentPlayerNumber;
-	private ScoreBoard[] ScoreBoards = new ScoreBoard[2];
+	private ScoreBoard ScoreBoard;
 	private TimeKeeper TimeKeeper;
 	private Wheel Wheel;
 	private int RoundNumber;
@@ -31,8 +31,7 @@ public class Controller
 		this.Players[1] = new Player(theSecondPlayerName);
 		this.Players[2] = new Player(theThirdPlayerName);
 	
-		this.ScoreBoards[0] = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
-		this.ScoreBoards[1] = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
+		this.ScoreBoard = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
                 
 		this.DatabaseName = theDatabaseName;
     }
@@ -55,8 +54,7 @@ public class Controller
     }
     
     public void setupScoreBoards(){
-        this.ScoreBoards[0] = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
-        this.ScoreBoards[1] = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
+        this.ScoreBoard = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
     }
     
     public void setDatabaseName(String theDatabaseName){
@@ -149,7 +147,7 @@ public class Controller
      */
     public ScoreBoard getScoreBoard( )
     {
-	return this.ScoreBoards[this.RoundNumber-1];
+	return this.ScoreBoard;
     }
 
     /**
