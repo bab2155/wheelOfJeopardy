@@ -33,6 +33,10 @@ public class ScoreBoard {
 	public int getRoundCount(){
 		return this.RoundCount;
 	}
+        public void setRoundCount(int theRoundCount){
+            this.RoundCount = theRoundCount;
+        }
+        
 	public void bankruptPlayer(Player thePlayer){
 		thePlayer.setScore(0);
 	}
