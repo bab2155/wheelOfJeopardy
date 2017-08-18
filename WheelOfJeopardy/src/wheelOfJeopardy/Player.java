@@ -35,7 +35,7 @@ public class Player {
 
 	public void useAToken() {
 		if (this.NumberOfTokens > 0) {
-			this.NumberOfTokens = this.NumberOfTokens--;
+			this.NumberOfTokens = --this.NumberOfTokens;
 			//Controller allows for another turn
 			
 		} else {//no tokens to use

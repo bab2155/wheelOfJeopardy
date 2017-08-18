@@ -861,12 +861,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player_answer.setDisable(true);
         
         if (!player_answer.getText().equalsIgnoreCase(correct_answer.getText())){
-            //free_spin_type = 1;
-            if(checkForToken()){
-                populateUseToken();
-            } else {
-                setAnswerResultsIncorrectVisible(true);
-            }
+            setAnswerResultsIncorrectVisible(true);    
         } else {
             populateAnswerCorrect();
         }
@@ -1360,7 +1355,6 @@ public class WheelofJeopardyDocumentController implements Initializable {
         if(spinCount == 0 || !areThereUnusedQuestions){
             if(this.controller.getRoundNumber() == 1){
                 this.controller.startRound2();
-                this.scoreboard = this.controller.getScoreBoard();
                 this.updatePlayerStats();
                 populateGameStats();
                 hardCodedAnswersR2();
