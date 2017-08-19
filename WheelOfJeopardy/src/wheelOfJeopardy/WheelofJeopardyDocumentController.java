@@ -538,6 +538,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
         } 
         else{
             this.controller.loseATurn();
+            WheelSector theWheelSector = this.controller.spin();
+            gamePlay(theWheelSector);
+            
         }
         
     }
@@ -559,6 +562,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
         } 
         else{
             this.controller.loseATurn();
+            WheelSector theWheelSector = this.controller.spin();
+            gamePlay(theWheelSector);
         }
         
     }
@@ -646,6 +651,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
         this.controller.bankruptCurrentPlayer();
         this.updatePlayerStats();
         this.controller.loseATurn();
+        WheelSector theWheelSector = this.controller.spin();
+        gamePlay(theWheelSector);
+        
     }
     
     //Handle lose turn submit action
@@ -656,6 +664,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
         }
         else{
             this.controller.loseATurn();
+            WheelSector theWheelSector = this.controller.spin();
+            gamePlay(theWheelSector);
         }
         
     }
@@ -665,6 +675,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private void handleSpinAgainContinueAction(ActionEvent event) {
 
         WheelSector theWheelSector = this.controller.spin();
+        gamePlay(theWheelSector);
         
     }
     @FXML 
