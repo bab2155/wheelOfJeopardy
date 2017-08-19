@@ -1,7 +1,9 @@
 package wheelOfJeopardy;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Controller
@@ -94,18 +96,26 @@ public class Controller
      * stop the game and declare the winner
      * @return 
      */
-    public Player stopGame()
+    public List<Player> stopGame()
     {
         this.Players[0].setScore(this.firstRoundScores[0] + this.Players[0].getScore());
         this.Players[1].setScore(this.firstRoundScores[1] + this.Players[1].getScore());
         this.Players[2].setScore(this.firstRoundScores[2] + this.Players[2].getScore());
-        Player theWinner = this.Players[0];
-	for (int playerIndex = 1; playerIndex < this.Players.length; playerIndex++){
-            if (this.Players[playerIndex].getScore() > theWinner.getScore()){
-                theWinner = this.Players[playerIndex];
+        List<Player> theWinners = new ArrayList<Player>();
+        theWinners.add(this.Players[0]);
+        for (int playerIndex = 1; playerIndex < this.Players.length; playerIndex++){
+            if (this.Players[playerIndex].getScore() > theWinners.get(0).getScore()){
+                for (int idx2 = 0; idx2 < theWinners.size(); idx2++){
+                    theWinners.remove(this.Players[idx2]);
+                }
+                theWinners.add(this.Players[playerIndex]);
+            }
+            if (this.Players[playerIndex].getScore() == theWinners.get(0).getScore()){
+                theWinners.add(this.Players[playerIndex]);
             }
         }
-        return theWinner;
+        
+        return theWinners;
     }
 
     

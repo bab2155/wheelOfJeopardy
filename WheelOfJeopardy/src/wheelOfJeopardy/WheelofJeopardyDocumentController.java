@@ -403,9 +403,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
     }
     
     
-    @FXML void setPlayerWinner(Player theWinner){
+    @FXML void setPlayerWinner(String theWinners){
        
-        winner_name.setText(theWinner.getName());
+        winner_name.setText(theWinners);
     }
 
     
@@ -998,7 +998,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
             }
         }
     @FXML private void endGame(){
-        Player theWinner = this.controller.stopGame();
+        List<Player> theWinners = this.controller.stopGame();
         setSectorsInvisible();
         setGamePlayVisible(false);
         setPlayerStatsVisible(false);
@@ -1015,7 +1015,12 @@ public class WheelofJeopardyDocumentController implements Initializable {
         player2_final_name.setText(player2.getName());
         player3_final_name.setText(player3.getName());
         
-        setPlayerWinner(theWinner);
+        String theWinnerString = "";
+        for (int idx = 0; idx < theWinners.size();idx++){
+            theWinnerString = theWinnerString + " " +theWinners.get(idx).getName();
+        }
+        
+        setPlayerWinner(theWinnerString);
         spin_wheel_image.setVisible(false);
         spin_wheel_button.setVisible(false);
         spin_wheel_button.setDisable(true);
