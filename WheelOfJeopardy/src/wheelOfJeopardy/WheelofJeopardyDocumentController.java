@@ -167,9 +167,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private ScoreBoard scoreboard;
     
     private TimeKeeper timeKeeper = new TimeKeeper();
-    private boolean isTimerForQuestion = false;
     private TimeKeeper gameTimer = new TimeKeeper();
-    private boolean timerIsUp = false;
     
     //Add styling
     @FXML void addCSS(){
@@ -871,7 +869,6 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML
     private void handlePlayerSubmitAction(ActionEvent event) {
         timeKeeper.stopTimer();
-        isTimerForQuestion = false;
         player_submit_button.setVisible(false);
         player_answer.setDisable(true);
         
@@ -1085,7 +1082,6 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorQuestionVisible(true);
         
         this.timeKeeper = new TimeKeeper();
-        this.isTimerForQuestion = true;
         this.timeKeeper.addListener(() -> {
             setQuestionTimer();
         });
