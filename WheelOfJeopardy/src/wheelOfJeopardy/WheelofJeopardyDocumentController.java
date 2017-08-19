@@ -397,8 +397,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
             int numberOfSeconds = timeKeeper.getNumberOfSeconds();
             spin_timer.setText(String.format("00:%02d",numberOfSeconds));
             if (numberOfSeconds == 0){
-                String[] wheelCategories = getCategories();
-                gamePlay(new CategorySector(wheelCategories[0]));
+                List<String> validCategories = getValidCategories();
+                gamePlay(new CategorySector(validCategories.get(0)));
             }
         });
         
