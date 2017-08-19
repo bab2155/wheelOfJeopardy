@@ -1092,9 +1092,6 @@ public class WheelofJeopardyDocumentController implements Initializable {
         
         spin_timer.setVisible(true);
         this.timeKeeper.startTimer(60);
-        if (timerIsUp){
-         
-        }
         
     }
     
