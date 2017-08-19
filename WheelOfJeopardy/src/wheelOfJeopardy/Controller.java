@@ -81,20 +81,8 @@ public class Controller
 		this.RoundNumber = 1;
                 
                 createQuestionBoards();
-//                this.DatabaseName = "questions.json";
-		
-		//this.createQuestionBoards();
-		
-		//this.Wheel = new Wheel(this.QuestionBoards[this.RoundNumber-1].getAllCategories());
-		
-                String[] categories = new String[6];
-                categories[0] = "American History";
-                categories[1] = "Single-Named Singers";
-                categories[2] = "Science";
-                categories[3] = "Literature";
-                categories[4] = "Business";
-                categories[5] = "Movies";
-                this.Wheel = new Wheel(categories);
+	
+                this.Wheel = new Wheel(this.getQuestionBoard().getAllCategories());
 		//Pick current player randomly
 		Random randomGenerator = new Random();
 		this.CurrentPlayerNumber = randomGenerator.nextInt(3);
@@ -142,14 +130,7 @@ public class Controller
     {
         this.RoundNumber = 2;
 	
-        String[] categories = new String[6];
-        categories[0] = "Criminal Behavior";
-        categories[1] = "Board Games";
-        categories[2] = "Pop Culture";
-        categories[3] = "Palindromes";
-        categories[4] = "Geography";
-        categories[5] = "Botany";  
-        this.Wheel = new Wheel(categories);
+        this.Wheel = new Wheel(this.getQuestionBoard().getAllCategories());
         
         this.firstRoundScores[0] = this.Players[0].getScore();
         this.firstRoundScores[1] = this.Players[1].getScore();

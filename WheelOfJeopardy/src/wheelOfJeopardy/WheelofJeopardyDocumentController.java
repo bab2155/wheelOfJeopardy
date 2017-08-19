@@ -998,7 +998,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
                 populateGameStats();
                 
                 setSpinCounter(Integer.toString(this.scoreboard.getRoundCount()));
-                
+                game_play.toFront();
             } else if (round_value.getText().equalsIgnoreCase("2")){
                 endGame();
             }
