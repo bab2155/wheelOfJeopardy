@@ -628,16 +628,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
         if(!category_box_player.getSelectionModel().isEmpty()){
             category_selected = category_box_player.getSelectionModel().getSelectedItem().toString();
         }
-        
-        //String[] categories = getCategories();
-        //for (String s: categories) { 
-        //category_box_player.getItems().remove(s);
-        category_box_player.getItems().clear();
-       // }
-        //category_box_player.setValue("");
-        //spin_count ++; //Have to update to not count as a spin
-        
 
+        category_box_player.getItems().clear();
+       
         CategorySector theCategorySector = new CategorySector(category_selected);
         spin_timer.setVisible(false);
         gamePlay(theCategorySector);
@@ -652,13 +645,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_selected = category_box_opponent.getSelectionModel().getSelectedItem().toString();
         }
 
-        //String[] categories = getCategories();
-        //for (String s: categories) { 
-         //   category_box_opponent.getItems().remove(s);
-         category_box_opponent.getItems().clear();
-        //}
-        //category_box_opponent.setValue("");
-
+        category_box_opponent.getItems().clear();
+       
         CategorySector theCategorySector = new CategorySector(category_selected);
         spin_timer.setVisible(false);
         gamePlay(theCategorySector);
