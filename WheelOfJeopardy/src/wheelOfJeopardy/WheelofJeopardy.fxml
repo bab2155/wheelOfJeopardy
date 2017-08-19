@@ -55,7 +55,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="game_end" layoutX="728.0" layoutY="-224.0" prefHeight="518.0" prefWidth="563.0" visible="false">
+            <AnchorPane fx:id="game_end" layoutX="361.0" layoutY="85.0" prefHeight="518.0" prefWidth="563.0" visible="false">
                <children>
                   <Label layoutX="214.0" layoutY="63.0" text="Game Ended">
                      <font>
@@ -72,12 +72,12 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="player2_final_name" layoutX="188.0" layoutY="232.0" text="Player2">
+                  <Label fx:id="player2_final_name" layoutX="184.0" layoutY="232.0" text="Player2">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="player3_final_name" layoutX="189.0" layoutY="285.0" text="Player3">
+                  <Label fx:id="player3_final_name" layoutX="184.0" layoutY="285.0" text="Player3">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -102,7 +102,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="winner_name" alignment="TOP_CENTER" layoutX="179.0" layoutY="413.0" prefHeight="91.0" prefWidth="227.0" text="Winner" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="winner_name" alignment="TOP_CENTER" layoutX="179.0" layoutY="415.0" prefHeight="91.0" prefWidth="227.0" text="Winner" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -155,9 +155,9 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="game_stats" layoutX="120.0" layoutY="58.0" prefHeight="369.0" prefWidth="635.0">
+            <AnchorPane fx:id="game_stats" layoutX="120.0" layoutY="58.0" prefHeight="369.0" prefWidth="635.0" visible="false">
                <children>
-                  <TableView fx:id="category_table" layoutX="36.0" layoutY="73.0" prefHeight="205.0" prefWidth="592.0">
+                  <TableView fx:id="category_table" layoutX="36.0" layoutY="73.0" prefHeight="205.0" prefWidth="598.0">
                     <columns>
                       <TableColumn fx:id="category1" minWidth="5.3999786376953125" prefWidth="100.0">
                           <graphic>
@@ -199,7 +199,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="game_timer" alignment="CENTER" layoutX="145.0" layoutY="35.0" style="&#10;" text="25:23" textAlignment="CENTER" wrapText="false" visible="true">
+                  <Label fx:id="game_timer" alignment="CENTER" layoutX="145.0" layoutY="35.0" style="&#10;" text="25:23" textAlignment="CENTER" visible="true" wrapText="false">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -238,7 +238,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="spin_timer" alignment="CENTER" layoutX="720.0" layoutY="15.0" style="&#10;" text="0:60" textAlignment="CENTER" wrapText="false" visible="false">
+                  <Label fx:id="spin_timer" alignment="CENTER" layoutX="720.0" layoutY="15.0" style="&#10;" text="0:60" textAlignment="CENTER" visible="false" wrapText="false">
                      <font>
                         <Font size="18.0" />
                      </font>

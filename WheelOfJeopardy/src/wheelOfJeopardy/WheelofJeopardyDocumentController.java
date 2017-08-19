@@ -168,7 +168,6 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private Question lastQueston;
     
     private TimeKeeper timeKeeper = new TimeKeeper();
-    private boolean isTimerForQuestion = false;
     private TimeKeeper gameTimer = new TimeKeeper();
     
     //Add styling
@@ -372,19 +371,33 @@ public class WheelofJeopardyDocumentController implements Initializable {
     }
     
     @FXML
+    private void setQuestionTimer(){
+        Platform.runLater(() -> {
+            int numberOfSeconds = timeKeeper.getNumberOfSeconds();
+            spin_timer.setText(String.format("00:%02d",numberOfSeconds));
+            if (numberOfSeconds == 0){
+                highlightCategoryTable(category_title.getText(), false);
+                updateCategoryTable(round_value.getText(), category_title.getText(), question_value.getText());
+                if (checkForToken()){
+                    populateUseToken();
+                }
+                else{
+                    gamePlay(new LoseATurnSector());
+                }
+            }
+        });
+        
+    }
+    
+    
+    @FXML
     private void setActionTimer(){
         Platform.runLater(() -> {
             int numberOfSeconds = timeKeeper.getNumberOfSeconds();
             spin_timer.setText(String.format("00:%02d",numberOfSeconds));
             if (numberOfSeconds == 0){
-               if (isTimerForQuestion){
-                gamePlay(new LoseATurnSector());
-                isTimerForQuestion = false;
-               }
-               else{
                 String[] wheelCategories = getCategories();
                 gamePlay(new CategorySector(wheelCategories[0]));
-               }
             }
         });
         
@@ -496,7 +509,6 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML
     private void handlePlayerSubmitAction(ActionEvent event) {
         timeKeeper.stopTimer();
-        isTimerForQuestion = false;
         player_submit_button.setVisible(false);
         player_answer.setDisable(true);
         
@@ -506,6 +518,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
             populateAnswerCorrect();
         }
         spin_timer.setVisible(false);
+        
     }
     
         
@@ -520,6 +533,13 @@ public class WheelofJeopardyDocumentController implements Initializable {
         this.scoreboard.addPointsForPlayer(this.controller.getCurrentPlayer(), Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
         
+        if(checkForToken()){
+            populateUseToken();
+        } 
+        else{
+            this.controller.loseATurn();
+        }
+        
     }
     
     //Handle Correct Answer Override button action    
@@ -533,6 +553,13 @@ public class WheelofJeopardyDocumentController implements Initializable {
 
         this.controller.addPointsForCurrentPlayer(Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
+        
+        if(checkForToken()){
+            populateUseToken();
+        } 
+        else{
+            this.controller.loseATurn();
+        }
         
     }
     
@@ -694,14 +721,12 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorQuestionVisible(true);
         
         this.timeKeeper = new TimeKeeper();
-        this.isTimerForQuestion = true;
         this.timeKeeper.addListener(() -> {
-            setActionTimer();
+            setQuestionTimer();
         });
         
         spin_timer.setVisible(true);
         this.timeKeeper.startTimer(60);
-        
         
     }
     
@@ -931,6 +956,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
     //Main controller
 
     public void gamePlay(WheelSector theWheelSector){
+        spin_timer.setVisible(false);
+        
         player_display_name.setText(this.controller.getCurrentPlayer().getName());
         String[] categories = getCategories();
         for (String category:categories){
