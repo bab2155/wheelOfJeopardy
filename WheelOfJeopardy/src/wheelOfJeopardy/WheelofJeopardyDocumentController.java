@@ -117,6 +117,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML private TableColumn category6;
     @FXML private ChoiceBox category_box_player;
     @FXML private ChoiceBox category_box_opponent;
+    @FXML private ChoiceBox database_names;
     
     @FXML private AnchorPane game_screen;
     @FXML private AnchorPane game_open_panel;
@@ -396,8 +397,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
             int numberOfSeconds = timeKeeper.getNumberOfSeconds();
             spin_timer.setText(String.format("00:%02d",numberOfSeconds));
             if (numberOfSeconds == 0){
-                String[] wheelCategories = getCategories();
-                gamePlay(new CategorySector(wheelCategories[0]));
+                List<String> validCategories = getValidCategories();
+                gamePlay(new CategorySector(validCategories.get(0)));
             }
         });
         
@@ -458,11 +459,21 @@ public class WheelofJeopardyDocumentController implements Initializable {
         new_game_button.setVisible(false);
         large_wheel_image.setVisible(false);
         player_identifiers.setVisible(true);
+        String[] theDatabaseNames = this.controller.getDatabaseNames();
+        
+        for (String theDatabase:theDatabaseNames) { 
+            database_names.getItems().add(theDatabase);
+        }
     }
+    
     
     //Handle Player Identifier submit action and start game
     @FXML
-    public void handleGameStart(ActionEvent event) {
+    public void handleGameStart(ActionEvent event) throws Exception {
+        String selected_database = null;
+        if(!database_names.getSelectionModel().isEmpty()){
+            selected_database = database_names.getSelectionModel().getSelectedItem().toString();
+        }
         player_identifiers.setVisible(false);
         player1_label.setText(player1_name.getText());
         this.controller.setPlayer1(player1_name.getText());
@@ -470,6 +481,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         this.controller.setPlayer2(player2_name.getText());
         player3_label.setText(player3_name.getText());
         this.controller.setPlayer3(player3_name.getText());
+        this.controller.setDatabaseName(selected_database);
         this.controller.startGame();
         this.controller.setupScoreBoards();
         this.scoreboard = this.controller.getScoreBoard();
@@ -533,15 +545,10 @@ public class WheelofJeopardyDocumentController implements Initializable {
         this.scoreboard.addPointsForPlayer(this.controller.getCurrentPlayer(), Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
         
-        if(checkForToken()){
-            populateUseToken();
-        } 
-        else{
-            this.controller.loseATurn();
-            WheelSector theWheelSector = this.controller.spin();
-            gamePlay(theWheelSector);
-            
-        }
+        this.controller.loseATurn();
+        WheelSector theWheelSector = this.controller.spin();
+        gamePlay(theWheelSector);
+
         
     }
     
@@ -557,14 +564,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
         this.controller.addPointsForCurrentPlayer(Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
         
-        if(checkForToken()){
-            populateUseToken();
-        } 
-        else{
-            this.controller.loseATurn();
-            WheelSector theWheelSector = this.controller.spin();
-            gamePlay(theWheelSector);
-        }
+        this.controller.loseATurn();
+        WheelSector theWheelSector = this.controller.spin();
+        gamePlay(theWheelSector);
         
     }
     
@@ -584,6 +586,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
         } 
         else{
             this.controller.loseATurn();
+            WheelSector theWheelSector = this.controller.spin();
+            gamePlay(theWheelSector);
         }
         
     }
@@ -593,14 +597,16 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private void handleUseTokenSubmitAction(ActionEvent event) {
         this.controller.useTokenForCurrentPlayer();
         this.updatePlayerStats();
-        
+        WheelSector theWheelSector = this.controller.spin();
+        gamePlay(theWheelSector);
     }
     
     //Handle using a token no action
     @FXML
     private void handleNoUseTokenSubmitAction(ActionEvent event) {
         this.controller.loseATurn();
-       
+        WheelSector theWheelSector = this.controller.spin();
+        gamePlay(theWheelSector);
     }
     
     //Handle player's choice
@@ -611,15 +617,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
         if(!category_box_player.getSelectionModel().isEmpty()){
             category_selected = category_box_player.getSelectionModel().getSelectedItem().toString();
         }
-        
-        String[] categories = getCategories();
-        for (String s: categories) { 
-            category_box_player.getItems().remove(s);
-        }
-        category_box_player.setValue("");
-        //spin_count ++; //Have to update to not count as a spin
-        
 
+        category_box_player.getItems().clear();
+       
         CategorySector theCategorySector = new CategorySector(category_selected);
         spin_timer.setVisible(false);
         gamePlay(theCategorySector);
@@ -634,12 +634,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_selected = category_box_opponent.getSelectionModel().getSelectedItem().toString();
         }
 
-        String[] categories = getCategories();
-        for (String s: categories) { 
-            category_box_opponent.getItems().remove(s);
-        }
-        category_box_opponent.setValue("");
-
+        category_box_opponent.getItems().clear();
+       
         CategorySector theCategorySector = new CategorySector(category_selected);
         spin_timer.setVisible(false);
         gamePlay(theCategorySector);
@@ -708,7 +704,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     
     @FXML void setOpponentDisplayName(String player){
         if(player.equalsIgnoreCase("player1")) {
-            opponent_identifier.setText(player1_name.getText());
+            opponent_identifier.setText(player1_name.getText() +" ");
         } else if(player.equalsIgnoreCase("player2")){
             opponent_identifier.setText(player2_name.getText());
         } else {
@@ -793,6 +789,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorsInvisible();
         sector_player_choice.toFront();
         player_identifier.setText(theCurrentPlayer.getName());
+        category_box_player.getItems().clear();
         for (int idx2 = 0; idx2 < validCategories.size(); idx2++) { 
             category_box_player.getItems().add(validCategories.get(idx2));
         }
@@ -814,6 +811,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorsInvisible();
         sector_opponent_choice.toFront();
         opponent_identifier.setText(theOpponent.getName());
+        category_box_opponent.getItems().clear();
         for (int idx2 = 0; idx2 < validCategories.size(); idx2++) { 
             category_box_opponent.getItems().add(validCategories.get(idx2));
         }
@@ -987,12 +985,12 @@ public class WheelofJeopardyDocumentController implements Initializable {
         }
         if(spinCount == 0 || !areThereUnusedQuestions){
             if(this.controller.getRoundNumber() == 1){
+                setSectorsInvisible();
                 this.controller.startRound2();
                 this.updatePlayerStats();
                 populateGameStats();
-                
                 setSpinCounter(Integer.toString(this.scoreboard.getRoundCount()));
-                
+                game_play.toFront();
             } else if (round_value.getText().equalsIgnoreCase("2")){
                 endGame();
             }

@@ -197,7 +197,7 @@ public class DatabaseManager {
 
 		/* Get all files from db directory */
 //		File dbStore = new File(this.databaseDir);
-		File dbStore = new File("WheelOfJeopardy/src/assets/database/");
+		File dbStore = new File("./src/assets/database/");
                 System.out.println(dbStore.getAbsolutePath());
 		File[] files = dbStore.listFiles();
 		List<String> filenames = new ArrayList<String>();
