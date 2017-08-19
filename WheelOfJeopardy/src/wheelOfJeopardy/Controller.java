@@ -1,12 +1,15 @@
 package wheelOfJeopardy;
 
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Controller
 {
 	// Instance variables
-        private QuestionBoard[] QuestionBoards = new QuestionBoard[2];
+  public QuestionBoard[] QuestionBoards = new QuestionBoard[2];
 	private Player[] Players = new Player[3];
 	private int CurrentPlayerNumber;
 	private ScoreBoard ScoreBoard;
@@ -15,6 +18,7 @@ public class Controller
 	private int RoundNumber;
 	private String DatabaseName;
         private int[] firstRoundScores = new int[3];
+	public URL testme;
 	//need to add View as an attribute
 
     /**
@@ -37,7 +41,9 @@ public class Controller
     }
     
     public Controller(){
-        this.DatabaseName = "";
+        this.DatabaseName = "questions.json";
+        createQuestionBoards();
+
     }
     
     public void setPlayer1(String theFirstPlayerName){
@@ -67,7 +73,7 @@ public class Controller
     {
 		this.RoundNumber = 1;
                 
-                this.DatabaseName = "questions.json";
+//                this.DatabaseName = "questions.json";
 		
 		//this.createQuestionBoards();
 		
@@ -90,18 +96,27 @@ public class Controller
      * stop the game and declare the winner
      * @return 
      */
-    public Player stopGame()
+    public List<Player> stopGame()
     {
         this.Players[0].setScore(this.firstRoundScores[0] + this.Players[0].getScore());
         this.Players[1].setScore(this.firstRoundScores[1] + this.Players[1].getScore());
         this.Players[2].setScore(this.firstRoundScores[2] + this.Players[2].getScore());
-        Player theWinner = this.Players[0];
-	for (int playerIndex = 1; playerIndex < this.Players.length; playerIndex++){
-            if (this.Players[playerIndex].getScore() > theWinner.getScore()){
-                theWinner = this.Players[playerIndex];
+        List<Player> theWinners = new ArrayList<Player>();
+        theWinners.add(this.Players[0]);
+        for (int playerIndex = 1; playerIndex < this.Players.length; playerIndex++){
+            int previousScore = theWinners.get(0).getScore();
+            if (this.Players[playerIndex].getScore() > previousScore){
+                for (int idx2 = 0; idx2 < theWinners.size(); idx2++){
+                    theWinners.remove(idx2);
+                }
+                theWinners.add(this.Players[playerIndex]);
+            }
+            else if (this.Players[playerIndex].getScore() == previousScore){
+                theWinners.add(this.Players[playerIndex]);
             }
         }
-        return theWinner;
+        
+        return theWinners;
     }
 
     
@@ -223,8 +238,22 @@ public class Controller
      * @param thePointValue
      * @return Question
      */
-    public Question getQuestionForCategory( String theCategory, int thePointValue )
-    {   Question theQuestion = this.getQuestionBoard().getQuestionForCategory(theCategory,thePointValue);
+    public Question getQuestionForCategory( String theCategory)
+    {   
+        int multiplier = 100;
+        if (this.RoundNumber == 2){
+            multiplier = 200;
+        }
+       
+        Question theQuestion = null;
+        for (int idx = 1 * multiplier; idx < 6 * multiplier; idx++){
+            Question tmpQuestion = this.getQuestionBoard().getQuestionForCategory(theCategory,idx);
+            if (tmpQuestion != null){
+                theQuestion = tmpQuestion;
+                break;
+            }
+        }
+        
         return theQuestion;
     }
 
@@ -261,10 +290,11 @@ public class Controller
 		this.getScoreBoard().useTokenForPlayer( this.getCurrentPlayer( ) );
 	}
 	public void createQuestionBoards(){
-		String theActualDatabaseNames[] = DatabaseManager.getDatabaseNames();
-		if (Arrays.asList(theActualDatabaseNames).contains(this.DatabaseName)){
-                     this.QuestionBoards = DatabaseManager.createQuestionBoards(DatabaseName);
-		}
+	  this.QuestionBoards = DatabaseManager.createQuestionBoards(this.DatabaseName);
+//		String theActualDatabaseNames[] = DatabaseManager.getDatabaseNames();
+//		if (Arrays.asList(theActualDatabaseNames).contains(this.DatabaseName)){
+//                     this.QuestionBoards = DatabaseManager.createQuestionBoards(DatabaseName);
+//		}
 	}
 
     /**

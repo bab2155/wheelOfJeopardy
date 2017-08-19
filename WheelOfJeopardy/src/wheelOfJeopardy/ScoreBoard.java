@@ -38,7 +38,9 @@ public class ScoreBoard {
         }
         
 	public void bankruptPlayer(Player thePlayer){
+            if (thePlayer.getScore() > 0){
 		thePlayer.setScore(0);
+            }
 	}
 
 	public void useTokenForPlayer(Player thePlayer){

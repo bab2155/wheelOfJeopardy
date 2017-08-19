@@ -3,210 +3,210 @@
     "category":"American History",
     "question":"The only Constitutional amendment to be repealed,the 18th Amendment originally put this into effect",
     "answer":"Prohibition",
-    "value":200,
+    "value":100,
     "used":false
   },
   {
     "category":"American History",
     "question":"In 1964 the Warren Commission concluded that this man acted alone in killing President Kennedy",
     "answer":"Oswald",
-    "value":400,
+    "value":200,
     "used":false
   },
   {
     "category":"American History",
     "question":"Under the Jones Act of 1917,residents of this Caribbean island gained U.S. citizenship",
     "answer":"Puerto Rico",
-    "value":600,
+    "value":300,
     "used":false
   },
   {
     "category":"American History",
     "question":"Introduced by Europeans, this disease that wiped out entire tribes had its last known U.S. case in 1949",
     "answer":"smallpox",
-    "value":800,
+    "value":400,
     "used":false
   },
   {
     "category":"American History",
-    "question":"PLACEHOLDER",
-    "answer":"PLACEHOLDER",
-    "value":1000,
+    "question":"In terms of square miles, what is the largest city in the US.",
+    "answer":"Juneau",
+    "value":500,
     "used":false
   },
   {
     "category":"Single-Named Singers",
     "question":"This ‘Royals’ singer made Time magazine's list of the most influential teens of 2013",
     "answer":"Lorde",
-    "value":200,
+    "value":100,
     "used":false
   },
   {
     "category":"Single-Named Singers",
     "question":"In a collaboration with Eminem, she sings of a monster that's under her bed & voices inside her head",
     "answer":"Rihanna",
-    "value":400,
+    "value":200,
     "used":false
   },
   {
     "category":"Single-Named Singers",
     "question":"6 months after his death, this rock icon's Minnesota home & studio complex was open to the public for tours",
     "answer":"Prince",
-    "value":600,
+    "value":300,
     "used":false
   },
   {
     "category":"Single-Named Singers",
     "question":"He collaborated with Pitbull on ‘DJ Got Us Fallin' In Love’",
     "answer":"Usher",
-    "value":800,
+    "value":400,
     "used":false
   },
   {
     "category":"Single-Named Singers",
     "question":"Bey's younger sister, in 2016 she had her first No. 1 album with ‘A Seat at the Table’",
     "answer":"Solange",
-    "value":1000,
+    "value":500,
     "used":false
   },
   {
     "category":"Science",
     "question":"By definition, it's the branch of chemistry that deals with non-carbon compounds",
     "answer":"inorganic",
-    "value":200,
+    "value":100,
     "used":false
   },
   {
     "category":"Science",
     "question":"Hydrogen has three isotopes: protium with its nucleus made up of one proton, deuterium with one proton and one neutron, and a third radioactive isotope with an additional neutron giving it a mass number of 3; hence, this name",
     "answer":"tritium",
-    "value":400,
+    "value":200,
     "used":false
   },
   {
     "category":"Science",
     "question":"The Celsius temperature scale is also known as this scale because it's divided into 100 parts",
     "answer":"centigrade",
-    "value":600,
+    "value":300,
     "used":false
   },
   {
     "category":"Science",
     "question":"It seems to defy gravity when a liquid goes up tubes by means of this action",
     "answer":"capillary",
-    "value":800,
+    "value":400,
     "used":false
   },
   {
     "category":"Science",
     "question":"The original \"handy man\" was this early human whose name means just that",
     "answer":"homo habilis",
-    "value":1000,
+    "value":500,
     "used":false
   },
   {
     "category":"Literature",
     "question":"Mary Mapes Dodge penned this guy,\"Or, The Silver skates\"; within her lifetime, the book appeared in more than 100 editions",
     "answer":"Hans Brinker",
-    "value":200,
+    "value":100,
     "used":false
   },
   {
     "category":"Literature",
     "question":"After leaving Rochester-- the man, not the city--this Bronte title woman finds herself destitute and friendless",
     "answer":"Jane Eyre",
-    "value":400,
+    "value":200,
     "used":false
   },
   {
     "category":"Literature",
     "question":"The daydreams of this James Thurber character include being a surgeon & the world's greatest pistol shot",
     "answer":"Walter Mitty",
-    "value":600,
+    "value":300,
     "used":false
   },
   {
     "category":"Literature",
     "question":"’T.S. Garp cried in the airplane that was bringing him home to be famous in his violent country’, penned this novelist",
     "answer":"John Irving",
-    "value":800,
+    "value":400,
     "used":false
   },
   {
     "category":"Literature",
     "question":"Though the play did not hit Broadway until 1946, ‘The Iceman Cometh’ by him first cameth in 1939",
     "answer":"Eugene O’Neill",
-    "value":1000,
+    "value":500,
     "used":false
   },
   {
     "category":"Business",
     "question":"Brixton Metals has the stocky symbol BBB; this home essentials store got BBBY",
     "answer":"Bed Bath and Beyond",
-    "value":200,
+    "value":100,
     "used":false
   },
   {
     "category":"Business",
     "question":"This delivery co. says it covers ‘more than 220 countries & territories’ and links ‘more than 99% of the world's GDP’",
     "answer":"FedEx",
-    "value":400,
+    "value":200,
     "used":false
   },
   {
     "category":"Business",
     "question":"In 2012 the founder of this office superstore told the GOP convention how Mitt Romney helped launch the company",
     "answer":"Staples",
-    "value":600,
+    "value":300,
     "used":false
   },
   {
     "category":"Business",
     "question":"In 1999, this shark & a pal sold their broadcast.com to Yahoo for $5.7 billion",
     "answer":"Mark Cuban",
-    "value":800,
+    "value":400,
     "used":false
   },
   {
     "category":"Business",
     "question":"This casual clothing company debuted its \"initial\" catalog in 1983",
     "answer":"J. Crew",
-    "value":1000,
+    "value":500,
     "used":false
   },
   {
     "category":"Movies",
     "question":"The \"Star Trek\" universe: Mr. Spock's emotionless race",
     "answer":"Vulcan",
-    "value":200,
+    "value":100,
     "used":false
   },
   {
     "category":"Movies",
     "question":"In ‘Bridge of Spies’: the city where the bridge is located",
     "answer":"Berlin",
-    "value":400,
+    "value":200,
     "used":false
   },
   {
     "category":"Movies",
     "question":"Michael Fassbender plays an ‘Apple’ grower: the title",
     "answer":"Steve Jobs",
-    "value":600,
+    "value":300,
     "used":false
   },
   {
     "category":"Movies",
     "question":"’The Blind Side’: the Best Actress winner",
     "answer":"Sandra Bullock",
-    "value":800,
+    "value":400,
     "used":false
   },
   {
     "category":"Movies",
     "question":"’The Martian’: the director",
     "answer":"Ridley Scott",
-    "value":1000,
+    "value":500,
     "used":false
   },
   {
@@ -219,7 +219,7 @@
   {
     "category":"Criminal Behavior",
     "question":"Illegally avoiding paying the government on state, federal or local levels",
-    "answer":"ta evasion",
+    "answer":"tax evasion",
     "value":400,
     "used":false
   },

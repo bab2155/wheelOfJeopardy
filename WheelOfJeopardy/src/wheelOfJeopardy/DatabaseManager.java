@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileReader;
+import java.net.URL;
 import java.util.*;
 
 import com.google.gson.stream.JsonReader;
@@ -50,7 +51,9 @@ public class DatabaseManager {
 
 		Question[] questions = null;
 
+
 		try{
+
 			JsonReader jr = new JsonReader(new FileReader("./src/assets/database/" +databaseName));
 			questions = new Gson().fromJson(jr, Question[].class);
 
@@ -67,6 +70,15 @@ public class DatabaseManager {
 	private static String[][] setRoundCategories(Question[] theQuestions){
 
 		String[][] categories = new String[2][6];
+                
+                for (int firstRoundIndex = 0; firstRoundIndex < 30; firstRoundIndex = firstRoundIndex+5){
+                    categories[0][firstRoundIndex/5]= theQuestions[firstRoundIndex].category;
+                }
+                for (int secondRoundIndex = 0; secondRoundIndex < 30; secondRoundIndex = secondRoundIndex + 5){
+                    categories[1][secondRoundIndex/5]= theQuestions[secondRoundIndex + 30].category;
+                }
+                return categories;
+                /**
 		HashSet<String> categorySet = new HashSet<String>();
 
 		for(Question question : theQuestions){
@@ -89,6 +101,7 @@ public class DatabaseManager {
 		}
 
 		return categories;
+                * **/
 
 	}
 
@@ -105,33 +118,45 @@ public class DatabaseManager {
 		List<HashMap<String, ArrayList<Question>>> categoryQuestions = new ArrayList<HashMap<String,
 				ArrayList<Question>>>();
 
+
 		// Initialize categories in HashMap
 		for(int i=0; i<=1; i++){
+			categoryQuestions.add(new HashMap<String, ArrayList<Question>>());
 			for(String category : theRoundCategories[i]){
 				categoryQuestions.get(i).put(category, new ArrayList<Question>());
+
 			}
 		}
 
 		for(int i=0; i<=1; i++) {
 			HashMap<String, ArrayList<Question>> allQuestions = new HashMap<String, ArrayList<Question>>();
 
+			// Initialize categories in HashMap
+			for(int j=0; j<=1; j++){
+				for(String category : theRoundCategories[j]){
+					allQuestions.put(category, new ArrayList<Question>());
+				}
+			}
 
+			// See if current question category exists in round categories
 			for (Question question : theQuestions) {
-
-				// See if current question category exists in round categories
-				if (categoryQuestions.get(i).containsKey(question.category)) {
+				if(allQuestions.containsKey(question.category)){
 					allQuestions.get(question.category).add(question);
 				}
+
 			}
 
 			// Shuffle all questions
 			for (String category : theRoundCategories[i]) {
-				Collections.shuffle(allQuestions.get(category));
+				//Collections.shuffle(allQuestions.get(category));
 
 				for (Integer roundvalue : questionValues.get(i)) {
+				
+					
 					Question toAdd = allQuestions.get(category).stream().filter(question -> question.value == roundvalue)
 							.findFirst()
 							.get();
+					
 					categoryQuestions.get(i).get(category).add(toAdd);
 				}
 
@@ -152,6 +177,8 @@ public class DatabaseManager {
 
 		Question[] dbQuestions = getAllDatabaseQuestions(theDatabaseName);
 		String[][] roundCategories = setRoundCategories(dbQuestions);
+                
+                
 		List<HashMap<String, ArrayList<Question>>> categoryQuestions = getCategoryQuestions(roundCategories, dbQuestions);
 
 		List<QuestionBoard> tmp = new ArrayList<>();
@@ -170,7 +197,7 @@ public class DatabaseManager {
 
 		/* Get all files from db directory */
 //		File dbStore = new File(this.databaseDir);
-		File dbStore = new File("./src/assets/database/");
+		File dbStore = new File("WheelOfJeopardy/src/assets/database/");
                 System.out.println(dbStore.getAbsolutePath());
 		File[] files = dbStore.listFiles();
 		List<String> filenames = new ArrayList<String>();
