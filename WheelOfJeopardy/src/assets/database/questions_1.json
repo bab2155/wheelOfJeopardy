@@ -119,7 +119,7 @@
     "used":false
   },
   {
-    "category":"Literature",
+    "category":"Books",
     "question":"The daydreams of this James Thurber character include being a surgeon & the world's greatest pistol shot",
     "answer":"Walter Mitty",
     "value":300,
@@ -245,35 +245,35 @@
     "used":false
   },
   {
-    "category":"Board Games",
+    "category":"Games",
     "question":"In this board game you must solve the case of millionaire Samuel Black, murdered in his own mansion",
     "answer":"Clue",
     "value":200,
     "used":false
   },
   {
-    "category":"Board Games",
+    "category":"Games",
     "question":"It's ‘the classic naval combat game’",
     "answer":"Battleship",
     "value":400,
     "used":false
   },
   {
-    "category":"Board Games",
+    "category":"Games",
     "question":"Good deeds allow you to climb up, but watch out for the slides in this game where you try to reach the 100 square",
     "answer":"Chutes and Ladders",
     "value":600,
     "used":false
   },
   {
-    "category":"Board Games",
+    "category":"Games",
     "question":"Use your skull in all of the activities of this game whose name is a synonym for ‘skull’",
     "answer":"Cranium",
     "value":800,
     "used":false
   },
   {
-    "category":"Board Games",
+    "category":"Games",
     "question":"In 2016 news an A.I. program beat a champion of this 2-letter game with 361 pieces",
     "answer":"go",
     "value":1000,
@@ -385,35 +385,35 @@
     "used":false
   },
   {
-    "category":"Botany",
+    "category":"Plants",
     "question":"Disappointing but true,these flowers don't breathe fire",
     "answer":"snapdragons",
     "value":200,
     "used":false
   },
   {
-    "category":"Botany",
+    "category":"Plants",
     "question":"This flower shares its name with a character in ‘Peter Pan’",
     "answer":"tiger lily",
     "value":400,
     "used":false
   },
   {
-    "category":"Botany",
+    "category":"Plants",
     "question":"You are ‘barking’ up this tree,looking for small flowers",
     "answer":"dogwood",
     "value":600,
     "used":false
   },
   {
-    "category":"Botany",
+    "category":"Plants",
     "question":"Equisetum is the genus of the flowerless perennial called giant this for its brushy look",
     "answer":"brushy horsetail",
     "value":800,
     "used":false
   },
   {
-    "category":"Botany",
+    "category":"Plants",
     "question":"This tree is so named for the challenge its prickly leaves would pose to certain simian climbers",
     "answer":"monkey puzzle tree",
     "value":1000,
