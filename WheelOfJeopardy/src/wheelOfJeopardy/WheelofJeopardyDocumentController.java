@@ -629,11 +629,12 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_selected = category_box_player.getSelectionModel().getSelectedItem().toString();
         }
         
-        String[] categories = getCategories();
-        for (String s: categories) { 
-            category_box_player.getItems().remove(s);
-        }
-        category_box_player.setValue("");
+        //String[] categories = getCategories();
+        //for (String s: categories) { 
+        //category_box_player.getItems().remove(s);
+        category_box_player.getItems().clear();
+       // }
+        //category_box_player.setValue("");
         //spin_count ++; //Have to update to not count as a spin
         
 
@@ -651,11 +652,12 @@ public class WheelofJeopardyDocumentController implements Initializable {
             category_selected = category_box_opponent.getSelectionModel().getSelectedItem().toString();
         }
 
-        String[] categories = getCategories();
-        for (String s: categories) { 
-            category_box_opponent.getItems().remove(s);
-        }
-        category_box_opponent.setValue("");
+        //String[] categories = getCategories();
+        //for (String s: categories) { 
+         //   category_box_opponent.getItems().remove(s);
+         category_box_opponent.getItems().clear();
+        //}
+        //category_box_opponent.setValue("");
 
         CategorySector theCategorySector = new CategorySector(category_selected);
         spin_timer.setVisible(false);
@@ -810,6 +812,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorsInvisible();
         sector_player_choice.toFront();
         player_identifier.setText(theCurrentPlayer.getName());
+        category_box_player.getItems().clear();
         for (int idx2 = 0; idx2 < validCategories.size(); idx2++) { 
             category_box_player.getItems().add(validCategories.get(idx2));
         }
@@ -831,6 +834,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         setSectorsInvisible();
         sector_opponent_choice.toFront();
         opponent_identifier.setText(theOpponent.getName());
+        category_box_opponent.getItems().clear();
         for (int idx2 = 0; idx2 < validCategories.size(); idx2++) { 
             category_box_opponent.getItems().add(validCategories.get(idx2));
         }
