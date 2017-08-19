@@ -165,6 +165,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     
     private Controller controller = new Controller();
     private ScoreBoard scoreboard;
+    private Question lastQueston;
     
     private TimeKeeper timeKeeper = new TimeKeeper();
     private boolean isTimerForQuestion = false;
@@ -417,6 +418,19 @@ public class WheelofJeopardyDocumentController implements Initializable {
         return categories;
     }
     
+    @FXML
+    private List<String> getValidCategories(){
+        String[] categories = getCategories();
+        List<String> validCategories = new ArrayList<>();
+        for (int idx = 0; idx < categories.length; idx++)
+        {
+            if (this.controller.getQuestionForCategory(categories[idx]) != null){
+                validCategories.add(categories[idx]);
+            }
+        }
+        return validCategories;
+    }
+    
     @FXML 
     private void usedQuestionsHC(){
         for (int i = 0; i < usedQuestion.length; i++) {
@@ -432,7 +446,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
        questionsHC[1] = "In 1964 the Warren Commission concluded that this man acted alone in killing President Kennedy";
        questionsHC[2] = "Under the Jones Act of 1917, residents of this Caribbean island gained U.S. citizenship";
        questionsHC[3] = "Introduced by Europeans, this disease that wiped out entire tribes had its last known U.S. case in 1949";
-       questionsHC[4] = "In terms of square miles, what is the largest city in the US?";
+       questionsHC[4] = "In terms of square miles, what is the largest city in the US.";
        
        //catetgory 2, 5-9
        questionsHC[5] = "Royals' singer made Time magazine's list of the most influential teens of 2013";
@@ -750,7 +764,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML
     private void handleCorrectAnswerContinueAction(ActionEvent event){
         highlightCategoryTable(category_title.getText(), false);
-        updateCategoryTable(round_value.getText(), category_title.getText(), question_value.getText());
+        updateCategoryTable();
         player_answer.setText("");
         correct_answer.setText("");
         player_answer.setDisable(false);
@@ -764,7 +778,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML
     private void handleCorrectOverrideSubmitAction(ActionEvent event) {
         highlightCategoryTable(category_title.getText(), false);
-        updateCategoryTable(round_value.getText(), category_title.getText(), question_value.getText());
+        updateCategoryTable();
         player_answer.setText("");
         correct_answer.setText("");
         player_answer.setDisable(false);
@@ -778,7 +792,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML
     private void handleIncorrectOverrideSubmitAction(ActionEvent event) {
         highlightCategoryTable(category_title.getText(), false);
-        updateCategoryTable(round_value.getText(), category_title.getText(), question_value.getText());
+        updateCategoryTable();
         player_answer.setText("");
         correct_answer.setText("");
         player_answer.setDisable(false);
@@ -849,7 +863,6 @@ public class WheelofJeopardyDocumentController implements Initializable {
         CategorySector theCategorySector = new CategorySector(category_selected);
         spin_timer.setVisible(false);
         gamePlay(theCategorySector);
-        //gamePlay(7, player_identifier.getText(), category_selected, false);
     }
     
     //Handle bankruptcy submit action
@@ -992,12 +1005,12 @@ public class WheelofJeopardyDocumentController implements Initializable {
     
     public void populatePlayerChoice(){
         Player theCurrentPlayer = this.controller.getCurrentPlayer();
-        String[] categories = getCategories();
+        List<String> validCategories = getValidCategories();
         setSectorsInvisible();
         sector_player_choice.toFront();
         player_identifier.setText(theCurrentPlayer.getName());
-        for (String s: categories) { 
-            category_box_player.getItems().add(s);
+        for (int idx2 = 0; idx2 < validCategories.size(); idx2++) { 
+            category_box_player.getItems().add(validCategories.get(idx2));
         }
         setSectorPlayerChoiceVisible(true);
         
@@ -1012,12 +1025,13 @@ public class WheelofJeopardyDocumentController implements Initializable {
     
     public void populateOpponentChoice(){
         Player theOpponent = this.controller.getOpponent();
-        String[] categories = getCategories();
+        List<String> validCategories = getValidCategories();
+        
         setSectorsInvisible();
         sector_opponent_choice.toFront();
         opponent_identifier.setText(theOpponent.getName());
-        for (String s: categories) { 
-            category_box_opponent.getItems().add(s);
+        for (int idx2 = 0; idx2 < validCategories.size(); idx2++) { 
+            category_box_opponent.getItems().add(validCategories.get(idx2));
         }
         setSectorOpponentChoiceVisible(true);
         
@@ -1091,66 +1105,31 @@ public class WheelofJeopardyDocumentController implements Initializable {
         }
     }
     
-    public void updateCategoryTable(String round, String category, String points){
+    public void updateCategoryTable(){
         //Remove category point value cell value
-        int column_position = 0;
         int row_position = 0;
-        if(category.equalsIgnoreCase(category1_label.getText())){
-            column_position = 0;
-        } else if(category.equalsIgnoreCase(category2_label.getText())){
-            column_position = 1;
-        } else if(category.equalsIgnoreCase(category3_label.getText())){
-            column_position = 2;
-        } else if(category.equalsIgnoreCase(category4_label.getText())){
-            column_position = 3;
-        } else if(category.equalsIgnoreCase(category5_label.getText())){
-            column_position = 4;   
-        } else if(category.equalsIgnoreCase(category6_label.getText())){
-            column_position = 5;   
-        } 
-
-        //Round 1
-        if (round_value.getText().equalsIgnoreCase("1")){
-            if (points.equalsIgnoreCase("100")){
-                row_position = 0;
-            } else if (points.equalsIgnoreCase("200")){
-                row_position = 1;
-            } else if (points.equalsIgnoreCase("300")){
-                row_position = 2;
-            } else if (points.equalsIgnoreCase("400")){
-                row_position = 3;
-            } else if (points.equalsIgnoreCase("500")){
-                row_position = 4;
-            }
-        } else {
-            if (points.equalsIgnoreCase("200")){
-                row_position = 0;
-            } else if (points.equalsIgnoreCase("400")){
-                row_position = 1;
-            } else if (points.equalsIgnoreCase("600")){
-                row_position = 2;
-            } else if (points.equalsIgnoreCase("800")){
-                row_position = 3;
-            } else if (points.equalsIgnoreCase("1000")){
-                row_position = 4;
-            }
-        }
+        String category = this.lastQueston.getCategory();
+        int points = this.lastQueston.getPointValue();
+        row_position = (points/(100 * this.controller.getRoundNumber()) -1);
+        
         
         RowPointValues updatedRow = new RowPointValues();
         updatedRow = (RowPointValues) list.get(row_position);
-        if (column_position == 0){
+        
+        
+        if(category.equalsIgnoreCase(category1_label.getText())){
             updatedRow.setCell_1("");
-        } else if (column_position == 1){
+        } else if(category.equalsIgnoreCase(category2_label.getText())){
             updatedRow.setCell_2("");
-        } else if (column_position == 2){
+        } else if(category.equalsIgnoreCase(category3_label.getText())){
             updatedRow.setCell_3("");
-        } else if (column_position == 3){
+        } else if(category.equalsIgnoreCase(category4_label.getText())){
             updatedRow.setCell_4("");
-        } else if (column_position == 4){
+        } else if(category.equalsIgnoreCase(category5_label.getText())){
             updatedRow.setCell_5("");
-        } else if (column_position == 5){
+        } else if(category.equalsIgnoreCase(category6_label.getText())){
             updatedRow.setCell_6("");
-        }
+        } 
 
         list.set(row_position, updatedRow);       
     }
@@ -1197,9 +1176,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     public void launchGame(){
         game_open_panel.setVisible(true);
         addCSS();
-        //hardCodedAnswers();
-        //hardCodedQuestions();
-        //usedQuestionsHC();
+        
     } 
     
 
@@ -1219,6 +1196,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         for (String theCategory:theCategories){
             if(this.controller.getQuestionForCategory(theCategory) != null){
                 areThereUnusedQuestions = true;
+                break;
             }
         }
         if(spinCount == 0 || !areThereUnusedQuestions){
@@ -1261,20 +1239,18 @@ public class WheelofJeopardyDocumentController implements Initializable {
                     populateFreeToken();
                 }
                 if (theWheelSector instanceof CategorySector){
-                    //String[] questionValue = getQuestionValue(theWheelSector.getName());
                     String theCategory = theWheelSector.getName();
                     
                     Question theQuestion = this.controller.getQuestionForCategory(theCategory);
                     if (theQuestion == null){
-                        for (String categoryToCheck:getCategories()){
-                            theQuestion = this.controller.getQuestionForCategory(categoryToCheck);
-                            if(theQuestion != null){
-                                theCategory = categoryToCheck;
-                            }
-                        }
+                        WheelSector newWheelSector = this.controller.spin();
+                        gamePlay(newWheelSector); 
                     }
-                    theQuestion.setUsed(true);
-                    populateQuestion(theCategory, theQuestion);
+                    else{
+                        this.lastQueston = theQuestion;
+                        theQuestion.setUsed(true);
+                        populateQuestion(theCategory, theQuestion);
+                    }
                 }
                 
                 

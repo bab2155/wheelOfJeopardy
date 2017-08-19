@@ -54,7 +54,7 @@ public class DatabaseManager {
 
 		try{
 
-			JsonReader jr = new JsonReader(new FileReader("WheelOfJeopardy/src/assets/database/" +databaseName));
+			JsonReader jr = new JsonReader(new FileReader("./src/assets/database/" +databaseName));
 			questions = new Gson().fromJson(jr, Question[].class);
 
 		} catch (Exception e){
@@ -70,6 +70,15 @@ public class DatabaseManager {
 	private static String[][] setRoundCategories(Question[] theQuestions){
 
 		String[][] categories = new String[2][6];
+                
+                for (int firstRoundIndex = 0; firstRoundIndex < 30; firstRoundIndex = firstRoundIndex+5){
+                    categories[0][firstRoundIndex/5]= theQuestions[firstRoundIndex].category;
+                }
+                for (int secondRoundIndex = 0; secondRoundIndex < 30; secondRoundIndex = secondRoundIndex + 5){
+                    categories[1][secondRoundIndex/5]= theQuestions[secondRoundIndex + 30].category;
+                }
+                return categories;
+                /**
 		HashSet<String> categorySet = new HashSet<String>();
 
 		for(Question question : theQuestions){
@@ -92,6 +101,7 @@ public class DatabaseManager {
 		}
 
 		return categories;
+                * **/
 
 	}
 
@@ -138,21 +148,15 @@ public class DatabaseManager {
 
 			// Shuffle all questions
 			for (String category : theRoundCategories[i]) {
-				Collections.shuffle(allQuestions.get(category));
+				//Collections.shuffle(allQuestions.get(category));
 
 				for (Integer roundvalue : questionValues.get(i)) {
-					int theRoundValue;
-					if (i == 0){
-						theRoundValue = roundvalue * 2;
-					} else{
-						theRoundValue = roundvalue;
-					}
-					Question toAdd = allQuestions.get(category).stream().filter(question -> question.value == theRoundValue)
+				
+					
+					Question toAdd = allQuestions.get(category).stream().filter(question -> question.value == roundvalue)
 							.findFirst()
 							.get();
-					if (i==0){
-						toAdd.value = toAdd.value/2;
-					}
+					
 					categoryQuestions.get(i).get(category).add(toAdd);
 				}
 
@@ -173,6 +177,8 @@ public class DatabaseManager {
 
 		Question[] dbQuestions = getAllDatabaseQuestions(theDatabaseName);
 		String[][] roundCategories = setRoundCategories(dbQuestions);
+                
+                
 		List<HashMap<String, ArrayList<Question>>> categoryQuestions = getCategoryQuestions(roundCategories, dbQuestions);
 
 		List<QuestionBoard> tmp = new ArrayList<>();
