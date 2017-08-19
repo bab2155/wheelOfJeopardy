@@ -377,7 +377,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
             spin_timer.setText(String.format("00:%02d",numberOfSeconds));
             if (numberOfSeconds == 0){
                 highlightCategoryTable(category_title.getText(), false);
-                updateCategoryTable(round_value.getText(), category_title.getText(), question_value.getText());
+                updateCategoryTable();
                 if (checkForToken()){
                     populateUseToken();
                 }
