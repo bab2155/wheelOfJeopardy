@@ -471,7 +471,7 @@
                   <Button fx:id="new_game_button" layoutX="325.0" layoutY="553.0" mnemonicParsing="false" onAction="#handleGameLaunch" text="New Game" />
                   <AnchorPane fx:id="player_identifiers" layoutX="113.0" layoutY="56.0" prefHeight="397.0" prefWidth="529.0" visible="false">
                      <children>
-                        <Button fx:id="start_game_button" layoutX="227.0" layoutY="358.0" mnemonicParsing="false" onAction="#handleGameStart" text="Start Game" />
+                        <Button fx:id="start_game_button" layoutX="227.0" layoutY="500.0" mnemonicParsing="false" onAction="#handleGameStart" text="Start Game" />
                         <Label layoutX="108.0" layoutY="271.0" text="Player 3">
                            <font>
                               <Font size="18.0" />
@@ -507,6 +507,17 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
+                        <Label layoutX="108.0" layoutY="400.0" text="Database Names">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="108.0" layoutY="350.0" text="Please select a database of questions:">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="database_names" layoutX="275.0" layoutY="400.0" prefWidth="200.0" onAction="#handleDatabaseNames" />
                      </children>
                   </AnchorPane>
                </children>

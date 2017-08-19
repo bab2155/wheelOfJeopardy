@@ -117,6 +117,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML private TableColumn category6;
     @FXML private ChoiceBox category_box_player;
     @FXML private ChoiceBox category_box_opponent;
+    @FXML private ChoiceBox database_names;
     
     @FXML private AnchorPane game_screen;
     @FXML private AnchorPane game_open_panel;
@@ -458,11 +459,26 @@ public class WheelofJeopardyDocumentController implements Initializable {
         new_game_button.setVisible(false);
         large_wheel_image.setVisible(false);
         player_identifiers.setVisible(true);
+        String[] theDatabaseNames = this.controller.getDatabaseNames();
+        
+        for (String theDatabase:theDatabaseNames) { 
+            database_names.getItems().add(theDatabase);
+        }
+    }
+    
+    @FXML
+    private void handleDatabaseNames(ActionEvent event){
+        
+        //this.controller.setDatabaseName(null);
     }
     
     //Handle Player Identifier submit action and start game
     @FXML
-    public void handleGameStart(ActionEvent event) {
+    public void handleGameStart(ActionEvent event) throws Exception {
+        String selected_database = null;
+        if(!database_names.getSelectionModel().isEmpty()){
+            selected_database = database_names.getSelectionModel().getSelectedItem().toString();
+        }
         player_identifiers.setVisible(false);
         player1_label.setText(player1_name.getText());
         this.controller.setPlayer1(player1_name.getText());
@@ -470,6 +486,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
         this.controller.setPlayer2(player2_name.getText());
         player3_label.setText(player3_name.getText());
         this.controller.setPlayer3(player3_name.getText());
+        this.controller.setDatabaseName(selected_database);
         this.controller.startGame();
         this.controller.setupScoreBoards();
         this.scoreboard = this.controller.getScoreBoard();

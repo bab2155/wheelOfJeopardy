@@ -41,8 +41,7 @@ public class Controller
     }
     
     public Controller(){
-        this.DatabaseName = "questions.json";
-        createQuestionBoards();
+        
 
     }
     
@@ -63,16 +62,25 @@ public class Controller
         this.ScoreBoard = new ScoreBoard(this.Players[0],this.Players[1],this.Players[2]);
     }
     
+    
+    public String[] getDatabaseNames(){
+        return DatabaseManager.getDatabaseNames();
+    }
+    
     public void setDatabaseName(String theDatabaseName){
         this.DatabaseName = theDatabaseName;
     }
     /**
      * start the game
      */
-    public void startGame()
+    public void startGame() throws Exception
     {
+                if (this.DatabaseName == null){
+                    throw new Exception("No database is selected");
+                }
 		this.RoundNumber = 1;
                 
+                createQuestionBoards();
 //                this.DatabaseName = "questions.json";
 		
 		//this.createQuestionBoards();
