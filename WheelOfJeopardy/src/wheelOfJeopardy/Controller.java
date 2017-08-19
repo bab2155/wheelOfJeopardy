@@ -104,13 +104,14 @@ public class Controller
         List<Player> theWinners = new ArrayList<Player>();
         theWinners.add(this.Players[0]);
         for (int playerIndex = 1; playerIndex < this.Players.length; playerIndex++){
-            if (this.Players[playerIndex].getScore() > theWinners.get(0).getScore()){
+            int previousScore = theWinners.get(0).getScore();
+            if (this.Players[playerIndex].getScore() > previousScore){
                 for (int idx2 = 0; idx2 < theWinners.size(); idx2++){
-                    theWinners.remove(this.Players[idx2]);
+                    theWinners.remove(idx2);
                 }
                 theWinners.add(this.Players[playerIndex]);
             }
-            if (this.Players[playerIndex].getScore() == theWinners.get(0).getScore()){
+            else if (this.Players[playerIndex].getScore() == previousScore){
                 theWinners.add(this.Players[playerIndex]);
             }
         }
