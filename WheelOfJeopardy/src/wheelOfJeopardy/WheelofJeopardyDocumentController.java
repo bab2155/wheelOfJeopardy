@@ -601,6 +601,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
         } 
         else{
             this.controller.loseATurn();
+            WheelSector theWheelSector = this.controller.spin();
+            gamePlay(theWheelSector);
         }
         
     }
@@ -617,7 +619,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
     @FXML
     private void handleNoUseTokenSubmitAction(ActionEvent event) {
         this.controller.loseATurn();
-       
+        WheelSector theWheelSector = this.controller.spin();
+        gamePlay(theWheelSector);
     }
     
     //Handle player's choice
@@ -996,10 +999,10 @@ public class WheelofJeopardyDocumentController implements Initializable {
         }
         if(spinCount == 0 || !areThereUnusedQuestions){
             if(this.controller.getRoundNumber() == 1){
+                setSectorsInvisible();
                 this.controller.startRound2();
                 this.updatePlayerStats();
                 populateGameStats();
-                
                 setSpinCounter(Integer.toString(this.scoreboard.getRoundCount()));
                 game_play.toFront();
             } else if (round_value.getText().equalsIgnoreCase("2")){
