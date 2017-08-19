@@ -105,14 +105,14 @@
     "used":false
   },
   {
-    "category":"Literature",
+    "category":"Books",
     "question":"Mary Mapes Dodge penned this guy,\"Or, The Silver skates\"; within her lifetime, the book appeared in more than 100 editions",
     "answer":"Hans Brinker",
     "value":100,
     "used":false
   },
   {
-    "category":"Literature",
+    "category":"Books",
     "question":"After leaving Rochester-- the man, not the city--this Bronte title woman finds herself destitute and friendless",
     "answer":"Jane Eyre",
     "value":200,
@@ -126,14 +126,14 @@
     "used":false
   },
   {
-    "category":"Literature",
+    "category":"Books",
     "question":"’T.S. Garp cried in the airplane that was bringing him home to be famous in his violent country’, penned this novelist",
     "answer":"John Irving",
     "value":400,
     "used":false
   },
   {
-    "category":"Literature",
+    "category":"Books",
     "question":"Though the play did not hit Broadway until 1946, ‘The Iceman Cometh’ by him first cameth in 1939",
     "answer":"Eugene O’Neill",
     "value":500,
@@ -175,35 +175,35 @@
     "used":false
   },
   {
-    "category":"Movies",
+    "category":"Cinema",
     "question":"The \"Star Trek\" universe: Mr. Spock's emotionless race",
     "answer":"Vulcan",
     "value":100,
     "used":false
   },
   {
-    "category":"Movies",
+    "category":"Cinema",
     "question":"In ‘Bridge of Spies’: the city where the bridge is located",
     "answer":"Berlin",
     "value":200,
     "used":false
   },
   {
-    "category":"Movies",
+    "category":"Cinema",
     "question":"Michael Fassbender plays an ‘Apple’ grower: the title",
     "answer":"Steve Jobs",
     "value":300,
     "used":false
   },
   {
-    "category":"Movies",
+    "category":"Cinema",
     "question":"’The Blind Side’: the Best Actress winner",
     "answer":"Sandra Bullock",
     "value":400,
     "used":false
   },
   {
-    "category":"Movies",
+    "category":"Cinema",
     "question":"’The Martian’: the director",
     "answer":"Ridley Scott",
     "value":500,
