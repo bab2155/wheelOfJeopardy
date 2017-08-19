@@ -597,7 +597,8 @@ public class WheelofJeopardyDocumentController implements Initializable {
     private void handleUseTokenSubmitAction(ActionEvent event) {
         this.controller.useTokenForCurrentPlayer();
         this.updatePlayerStats();
-        
+        WheelSector theWheelSector = this.controller.spin();
+        gamePlay(theWheelSector);
     }
     
     //Handle using a token no action
