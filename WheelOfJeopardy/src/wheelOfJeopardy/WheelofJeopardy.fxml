@@ -401,7 +401,7 @@
                         </Label>
                         <Button fx:id="opponent_choice_submit_button" layoutX="369.0" layoutY="280.0" mnemonicParsing="false" onAction="#handleOpponentChoiceSubmitAction" text="Submit" />
                         <ChoiceBox fx:id="category_box_opponent" layoutX="342.0" layoutY="204.0" prefWidth="150.0" />
-                        <Label fx:id="player_identifier2113" alignment="CENTER" layoutX="341.0" layoutY="144.0" style="&#10;" text="choose a category " textAlignment="CENTER" wrapText="false">
+                        <Label fx:id="player_identifier2113" alignment="CENTER" layoutX="341.0" layoutY="144.0" style="&#10;" text=" choose a category" textAlignment="CENTER" wrapText="false">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -517,7 +517,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="database_names" layoutX="275.0" layoutY="400.0" prefWidth="200.0" onAction="#handleDatabaseNames" />
+                        <ChoiceBox fx:id="database_names" layoutX="275.0" layoutY="400.0" prefWidth="200.0" />
                      </children>
                   </AnchorPane>
                </children>

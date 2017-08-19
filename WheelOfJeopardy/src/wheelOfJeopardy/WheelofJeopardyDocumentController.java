@@ -466,11 +466,6 @@ public class WheelofJeopardyDocumentController implements Initializable {
         }
     }
     
-    @FXML
-    private void handleDatabaseNames(ActionEvent event){
-        
-        //this.controller.setDatabaseName(null);
-    }
     
     //Handle Player Identifier submit action and start game
     @FXML
@@ -550,15 +545,10 @@ public class WheelofJeopardyDocumentController implements Initializable {
         this.scoreboard.addPointsForPlayer(this.controller.getCurrentPlayer(), Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
         
-        if(checkForToken()){
-            populateUseToken();
-        } 
-        else{
-            this.controller.loseATurn();
-            WheelSector theWheelSector = this.controller.spin();
-            gamePlay(theWheelSector);
-            
-        }
+        this.controller.loseATurn();
+        WheelSector theWheelSector = this.controller.spin();
+        gamePlay(theWheelSector);
+
         
     }
     
@@ -574,14 +564,9 @@ public class WheelofJeopardyDocumentController implements Initializable {
         this.controller.addPointsForCurrentPlayer(Integer.parseInt(question_value.getText()));
         this.updatePlayerStats();
         
-        if(checkForToken()){
-            populateUseToken();
-        } 
-        else{
-            this.controller.loseATurn();
-            WheelSector theWheelSector = this.controller.spin();
-            gamePlay(theWheelSector);
-        }
+        this.controller.loseATurn();
+        WheelSector theWheelSector = this.controller.spin();
+        gamePlay(theWheelSector);
         
     }
     
@@ -718,7 +703,7 @@ public class WheelofJeopardyDocumentController implements Initializable {
     
     @FXML void setOpponentDisplayName(String player){
         if(player.equalsIgnoreCase("player1")) {
-            opponent_identifier.setText(player1_name.getText());
+            opponent_identifier.setText(player1_name.getText() +" ");
         } else if(player.equalsIgnoreCase("player2")){
             opponent_identifier.setText(player2_name.getText());
         } else {
